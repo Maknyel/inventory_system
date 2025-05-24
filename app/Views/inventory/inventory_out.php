@@ -49,8 +49,8 @@
             <input v-model="remarks" type="text" class="w-full border rounded px-3 py-2">
         </div>
 
-        <div>
-            <label class="block font-medium mb-1">Type</label>
+        <div class="<?=($sub_inventory_type_parse['has_purpose'] == 0)?'hidden':''?>">
+            <label class="block font-medium mb-1">Purpose</label>
             <select v-model="type" @change="changeType" class="w-full border rounded px-3 py-2">
                 <option></option>
                 <option>For Own Consumption</option>
@@ -58,7 +58,7 @@
             </select>
         </div>
 
-        <div>
+        <div class="<?=($sub_inventory_type_parse['has_distributor'] == 0)?'hidden':''?>">
             <label class="block font-medium mb-1">Distributor</label>
             <select v-model="distributor_id" class="w-full border rounded px-3 py-2">
                 <option></option>

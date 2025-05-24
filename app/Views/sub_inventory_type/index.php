@@ -18,6 +18,9 @@
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Name</th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Description</th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Inventory Type</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Has Purpose</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Has Distributor</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Has Return</th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Created At</th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Updated At</th>
             </tr>
@@ -33,6 +36,10 @@
                     <td class="px-4 py-2 border-b"><?= esc($type['name']) ?></td>
                     <td class="px-4 py-2 border-b"><?= esc($type['description']) ?></td>
                     <td class="px-4 py-2 border-b"><?= esc($type['inventory_type_name']) ?></td>
+
+                    <td class="px-4 py-2 border-b"><?= ($type['has_purpose'] != 0)?"Yes":"No" ?> </td>
+                    <td class="px-4 py-2 border-b"><?= ($type['has_distributor'] != 0)?"Yes":"No" ?> </td>
+                    <td class="px-4 py-2 border-b"><?= ($type['has_reeturn'] != 0)?"Yes":"No" ?> </td>
                     <td class="px-4 py-2 border-b">
                         <?= ($type['created_at'] !== '0000-00-00 00:00:00' && $type['created_at']) ? date('F j, Y h:i a', strtotime($type['created_at'])) : '' ?>
                     </td>
@@ -98,6 +105,31 @@
                     <?php endforeach; ?>    
                 </select>
             </div>
+
+            <div class="mb-4">
+                <label for="subinventorytype-has_purpose" class="block font-medium">Has Purpose</label>
+                <select id="subinventorytype-has_purpose" class="w-full px-3 py-2 border rounded" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>    
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="subinventorytype-has_distributor" class="block font-medium">Has Distributor</label>
+                <select id="subinventorytype-has_distributor" class="w-full px-3 py-2 border rounded" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>    
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="subinventorytype-has_reeturn" class="block font-medium">Has Return</label>
+                <select id="subinventorytype-has_reeturn" class="w-full px-3 py-2 border rounded" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>    
+                </select>
+            </div>
+            
             <div class="flex justify-end gap-2">
                 <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
                 <button type="submit" class="px-4 py-2 bg-yellow-600 text-white rounded">Save</button>
@@ -111,6 +143,9 @@
         document.getElementById('subinventorytype-id').value = '';
         document.getElementById('subinventorytype-name').value = '';
         document.getElementById('subinventorytype-inventorytype').value = '';
+        document.getElementById('subinventorytype-has_purpose').value = 0;
+        document.getElementById('subinventorytype-has_distributor').value = 0;
+        document.getElementById('subinventorytype-has_reeturn').value = 0;
         document.getElementById('subinventorytype-description').value = '';
         document.getElementById('modal-title').textContent = 'Add Sub Inventory Type';
         document.getElementById('subinventorytype-modal').classList.remove('hidden');
@@ -123,6 +158,9 @@
                 document.getElementById('subinventorytype-id').value = data.id;
                 document.getElementById('subinventorytype-name').value = data.name;
                 document.getElementById('subinventorytype-inventorytype').value = data.inventory_type_id;
+                document.getElementById('subinventorytype-has_purpose').value = data.has_purpose;
+                document.getElementById('subinventorytype-has_distributor').value = data.has_distributor;
+                document.getElementById('subinventorytype-has_reeturn').value = data.has_reeturn;
                 
                 document.getElementById('subinventorytype-description').value = data.description;
                 document.getElementById('modal-title').textContent = 'Edit Sub Inventory Type';
@@ -139,14 +177,16 @@
         const id = document.getElementById('subinventorytype-id').value;
         const name = document.getElementById('subinventorytype-name').value;
         const inventory_type_id = document.getElementById('subinventorytype-inventorytype').value;
-        
+        const has_purpose = document.getElementById('subinventorytype-has_purpose').value;
+        const has_distributor = document.getElementById('subinventorytype-has_distributor').value;
+        const has_reeturn = document.getElementById('subinventorytype-has_reeturn').value;
         const description = document.getElementById('subinventorytype-description').value;
         const url = id ? base_url + `subinventorytype/api/update/${id}` : base_url + 'subinventorytype/api/store';
 
         fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ name, inventory_type_id, description })
+            body: JSON.stringify({ name, inventory_type_id, has_purpose, has_distributor, has_reeturn, description })
         })
         .then(res => res.json())
         .then(() => location.reload());

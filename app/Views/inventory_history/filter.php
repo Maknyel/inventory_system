@@ -116,7 +116,7 @@
 
                 <th class="px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&inventory_type=<?=$inventory_type_parse['id']?>&sub_inventory_type=<?=$sub_inventory_type_parse['id']?>&orderby=customer_own_distribution&orderdir=<?= $orderby == 'customer_own_distribution' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
-                        Own Consumption/ Customer Distribution
+                        Purpose
                         <i class="ion-<?= ($orderby == 'customer_own_distribution' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'customer_own_distribution' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
@@ -168,9 +168,9 @@
                     <td class="px-4 py-2 border-b">
                         <?php
                             if($record['customer_own_distribution'] == 'For Own Consumption'){
-                                echo 'Own Consumption';
+                                echo 'For Own Consumption';
                             }else if($record['customer_own_distribution'] == 'For Distribution'){
-                                echo 'Customer Distribution';
+                                echo 'For Customer Distribution';
                             }else{
 
                             }

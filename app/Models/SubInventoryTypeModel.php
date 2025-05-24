@@ -9,7 +9,7 @@ class SubInventoryTypeModel extends Model
     protected $table      = 'sub_inventory_type';
     protected $primaryKey = 'id';
 
-    protected $allowedFields = ['name', 'description', 'inventory_type_id'];
+    protected $allowedFields = ['name', 'description', 'inventory_type_id', 'has_purpose', 'has_distributor', 'has_reeturn'];
 
     // Timestamps (if using created_at and updated_at columns)
     protected $useTimestamps = true;

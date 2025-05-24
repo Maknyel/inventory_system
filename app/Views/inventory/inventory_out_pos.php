@@ -72,16 +72,16 @@
 
     <!-- Type and Distributor -->
     <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-        <div>
-            <label class="block font-medium mb-1">Type</label>
+        <div class="<?=($sub_inventory_type_parse['has_purpose'] == 0)?'hidden':''?>">
+            <label class="block font-medium mb-1">Purpose</label>
             <select v-model="type" @change="changeType" class="w-full border rounded px-3 py-2">
-                <option value="">Select type</option>
+                <option value="">Select Purpose</option>
                 <option>For Own Consumption</option>
                 <option>For Distribution</option>
             </select>
         </div>
 
-        <div>
+        <div class="<?=($sub_inventory_type_parse['has_distributor'] == 0)?'hidden':''?>">
             <label class="block font-medium mb-1">Distributor</label>
             <select v-model="distributor_id" class="w-full border rounded px-3 py-2" :disabled="type !== 'For Distribution'">
                 <option disabled value="">Select distributor</option>
