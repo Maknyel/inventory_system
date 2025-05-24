@@ -17,6 +17,7 @@
     "postcss": "^8.5.3"
   },
   "dependencies": {
+    "html2pdf.js": "^0.10.3",
     "postcss-cli": "^11.0.1"
   }
 }
