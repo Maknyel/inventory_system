@@ -6,7 +6,7 @@
     <?php foreach ($inventory_type_data as $type): ?>
         <a href="<?= base_url('inventory') ?>/<?= $type['id'] ?>"
            class="block rounded-lg shadow-md bg-yellow-500 text-gray-800 hover:text-white p-4 py-8 hover:bg-black transition duration-200">
-            <div class="text-lg font-semibold w-full h-full">
+            <div class="text-center text-lg font-semibold w-full h-full">
                 <?= esc($type['name']) ?>
             </div>
         </a>
