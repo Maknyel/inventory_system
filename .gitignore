@@ -33,6 +33,7 @@ Vagrantfile
 #-------------------------
 # Writable Directories (cache, logs, sessions, uploads)
 #-------------------------
+writable
 writable/cache/*
 !writable/cache/index.html
 
