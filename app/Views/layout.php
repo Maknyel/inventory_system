@@ -42,7 +42,8 @@
                                 }
                             ?>
                             <img 
-                                src="<?= !empty($user['image_url']) ? base_url(esc($user['image_url'])) : generateInitialsImage($user['name']) ?>" 
+                                src="<?= !empty($user['image_url']) ? base_url(esc($user['image_url'])) : generateInitialsImage($user['name']) ?>"
+                                onerror="this.onerror=null; this.src='<?= base_url('public/images/default.png') ?>';" 
                                 alt="Profile Image" 
                                 class="w-10 h-10 object-cover rounded-full border"
                             >
