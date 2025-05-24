@@ -1,0 +1,495 @@
+<?php
+namespace App\Controllers;
+
+use CodeIgniter\Controller;
+use App\Models\InventoryModel;
+use App\Models\InventoryTypeModel;
+use App\Models\SubInventoryTypeModel;
+use App\Models\InventoryHistoryModel;
+
+class InventoryController extends Controller
+{
+    public function index()
+    {
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_data'] = $inventoryTypeModel->findAll();
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        return view('inventory/index', $data);
+    }
+    public function sub_inventory_type($inventory_type_id)
+    {
+        $subInventoryTypeModel = new SubInventoryTypeModel();
+        $data['sub_inventory_type_data'] = $subInventoryTypeModel->where('inventory_type_id', $inventory_type_id)->findAll();
+
+
+        $inventoryTypeModel = new InventoryTypeModel();
+        $id = $inventory_type_id;
+        $data['inventory_type_data'] = $inventoryTypeModel->find($id);
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        return view('inventory/sub_inventory_type', $data);
+    }
+    public function show($inventory_type_id, $sub_inventory_type)
+    {
+
+        $inventoryModel = new InventoryModel();
+        
+        $perPage = 3;
+
+
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_parse'] = $inventoryTypeModel->find($inventory_type_id);
+
+        $subInventoryTypeModel = new SubInventoryTypeModel();
+        $data['sub_inventory_type_parse'] = $subInventoryTypeModel->find($sub_inventory_type);
+
+        // Get the current page number from the URL, default to 1
+        $currentPage = $this->request->getVar('page_inventory') ?: 1;
+        $search = $this->request->getGet('search');
+        $orderBy = $this->request->getGet('orderby') ?? 'inventory.name';
+        $orderDir = $this->request->getGet('orderdir') ?? 'asc';
+
+        // Fetch paginated inventory data
+        $inventoryModel->select('inventory.*, inventory_type.name as inventory_type_name')
+                   ->join('inventory_type', 'inventory.inventory_type = inventory_type.id');
+
+        // Apply search
+        if (!empty($search)) {
+            $inventoryModel->groupStart()
+                ->like('inventory.name', $search)
+                ->orLike('inventory.description', $search)
+                ->orLike('inventory_type.name', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($inventory_type_id)) {
+            $inventoryModel->groupStart()
+                ->like('inventory.inventory_type', $inventory_type_id)
+                ->groupEnd();
+        }
+        if (!empty($sub_inventory_type)) {
+            $inventoryModel->groupStart()
+                ->like('inventory.sub_inventory_type', $sub_inventory_type)
+                ->groupEnd();
+        }
+        
+        if (!empty($sub_inventory_type)) {
+            $inventoryModel->groupStart()
+                ->like('inventory.sub_inventory_type', $sub_inventory_type)
+                ->groupEnd();
+        }
+
+        // Apply ordering
+        $inventoryModel->orderBy($orderBy, $orderDir);
+
+        // Get paginated results
+        $data['inventory'] = $inventoryModel->paginate($perPage, 'inventory');
+
+
+        // Get pager instance to render pagination links
+        $data['pager'] = $inventoryModel->pager;
+
+        // Current page
+        $data['currentPage'] = $currentPage;
+
+        // Total items (count of all inventory records)
+        // $data['totalItems'] = $inventoryModel->countAllResults();
+
+        // Total pages based on the per page count
+        // $data['totalPages'] = ceil($data['totalItems'] / $perPage);
+        $data['totalItems'] = $inventoryModel->pager->getTotal('inventory');
+        $data['totalPages'] = $data['totalItems'] ? ceil($data['totalItems'] / $perPage) : 1;
+
+        // Fetch inventory types for the dropdown
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_data'] = $inventoryTypeModel->findAll();
+
+        $data['search'] = $search;
+        // $data['inventory_type'] = $inventory_type;
+        $data['orderby'] = $orderBy;
+        $data['orderdir'] = $orderDir;
+
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        return view('inventory/show', $data);
+    }
+
+    public function savePosOut(){
+        if ($this->request->isAJAX()) {
+            $json = $this->request->getJSON(true);
+
+            $items = $json['items'] ?? [];
+            $customer_own_distribution = $json['type'] ?? null;
+            $distributor_id = $json['distributor_id'] ?? null;
+
+            if (empty($items)) {
+                return $this->response->setStatusCode(400)->setJSON(['error' => 'Cart is empty.']);
+            }
+
+            $inventoryModel = new InventoryModel();
+            $inventoryHistoryModel = new InventoryHistoryModel();
+            $user_id = session()->get('user_id') ?? 1;
+
+            $db = \Config\Database::connect();
+            $db->transStart();
+
+            foreach ($items as $item) {
+                $id = $item['inventory_id'];
+                $quantity = (int)$item['quantity'];
+                $remarks = $item['remarks'] ?? 'POS sale';
+
+                // Fetch current inventory record
+                $inventory = $inventoryModel->find($id);
+
+                if (!$inventory) {
+                    $db->transRollback();
+                    return $this->response->setStatusCode(404)->setJSON(['error' => "Inventory item ID {$id} not found."]);
+                }
+
+                if ((int)$inventory['current_quantity'] < $quantity) {
+                    $db->transRollback();
+                    return $this->response->setStatusCode(400)->setJSON(['error' => "Not enough stock for item: {$inventory['name']}"]);
+                }
+
+                // Deduct from current_quantity
+                $newQuantity = (int)$inventory['current_quantity'] - $quantity;
+                $db->table('inventory')
+                    ->where('id', $id)
+                    ->set('current_quantity', $newQuantity)
+                    ->update();
+
+                // Insert into inventory history
+                $inventoryHistoryModel->insert([
+                    'name'                          => $inventory['name'],
+                    'description'                   => $inventory['description'],
+                    'price'                         => $inventory['current_price'],
+                    'quantity'                      => $quantity,
+                    'return_quantity'               => 0,
+                    'in_out'                        => 'out',
+                    'inventory_id'                  => $id,
+                    'user_id'                       => $user_id,
+                    'remarks'                       => $remarks,
+                    'supplier_id'                   => null,
+                    'customer_own_distribution'     => $customer_own_distribution,
+                    'distributor_id'                => $distributor_id,
+                    'created_at'                    => date('Y-m-d H:i:s'),
+                    'updated_at'                    => date('Y-m-d H:i:s')
+                ]);
+            }
+
+            $db->transComplete();
+
+            if ($db->transStatus() === false) {
+                return $this->response->setStatusCode(500)->setJSON(['error' => 'POS transaction failed.']);
+            }
+
+            return $this->response->setJSON(['message' => 'POS transaction recorded successfully!']);
+        }
+
+        return $this->response->setStatusCode(400)->setJSON(['error' => 'Invalid request.']);
+    }
+
+    public function saveOut(){
+         $json = $this->request->getJSON(true);
+
+        $id = $json['inventory_id'];
+        $quantity = (int)$json['quantity'];
+        $remarks = $json['remarks'] ?? 'Inventory out via form';
+        $customer_own_distribution = $json['customer_own_distribution'] ?? null;
+        $distributor_id = $json['distributor_id'] ?? null;
+
+        $inventoryModel = new InventoryModel();
+        $inventoryHistoryModel = new InventoryHistoryModel();
+
+        // Fetch current inventory record
+        $inventory = $inventoryModel->find($id);
+
+        if (!$inventory) {
+            return $this->response->setStatusCode(404)->setJSON(['error' => 'Inventory not found.']);
+        }
+
+        if ((int)$inventory['current_quantity'] < $quantity) {
+            return $this->response->setStatusCode(400)->setJSON(['error' => 'Not enough stock available.']);
+        }
+
+        // Deduct from current_quantity
+        $newQuantity = (int)$inventory['current_quantity'] - $quantity;
+
+        $db = \Config\Database::connect();
+        $db->table('inventory')
+            ->where('id', $id)
+            ->set('current_quantity', $newQuantity)
+            ->update();
+
+        // Insert into inventory history
+        $inventoryHistoryModel->insert([
+            'name'                          => $inventory['name'],
+            'description'                   => $inventory['description'],
+            'price'                         => $inventory['current_price'], // Use current price on out
+            'quantity'                      => $quantity,
+            'return_quantity'               => 0,
+            'in_out'                        => 'out',
+            'inventory_id'                  => $id,
+            'user_id'                       => session()->get('user_id') ?? 1,
+            'remarks'                       => $remarks,
+            'supplier_id'                   => null,
+            'customer_own_distribution'     => $customer_own_distribution,
+            'distributor_id'                => $distributor_id,
+            'created_at'                    => date('Y-m-d H:i:s'),
+            'updated_at'                    => date('Y-m-d H:i:s')
+        ]);
+
+        return $this->response->setJSON(['message' => 'Inventory out recorded successfully']);
+    }
+
+    public function saveStock()
+    {
+        $json = $this->request->getJSON(true);
+
+        $id = $json['inventory_id'];
+        $supplierId = $json['supplier_id'];
+        $quantity = (int)$json['quantity'];
+        $price = (float)$json['price'];
+
+        $inventoryModel = new InventoryModel();
+        $InventoryhistoryModel = new InventoryHistoryModel();
+
+        // Fetch current inventory record
+        $inventory = $inventoryModel->find($id);
+
+
+
+        if (!$inventory) {
+            return $this->response->setStatusCode(404)->setJSON(['error' => 'Inventory not found.']);
+        }
+
+        // Update current_quantity and current_price
+        $quantityVal = (int)$inventory['current_quantity'] + $quantity;
+        
+        $db = \Config\Database::connect();
+        $db->table('inventory')
+            ->where('id', $id)
+            ->set('current_quantity', $quantityVal)
+            ->set('current_price', $price)
+            ->update();
+        
+
+        // Insert into history
+        $InventoryhistoryModel->insert([
+            'name' => $inventory['name'],
+            'description' => $inventory['description'],
+            'price' => $price,
+            'quantity' => $quantity,
+            'return_quantity' => 0,
+            'in_out' => 'in',
+            'inventory_id' => $id,
+            'user_id' => session()->get('user_id') ?? 1, // Adjust user ID as needed
+            'remarks' => 'Stock added via form',
+            'supplier_id' => $supplierId,
+            'created_at' => date('Y-m-d H:i:s'),
+            'updated_at' => date('Y-m-d H:i:s')
+        ]);
+
+        return $this->response->setJSON(['message' => 'Stock added successfully']);
+    }
+
+
+
+    public function getInventoryList()
+    {
+        $model = new \App\Models\InventoryModel();
+        
+        
+        // Get query parameters
+        $inventoryType = $this->request->getGet('inventory_type');
+        $subInventoryType = $this->request->getGet('sub_inventory_type');
+
+        // Build query
+        $query = $model->select('id, name, current_quantity, current_price');
+
+        if ($inventoryType) {
+            $query->where('inventory_type', $inventoryType);
+        }
+
+        if ($subInventoryType) {
+            $query->where('sub_inventory_type', $subInventoryType);
+        }
+
+        $data = $query->findAll();
+
+        return $this->response->setJSON($data);
+    }
+
+    public function getInventoryById($id)
+    {
+        $inventoryModel = new InventoryModel();
+        $item = $inventoryModel->find($id);
+        return $this->response->setJSON($item);
+    }
+
+    public function store()
+    {
+        $inventoryModel = new InventoryModel();
+
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'description' => $this->request->getPost('description'),
+            'inventory_type' => $this->request->getPost('inventory_type'),
+            'sub_inventory_type' => $this->request->getPost('sub_inventory_type'),
+            'reordering_level' => $this->request->getPost('reordering_level'),
+            'icon' => $this->request->getPost('icon'),
+        ];
+
+
+        $inventoryModel->save($data);
+        return $this->response->setJSON(['success' => true]);
+    }
+
+    public function update($id)
+    {
+        $inventoryModel = new InventoryModel();
+        $item = $inventoryModel->find($id);
+
+        if (!$item) {
+            return $this->response->setStatusCode(404, 'Item not found');
+        }
+
+        $data = [
+            'name' => $this->request->getPost('name'),
+            'description' => $this->request->getPost('description'),
+            'inventory_type' => $this->request->getPost('inventory_type'),
+            'sub_inventory_type' => $this->request->getPost('sub_inventory_type'),
+            'reordering_level' => $this->request->getPost('reordering_level'),
+            'icon' => $this->request->getPost('icon'),
+        ];
+
+        $inventoryModel->update($id, $data);
+        return $this->response->setJSON(['success' => true]);
+    }
+
+    public function delete($id)
+    {
+        $inventoryModel = new InventoryModel();
+        $item = $inventoryModel->find($id);
+
+        if (!$item) {
+            return $this->response->setStatusCode(404, 'Item not found');
+        }
+
+        $inventoryModel->delete($id);
+        return $this->response->setJSON(['success' => true]);
+    }
+
+    public function export()
+    {
+        $inventoryModel = new InventoryModel();
+        $items = $inventoryModel->findAll();
+
+        $filename = 'inventory_export_' . date('Y-m-d') . '.csv';
+        $file = fopen('php://output', 'w');
+
+        header('Content-Type: text/csv');
+        header('Content-Disposition: attachment;filename="' . $filename . '"');
+
+        // Add the column headers
+        fputcsv($file, ['ID', 'Icon', 'Name', 'Description', 'Inventory Type', 'Reordering Level', 'Created At', 'Updated At']);
+
+        // Add the data
+        foreach ($items as $item) {
+            fputcsv($file, [
+                $item['id'],
+                $item['icon'] ? base_url('uploads/icons/' . $item['icon']) : 'No Icon',
+                $item['name'],
+                $item['description'],
+                $item['inventory_type'],
+                $item['reordering_level'],
+                $item['created_at'],
+                $item['updated_at']
+            ]);
+        }
+
+        fclose($file);
+        exit;
+    }
+
+    public function inventoryIn()
+    {
+        // This method will handle the /inventory_in route
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        $inventoryType = $this->request->getGet('inventory_type');
+        $subInventoryType = $this->request->getGet('sub_inventory_type');
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_parse'] = $inventoryTypeModel->find($inventoryType);
+
+        $subInventoryTypeModel = new SubInventoryTypeModel();
+        $data['sub_inventory_type_parse'] = $subInventoryTypeModel->find($subInventoryType);
+        return view('inventory/inventory_in', $data);
+    }
+
+    public function inventoryOut()
+    {
+        $inventoryType = $this->request->getGet('inventory_type');
+        $subInventoryType = $this->request->getGet('sub_inventory_type');
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_parse'] = $inventoryTypeModel->find($inventoryType);
+
+        $subInventoryTypeModel = new SubInventoryTypeModel();
+        $data['sub_inventory_type_parse'] = $subInventoryTypeModel->find($subInventoryType);
+        // This method will handle the /inventory_out route
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        return view('inventory/inventory_out', $data);
+    }
+
+    public function inventoryOutPos()
+    {
+        $inventoryType = $this->request->getGet('inventory_type');
+        $subInventoryType = $this->request->getGet('sub_inventory_type');
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_parse'] = $inventoryTypeModel->find($inventoryType);
+
+        $subInventoryTypeModel = new SubInventoryTypeModel();
+        $data['sub_inventory_type_parse'] = $subInventoryTypeModel->find($subInventoryType);
+        // This method will handle the /inventory_out route
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        return view('inventory/inventory_out_pos', $data);
+    }
+
+    public function inventoryType()
+    {
+        // This method will handle the /inventory_type route
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        return view('inventory/inventory_type');
+    }
+
+    public function doUpload()
+    {
+        $file = $this->request->getFile('file');
+
+        if ($file && $file->isValid() && !$file->hasMoved()) {
+            $newName = $file->getRandomName();
+            $file->move(FCPATH . 'uploads/icons/', $newName);
+
+            return $this->response->setJSON([
+                'success' => true,
+                'filename' => $newName
+            ]);
+        }
+
+        return $this->response->setJSON([
+            'success' => false,
+            'error' => $file->getErrorString()
+        ]);
+    }
+}
