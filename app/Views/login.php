@@ -12,7 +12,7 @@
 
     <!-- Login Container -->
     <div class="w-full max-w-md bg-white p-8 rounded-lg shadow-lg">
-        <h2 class="text-2xl font-semibold text-center mb-6">Login</h2>
+        <h2 class="text-2xl font-semibold text-center mb-6">Logins</h2>
 
         <!-- Flash message for errors -->
         <?php if (session()->getFlashdata('error')): ?>
