@@ -6,6 +6,7 @@ use App\Models\InventoryModel;
 use App\Models\InventoryTypeModel;
 use App\Models\SubInventoryTypeModel;
 use App\Models\InventoryHistoryModel;
+use App\Models\InventoryHistoryReturnModel;
 
 class InventoryController extends Controller
 {
@@ -193,8 +194,67 @@ class InventoryController extends Controller
         return $this->response->setStatusCode(400)->setJSON(['error' => 'Invalid request.']);
     }
 
+    public function saveReturn(){
+        $json = $this->request->getJSON(true);
+
+        $id = $json['inventory_history_id'];
+        $quantity = (int)$json['quantity'];
+        $remarks = $json['remarks'] ?? 'Inventory return via form';
+
+        $inventoryModel = new InventoryModel();
+        $inventoryHistoryModel = new InventoryHistoryModel();
+        $inventoryHistoryReturnModel = new InventoryHistoryReturnModel();
+
+        
+        
+        // Fetch current inventory record
+        $inventoryHistory = $inventoryHistoryModel->find($id);
+
+        if (!$inventoryHistory) {
+            return $this->response->setStatusCode(404)->setJSON(['error' => 'Inventory History not found.']);
+        }
+
+        // Deduct from current_quantity
+        $newQuantity = (int)$inventoryHistory['return_quantity'] + $quantity;
+
+        $db = \Config\Database::connect();
+        $db->table('inventory_history')
+            ->where('id', $id)
+            ->set('return_quantity', $newQuantity)
+            ->update();
+
+
+        $inventory_id = $inventoryHistory['inventory_id'];
+        $inventory = $inventoryModel->find($inventory_id);
+
+        if (!$inventory) {
+            return $this->response->setStatusCode(404)->setJSON(['error' => 'Inventory not found.']);
+        }
+
+
+        // Deduct from current_quantity
+        $newQuantityv2 = (int)$inventory['current_quantity'] + $quantity;
+
+        $db = \Config\Database::connect();
+        $db->table('inventory')
+            ->where('id', $inventory['id'])
+            ->set('current_quantity', $newQuantityv2)
+            ->update();
+
+
+        $inventoryHistoryReturnModel->insert([
+            'inventory_out_id'              => $id,
+            'quantity'                      => $quantity,
+            'remarks'                       => $remarks,
+            'created_at'                    => date('Y-m-d H:i:s'),
+            'updated_at'                    => date('Y-m-d H:i:s')
+        ]);
+
+        return $this->response->setJSON(['message' => 'Inventory return recorded successfully']);
+    }
+
     public function saveOut(){
-         $json = $this->request->getJSON(true);
+        $json = $this->request->getJSON(true);
 
         $id = $json['inventory_id'];
         $quantity = (int)$json['quantity'];
@@ -297,7 +357,46 @@ class InventoryController extends Controller
         return $this->response->setJSON(['message' => 'Stock added successfully']);
     }
 
+    public function getInventoryInList()
+    {
+        $model = new \App\Models\InventoryHistoryModel();
+        
+        
+        // Get query parameters
+        $inventoryType = $this->request->getGet('inventory_type');
+        $subInventoryType = $this->request->getGet('sub_inventory_type');
 
+        // Build query
+        $query = $model->select('
+            inventory_history.id,
+            inventory_history.name,
+            inventory_history.description,
+            inventory_history.price,
+            inventory_history.quantity,
+            inventory_history.return_quantity,
+            inventory_history.in_out,
+            inventory_history.inventory_id,
+            inventory_history.created_at,
+            inventory_history.updated_at,
+            inventory.inventory_type,
+            inventory.sub_inventory_type
+        ');
+        $query->where('inventory_history.in_out', 'in');
+        $query->where('(inventory_history.price - IFNULL(inventory_history.return_quantity, 0)) >', 0);
+        $query->join('inventory', 'inventory_history.inventory_id = inventory.id');
+
+        if ($inventoryType) {
+            $query->where('inventory.inventory_type', $inventoryType);
+        }
+
+        if ($subInventoryType) {
+            $query->where('inventory.sub_inventory_type', $subInventoryType);
+        }
+
+        $data = $query->findAll();
+
+        return $this->response->setJSON($data);
+    }
 
     public function getInventoryList()
     {
@@ -309,7 +408,7 @@ class InventoryController extends Controller
         $subInventoryType = $this->request->getGet('sub_inventory_type');
 
         // Build query
-        $query = $model->select('id, name, current_quantity, current_price');
+        $query = $model->select('id, name, current_quantity, current_price, unit, description');
 
         if ($inventoryType) {
             $query->where('inventory_type', $inventoryType);
@@ -337,6 +436,7 @@ class InventoryController extends Controller
 
         $data = [
             'name' => $this->request->getPost('name'),
+            'unit' => $this->request->getPost('unit'),
             'description' => $this->request->getPost('description'),
             'inventory_type' => $this->request->getPost('inventory_type'),
             'sub_inventory_type' => $this->request->getPost('sub_inventory_type'),
@@ -360,6 +460,7 @@ class InventoryController extends Controller
 
         $data = [
             'name' => $this->request->getPost('name'),
+            'unit' => $this->request->getPost('unit'),
             'description' => $this->request->getPost('description'),
             'inventory_type' => $this->request->getPost('inventory_type'),
             'sub_inventory_type' => $this->request->getPost('sub_inventory_type'),
@@ -446,6 +547,22 @@ class InventoryController extends Controller
             return redirect()->to(base_url('login'));
         }
         return view('inventory/inventory_out', $data);
+    }
+
+    public function inventoryReturn()
+    {
+        $inventoryType = $this->request->getGet('inventory_type');
+        $subInventoryType = $this->request->getGet('sub_inventory_type');
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_parse'] = $inventoryTypeModel->find($inventoryType);
+
+        $subInventoryTypeModel = new SubInventoryTypeModel();
+        $data['sub_inventory_type_parse'] = $subInventoryTypeModel->find($subInventoryType);
+        // This method will handle the /inventory_out route
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        return view('inventory/inventory_return', $data);
     }
 
     public function inventoryOutPos()

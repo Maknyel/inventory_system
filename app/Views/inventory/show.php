@@ -29,9 +29,15 @@
             OUT
         </a>
         <a href="<?= base_url('inventory_out_pos?inventory_type=' . $inventory_type_parse['id'] . '&sub_inventory_type=' . $sub_inventory_type_parse['id']) ?>"
-            class="px-3 py-1 bg-green-500 text-white rounded hover:bg-green-600 transition">
+            class="px-3 py-1 bg-black text-white rounded hover:bg-black transition">
             POS
         </a>
+        <?php if($sub_inventory_type_parse['has_reeturn'] != 0){ ?>
+            <a href="<?= base_url('inventory_return?inventory_type=' . $inventory_type_parse['id'] . '&sub_inventory_type=' . $sub_inventory_type_parse['id']) ?>"
+                class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition">
+                Return
+            </a>
+        <?php } ?>
         <a href="<?= base_url('inventory_history_filter?inventory_type=' . $inventory_type_parse['id'] . '&sub_inventory_type=' . $sub_inventory_type_parse['id']) ?>"
             class="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 transition">
             History
@@ -68,6 +74,12 @@
                     <a href="?search=<?= esc($search) ?>&orderby=inventory.name&orderdir=<?= $orderby == 'inventory.name' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Inventory Name
                         <i class="ion-<?= ($orderby == 'inventory.name' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.name' ? 'text-black' : 'text-gray-400' ?>"></i>
+                    </a>
+                </th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
+                    <a href="?search=<?= esc($search) ?>&orderby=inventory.unit&orderdir=<?= $orderby == 'inventory.unit' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
+                        Unit
+                        <i class="ion-<?= ($orderby == 'inventory.unit' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.unit' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
@@ -134,6 +146,7 @@
                         <?php } ?>
                     </td>
                     <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['name'] ?></td>
+                    <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['unit'] ?></td>
                     <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['description'] ?></td>
                     <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['reordering_level'] ?></td>
                     <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['current_quantity'] ?></td>
@@ -215,6 +228,10 @@
                 <input type="text" id="inventory-name" class="w-full px-3 py-2 border rounded">
             </div>
             <div class="mb-4">
+                <label for="inventory-unit" class="block font-medium">Unit</label>
+                <input type="text" id="inventory-unit" class="w-full px-3 py-2 border rounded">
+            </div>
+            <div class="mb-4">
                 <label for="inventory-description" class="block font-medium">Description</label>
                 <textarea id="inventory-description" class="w-full px-3 py-2 border rounded"></textarea>
             </div>
@@ -260,6 +277,7 @@
     function openAddModal() {
         document.getElementById('inventory-id').value = '';
         document.getElementById('inventory-name').value = '';
+        document.getElementById('inventory-unit').value = '';
         document.getElementById('inventory-icon').value = '';
         
         document.getElementById('inventory-description').value = '';
@@ -275,6 +293,7 @@
             .then(data => {
                 document.getElementById('inventory-id').value = data.id;
                 document.getElementById('inventory-name').value = data.name;
+                document.getElementById('inventory-unit').value = data.unit;
                 document.getElementById('inventory-icon').value = data.icon;
                 document.getElementById('inventory-description').value = data.description;
                 document.getElementById('inventory-reordering-level').value = data.reordering_level;
@@ -293,6 +312,7 @@
 
         const id = document.getElementById('inventory-id').value;
         const name = document.getElementById('inventory-name').value;
+        const unit = document.getElementById('inventory-unit').value;
         const icon = document.getElementById('inventory-icon').value;
         const description = document.getElementById('inventory-description').value;
         const inventory_type = `<?=$inventory_type_parse['id']?>`;
@@ -301,6 +321,7 @@
         
         const formData = new FormData();
         formData.append('name', name);
+        formData.append('unit', unit);
         formData.append('icon', icon);
         formData.append('description', description);
         formData.append('inventory_type', inventory_type);

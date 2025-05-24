@@ -15,19 +15,19 @@
             <a href="<?=base_url('inventory/'.$inventory_type_parse['id'].'/'.$sub_inventory_type_parse['id'])?>" class="text-blue-600 hover:underline"><?=($sub_inventory_type_parse['name'])?></a>
         </li>
         <li><span class="mx-1 text-gray-400">/</span></li>
-        <li><span class="">Inventory Out</span></li>
+        <li><span class="">Inventory Return</span></li>
     </ol>
 </nav>
-<div id="inventory-out-app" class="p-4">
-    <h2 class="text-xl font-semibold mb-4">Inventory Out</h2>
+<div id="inventory-return-app" class="p-4">
+    <h2 class="text-xl font-semibold mb-4">Inventory Return</h2>
 
     <form @submit.prevent="submitForm" class="space-y-4 max-w-md">
         <div>
-            <label class="block font-medium mb-1">Inventory Item</label>
+            <label class="block font-medium mb-1">Inventory History List</label>
             <select v-model="selectedInventoryId" class="w-full border rounded px-3 py-2">
-                <option disabled value="">Select inventory</option>
-                <option v-for="item in inventoryList" :key="item.id" :value="item.id">
-                    {{ item.name }} - {{ item.description }} - ({{ item.unit }}) - ₱{{ (item.current_price) }}, Qty: {{ (item.current_quantity) }}
+                <option disabled value="">Select Inventory History</option>
+                <option v-for="item in inventoryHistoryList" :key="item.id" :value="item.id">
+                    {{ item.name }} - {{ item.description }} - ₱{{ item.price }} - Qty: {{ item.quantity }} - Returned: {{ item.return_quantity ?? 0 }} - Created: {{ formatDate(item.created_at) }}
                 </option>
             </select>
         </div>
@@ -41,7 +41,7 @@
                 min="1"
                 class="w-full border rounded px-3 py-2"
             >
-            <small class="text-sm text-gray-500">Available: {{ selectedInventory?.current_quantity ?? 0 }}</small>
+            <small class="text-sm text-gray-500">Available: {{ parseInt(selectedInventory?.quantity ?? 0) - parseInt(selectedInventory?.return_quantity ?? 0) }}</small>
         </div>
 
         <div>
@@ -49,27 +49,9 @@
             <input v-model="remarks" type="text" class="w-full border rounded px-3 py-2">
         </div>
 
-        <div class="<?=($sub_inventory_type_parse['has_purpose'] == 0)?'hidden':''?>">
-            <label class="block font-medium mb-1">Purpose</label>
-            <select v-model="type" @change="changeType" class="w-full border rounded px-3 py-2">
-                <option></option>
-                <option>For Own Consumption</option>
-                <option>For Distribution</option>
-            </select>
-        </div>
-
-        <div class="<?=($sub_inventory_type_parse['has_distributor'] == 0)?'hidden':''?>">
-            <label class="block font-medium mb-1">Distributor</label>
-            <select v-model="distributor_id" class="w-full border rounded px-3 py-2">
-                <option></option>
-                <option v-if="type=='For Distribution'" v-for="item in distributorList" :key="item.id" :value="item.id">
-                    {{ item.type }} | {{ item.name }}
-                </option>
-            </select>
-        </div>
 
         <button type="submit" class="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600">
-            Inventory Out
+            Inventory Return
         </button>
     </form>
 </div>
@@ -83,35 +65,32 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            inventoryList: [],
+            inventoryHistoryList: [],
             distributorList: [],
             selectedInventoryId: '',
             quantity: 0,
             remarks: '',
-            type: null,
-            distributor_id: null,
         };
     },
     computed: {
         selectedInventory() {
-            return this.inventoryList.find(item => item.id == this.selectedInventoryId);
+            return this.inventoryHistoryList.find(item => item.id == this.selectedInventoryId);
         }
     },
     mounted() {
         this.distributorListFunction();
-        this.getInventory();
+        this.getInventoryHistory();
     },
     methods: {
-        async changeType(){
-            if(this.type!='For Distribution'){
-                this.distributor_id = null;
-            }
+        formatDate (dateString){
+            const date = new Date(dateString);
+            return date.toLocaleString();
         },
-        async getInventory(){
-            fetch(`${base_url}inventory/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`)
+        async getInventoryHistory(){
+            fetch(`${base_url}inventory/in/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`)
             .then(res => res.json())
             .then(data => {
-                this.inventoryList = data;
+                this.inventoryHistoryList = data;
             });
         },
         async distributorListFunction(){
@@ -125,7 +104,7 @@ createApp({
             if(this.quantity > this.selectedInventory?.current_quantity){
                 alert("The entered quantity exceeds the current available inventory.");
             }else{
-                fetch(base_url + 'inventory/save-out', {
+                fetch(base_url + 'inventory/save-return', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -133,25 +112,23 @@ createApp({
                         'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
                     },
                     body: JSON.stringify({
-                        inventory_id: this.selectedInventoryId,
+                        inventory_history_id: this.selectedInventoryId,
                         quantity: this.quantity,
                         remarks: this.remarks,
-                        customer_own_distribution: this.type,
-                        distributor_id: this.distributor_id
                     })
                 })
                 .then(res => res.json())
                 .then(response => {
-                    alert('Inventory out recorded!');
+                    alert('Inventory return recorded!');
                     this.selectedInventoryId = '';
                     this.quantity = 0;
                     this.remarks = '';
-                    this.getInventory();
+                    this.getInventoryHistory();
                 });
             }
         }
     }
-}).mount('#inventory-out-app');
+}).mount('#inventory-return-app');
 </script>
 
 <?= $this->endSection() ?>

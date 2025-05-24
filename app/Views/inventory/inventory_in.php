@@ -27,7 +27,7 @@
                 <select v-model="selectedInventoryId" class="w-full border rounded px-3 py-2">
                     <option disabled value="">Select inventory</option>
                     <option v-for="item in inventoryList" :key="item.id" :value="item.id">
-                        {{ item.name }}
+                        {{ item.name }} - {{ item.description }} - ({{ item.unit }})
                     </option>
                 </select>
             </div>

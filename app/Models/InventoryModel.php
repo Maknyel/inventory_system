@@ -8,7 +8,7 @@ class InventoryModel extends Model
 {
     protected $table = 'inventory';
     protected $primaryKey = 'id';
-    protected $allowedFields = ['name', 'description', 'inventory_type', 'sub_inventory_type', 'reordering_level', 'icon', 'created_at', 'updated_at'];
+    protected $allowedFields = ['name', 'description', 'unit', 'inventory_type', 'sub_inventory_type', 'reordering_level', 'icon', 'created_at', 'updated_at'];
     protected $useTimestamps = true;
     protected $createdField  = 'created_at';
     protected $updatedField  = 'updated_at';

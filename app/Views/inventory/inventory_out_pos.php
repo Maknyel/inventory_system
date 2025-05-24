@@ -65,7 +65,7 @@
                     <td class="border p-2">{{ index + 1 }}</td>
                     <td class="border p-2">{{ item.name }}</td>
                     <td class="border p-2 text-right">{{ item.quantity }}</td>
-                    <td class="border p-2 text-center">pcs</td>
+                    <td class="border p-2 text-center">{{ item.unit }}</td>
                     <td class="border p-2 text-right">₱ {{ (item.unit_cost ?? 0).toFixed(2) }}</td>
                     <td class="border p-2 text-left">₱ {{ ((item.unit_cost ?? 0) * item.quantity).toFixed(2) }}</td>
                 </tr>
@@ -140,7 +140,7 @@
                 <tr v-for="(item, index) in cart" :key="index">
                     
                     <td class="border p-2 text-right">{{ item.quantity }}</td>
-                    <td class="border p-2 text-center">pcs</td>
+                    <td class="border p-2 text-center">{{ item.unit }}</td>
                     <td class="border p-2">{{ item.name }}</td>
                     <td class="border p-2 text-right">₱ {{ (item.unit_cost ?? 0).toFixed(2) }}</td>
                     <td class="border p-2 text-left">₱ {{ ((item.unit_cost ?? 0) * item.quantity).toFixed(2) }}</td>
@@ -223,7 +223,7 @@
                 <td class="border p-2">{{ index + 1 }}</td>
                 <td class="border p-2">{{ item.name }}</td>
                 <td class="border p-2 text-right">{{ item.quantity }}</td>
-                <td class="border p-2 text-center">pcs</td>
+                <td class="border p-2 text-center">{{ item.unit }}</td>
                 <td class="border p-2 text-right">₱ {{ (item.unit_cost ?? 0).toFixed(2) }}</td>
                 <td class="border p-2 text-left">₱ {{ ((item.unit_cost ?? 0) * item.quantity).toFixed(2) }}</td>
             </tr>
@@ -259,12 +259,14 @@
             <select v-model="selectedInventoryId" class="w-full border rounded px-3 py-2">
                 <option disabled value="">Select inventory</option>
                 <option v-for="item in inventoryList" :key="item.id" :value="item.id">
-                    {{ item.name }}
+                    {{ item.name }} - {{ item.description }} - ({{ item.unit }}) - ₱{{ (item.current_price) }}, Qty: {{ (item.current_quantity) }}
                 </option>
             </select>
         </div>
 
         <input type="text" class="hidden" v-model="selectedInventoryPrice">
+        <input type="text" class="hidden" v-model="selectedUnit">
+        
 
         <div>
             <label class="block font-medium mb-1">Quantity</label>
@@ -295,8 +297,8 @@
                 <tr v-for="(item, index) in cart" :key="index" class="border-b">
                     <td class="p-2">{{ item.name }}</td>
                     <td class="p-2">{{ item.quantity }}</td>
-                    <td class="p-2">₱ {{ item.unit_cost }}</td>
-                    <td class="p-2">₱ {{ item.quantity * item.unit_cost }}</td>
+                    <td class="p-2">₱ {{ (item.unit_cost).toFixed(2) }}</td>
+                    <td class="p-2">₱ {{ (item.quantity * item.unit_cost).toFixed(2) }}</td>
                     <td class="p-2">
                         <input v-model="item.remarks" class="border rounded px-2 py-1 w-full" placeholder="Remarks">
                     </td>
@@ -395,6 +397,9 @@ createApp({
         },
         selectedInventoryPrice() {
             return this.inventoryList.find(item => item.id == this.selectedInventoryId)?.current_price;
+        },
+        selectedUnit() {
+            return this.inventoryList.find(item => item.id == this.selectedInventoryId)?.unit;
         }
     },
     mounted() {
@@ -481,7 +486,8 @@ createApp({
                     name: item.name,
                     quantity: this.quantity,
                     remarks: '',
-                    unit_cost: parseFloat(this.selectedInventoryPrice)
+                    unit_cost: parseFloat(this.selectedInventoryPrice),
+                    unit: this.selectedUnit
                 });
             }
 
@@ -505,19 +511,19 @@ createApp({
             if (this.selectedForms.length === 0) {
                 alert("No Selected Form");
                 return;
-            }
+            }            
             
-            this.generateReceiptPurchaceOrder = true;
-            this.generateReceiptDistributors = true;
-            this.generateReceiptCustomer = true;
             this.$nextTick(() => {
                 if (this.selectedForms.includes('purchaseOrder')) {
+                    this.generateReceiptPurchaceOrder = true;
                     this.downloadPDFPurchaseOrder();
                 }
                 if (this.selectedForms.includes('customerDR')) {
+                    this.generateReceiptCustomer = true;
                     this.downloadPDFCustomer();
                 }
                 if (this.selectedForms.includes('distributorDR')) {
+                    this.generateReceiptDistributors = true;
                     this.downloadPDFDistributors();
                 }
             });
@@ -545,10 +551,11 @@ createApp({
             .then(res => res.json())
             .then(response => {
                 alert('POS transaction completed!');
-                this.cart = [];
-                this.type = '';
-                this.distributor_id = '';
-                this.getInventory();
+                // this.cart = [];
+                // this.type = '';
+                // this.distributor_id = '';
+                // this.getInventory();
+                location.reload();
             });
         }
     }

@@ -81,7 +81,7 @@
                     <?php if (current_user()['role_id'] == 1 || current_user()['role_id'] == 4) { ?>
                         <!-- <li><a href="<?= base_url('inventory_out') ?>" class="block hover:underline">Inventory Out</a></li> -->
                     <?php } ?>
-                    <li><a href="<?= base_url('inventory_history') ?>" class="block hover:underline">Inventory History</a></li>
+                    <!-- <li><a href="<?= base_url('inventory_history') ?>" class="block hover:underline">Inventory History</a></li> -->
                     <?php if (current_user()['role_id'] == 1 || current_user()['role_id'] == 4) { ?>
                         <li><a href="<?= base_url('supplier') ?>" class="block hover:underline">Supplier</a></li>
                         <li><a href="<?= base_url('distributor') ?>" class="block hover:underline">Distribution Orders Names</a></li>

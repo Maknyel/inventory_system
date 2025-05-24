@@ -22,12 +22,16 @@ $routes->post('inventory/api/update/(:segment)', 'InventoryController::update/$1
 $routes->delete('inventory/api/delete/(:segment)', 'InventoryController::delete/$1');
 $routes->get('inventory/export', 'InventoryController::export');
 $routes->get('/inventory/list', 'InventoryController::getInventoryList');
+$routes->get('/inventory/in/list', 'InventoryController::getInventoryInList');
 $routes->post('/inventory/save-stock', 'InventoryController::saveStock');
 $routes->post('inventory/save-out', 'InventoryController::saveOut');
+$routes->post('inventory/save-return', 'InventoryController::saveReturn');
+
 $routes->post('inventory/save-pos-out', 'InventoryController::savePosOut');
 
 $routes->get('/inventory_in', 'InventoryController::inventoryIn');
 $routes->get('/inventory_out', 'InventoryController::inventoryOut');
+$routes->get('/inventory_return', 'InventoryController::inventoryReturn');
 $routes->get('/inventory_out_pos', 'InventoryController::inventoryOutPos');
 
 $routes->get('/inventory_history', 'InventoryHistoryController::index');
