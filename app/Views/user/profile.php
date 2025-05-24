@@ -34,7 +34,7 @@
         <!-- Current Profile Image Preview -->
         <?php if (!empty($user['image_url'])): ?>
             <div class="mb-4">
-                <img onerror="this.onerror=null; this.src='<?= base_url('public/images/default.png') ?>';" src="<?= base_url(esc($user['image_url'])) ?>" 
+                <img onerror="this.onerror=null; this.src='<?= base_url('public/images/logo.png') ?>';" src="<?= base_url(esc($user['image_url'])) ?>" 
                     alt="Profile Image" 
                     class="w-32 h-32 object-cover rounded-full mx-auto border" />
             </div>
