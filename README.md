@@ -1,27 +1,18 @@
-# Inventory System - CodeIgniter 4
+# Employee Attendance System
 
-A simple Inventory Management System built using CodeIgniter 4 framework.
+A simple **Time In / Time Out** attendance tracking system with:
 
-## Features
+✅ **Backend** – CodeIgniter 3 (RESTful APIs)  
+✅ **Frontend** – Angular apps for Time In and Time Out
 
-✅ Inventory Type Management  
-✅ Inventory Item Management  
-✅ Inventory History (In/Out)  
-✅ User Management with Roles  
-✅ Search, Sorting, and Pagination  
-✅ Export to CSV  
-✅ Responsive UI with Tailwind CSS  
-✅ RESTful API structure  
+---
 
-## Requirements
+## 📁 Project Structure
 
-- PHP 8.1 or higher
-- MySQL 5.7 or higher / MariaDB
-- Composer
+This project uses the following folder names:
 
-## Installation
+- **CI3 backend:** `angular-backend`  
+- **Angular frontend:** `angular-testing`
 
-1. **Clone the repository:**
-   ```bash
-   git clone https://github.com/yourusername/inventory-system.git
-   cd inventory-system
+The overall project structure looks like this:
+
