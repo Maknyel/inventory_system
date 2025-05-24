@@ -33,22 +33,29 @@ Vagrantfile
 #-------------------------
 # Writable Directories (cache, logs, sessions, uploads)
 #-------------------------
-writable/
-writable/logs/
-writable/cache/*
-!writable/cache/index.html
-
+# Ignore everything in writable/logs except index.html (if you want to keep that)
 writable/logs/*
 !writable/logs/index.html
 
+# Ignore everything in writable/cache except index.html
+writable/cache/*
+!writable/cache/index.html
+
+# Ignore everything in writable/session except index.html
 writable/session/*
 !writable/session/index.html
 
+# Ignore everything in writable/uploads except index.html
 writable/uploads/*
 !writable/uploads/index.html
 
+# Ignore debugbar files except .gitkeep (to keep the folder)
 writable/debugbar/*
 !writable/debugbar/.gitkeep
+
+# NOTE: It's redundant to have "writable/" and "writable/logs/" both ignored
+# If you want to ignore all writable contents, you can uncomment the next line and remove the more specific ignores above
+# writable/
 
 php_errors.log
 
