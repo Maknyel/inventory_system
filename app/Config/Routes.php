@@ -30,7 +30,7 @@ $routes->get('/inventory_in', 'InventoryController::inventoryIn');
 $routes->get('/inventory_out', 'InventoryController::inventoryOut');
 $routes->get('/inventory_out_pos', 'InventoryController::inventoryOutPos');
 
-$routes->get('/inventory_histo1ry', 'InventoryHistoryController::index');
+$routes->get('/inventory_history', 'InventoryHistoryController::index');
 $routes->get('/inventory_history_filter', 'InventoryHistoryController::filter');
 
 $routes->get('/supplier', 'SupplierController::index');
