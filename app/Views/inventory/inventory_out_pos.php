@@ -1,6 +1,22 @@
 <?= $this->extend('layout') ?>
 <?= $this->section('content') ?>
-
+<nav class="text-sm text-gray-600" aria-label="Breadcrumb">
+    <ol class="flex items-center space-x-2">
+        <li>
+            <a href="<?=base_url('inventory')?>" class="text-blue-600 hover:underline">Inventory</a>
+        </li>
+        <li><span class="mx-1 text-gray-400">/</span></li>
+        <li>
+            <a href="<?=base_url('inventory/'.$inventory_type_parse['id'])?>" class="text-blue-600 hover:underline"><?=($inventory_type_parse['name'])?></a>
+        </li>
+        <li><span class="mx-1 text-gray-400">/</span></li>
+        <li>
+            <a href="<?=base_url('inventory/'.$inventory_type_parse['id'].'/'.$sub_inventory_type_parse['id'])?>" class="text-blue-600 hover:underline"><?=($sub_inventory_type_parse['name'])?></a>
+        </li>
+        <li><span class="mx-1 text-gray-400">/</span></li>
+        <li><span class="">Point of Sale</span></li>
+    </ol>
+</nav>
 <div id="pos-app" class="p-4">
     <h2 class="text-xl font-semibold mb-4">Point of Sale</h2>
 
