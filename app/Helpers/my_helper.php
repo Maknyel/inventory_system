@@ -4,7 +4,7 @@ use App\Models\UserModel;
 
 function global_name()
 {
-    return "Inventory System";
+    return "Faith Construct Epoxy Resin Specialist";
 }
 
 function generateInitialsImage($name) {

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title><?= global_name() ?></title>
+    <link rel="icon" href="<?=base_url('public/images/logo.png')?>" type="image/x-icon">
     <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
     <script src="https://cdn.tailwindcss.com"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
