@@ -11,12 +11,12 @@
     <table class="min-w-full table-auto border-collapse border border-gray-300">
         <thead>
             <tr>
-                <th class="px-4 py-2 border-b text-left">Actions</th>
-                <th class="px-4 py-2 border-b text-left">Name</th>
-                <th class="px-4 py-2 border-b text-left">Email</th>
-                <th class="px-4 py-2 border-b text-left">Role</th>
-                <th class="px-4 py-2 border-b text-left">Created At</th>
-                <th class="px-4 py-2 border-b text-left">Updated At</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">Actions</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">Name</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">Email</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">Role</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">Created At</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">Updated At</th>
             </tr>
         </thead>
         <tbody>

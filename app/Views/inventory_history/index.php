@@ -49,69 +49,69 @@
     <table id="myTable" class="min-w-full table-auto border-collapse border border-gray-300">
         <thead>
             <tr>
-                <!-- <th class="px-4 py-2 border-b text-left">#</th> -->
-                <th class="px-4 py-2 border-b text-left">
+                <!-- <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">#</th> -->
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.name&orderdir=<?= $orderby == 'inventory_history.name' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Name
                         <i class="ion-<?= ($orderby == 'inventory_history.name' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.name' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.description&orderdir=<?= $orderby == 'inventory_history.description' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Description
                         <i class="ion-<?= ($orderby == 'inventory_history.description' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.description' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.price&orderdir=<?= $orderby == 'inventory_history.price' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Price
                         <i class="ion-<?= ($orderby == 'inventory_history.price' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.price' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.name&orderdir=<?= $orderby == 'inventory_history.quantity' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Quantity
                         <i class="ion-<?= ($orderby == 'inventory_history.quantity' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.quantity' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.return_quantity&orderdir=<?= $orderby == 'inventory_history.return_quantity' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Return Qty
                         <i class="ion-<?= ($orderby == 'inventory_history.return_quantity' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.return_quantity' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.in_out&orderdir=<?= $orderby == 'inventory_history.in_out' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         In/Out
                         <i class="ion-<?= ($orderby == 'inventory_history.in_out' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.in_out' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.remarks&orderdir=<?= $orderby == 'inventory_history.remarks' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Remarks
                         <i class="ion-<?= ($orderby == 'inventory_history.remarks' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.remarks' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=supplier_name&orderdir=<?= $orderby == 'supplier_name' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Supplier
                         <i class="ion-<?= ($orderby == 'supplier_name' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'supplier_name' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_type_name&orderdir=<?= $orderby == 'inventory_type_name' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Inventory Type
                         <i class="ion-<?= ($orderby == 'inventory_type_name' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_type_name' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.created_at&orderdir=<?= $orderby == 'inventory_history.created_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Created At
                         <i class="ion-<?= ($orderby == 'inventory_history.created_at' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.created_at' ? 'text-black' : 'text-gray-400' ?>"></i>
                         
                     </a>
                 </th>
-                <th class="px-4 py-2 border-b text-left">
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.updated_at&orderdir=<?= $orderby == 'inventory_history.updated_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Updated At
                         <i class="ion-<?= ($orderby == 'inventory_history.updated_at' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.updated_at' ? 'text-black' : 'text-gray-400' ?>"></i>
