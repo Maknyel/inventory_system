@@ -1,0 +1,984 @@
+INFO - 2025-05-16 08:38:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 08:38:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 08:38:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 08:38:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 08:39:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 08:39:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 08:42:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 08:42:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-16 08:42:33 --> mysqli_sql_exception: Table 'inventory_system.inventory_types' doesn't exist in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `invento...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `invento...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `invento...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `invento...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\app\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\inventory_system\app\Views\home.php(34): get_low_stock_items()
+#6 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(228): include('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Common.php(1178): CodeIgniter\View\View->render('home', Array, true)
+#9 C:\xampp\htdocs\inventory_system\app\Controllers\Home.php(12): view('home')
+#10 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\Home->index()
+#11 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#12 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2025-05-16 08:42:33 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'inventory_system.inventory_types' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_types` ON `inventory`.`inventory_type_id` = `inventory_types`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 2 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Views\home.php(34): get_low_stock_items()
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 7 APPPATH\Controllers\Home.php(12): view('home')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:42:33 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'inventory_system.inventory_types' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_types` ON `inventory`.`inventory_type_id` = `inventory_types`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_types` ON `inventory`.`inventory_type_id` = `inventory_types`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_types` ON `inventory`.`inventory_type_id` = `inventory_types`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 4 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Views\home.php(34): get_low_stock_items()
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 9 APPPATH\Controllers\Home.php(12): view('home')
+10 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+11 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:42:33 --> [Caused by] mysqli_sql_exception: Table 'inventory_system.inventory_types' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_types` ON `inventory`.`inventory_type_id` = `inventory_types`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_types` ON `inventory`.`inventory_type_id` = `inventory_types`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_types` ON `inventory`.`inventory_type_id` = `inventory_types`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_types` ON `inventory`.`inventory_type_id` = `inventory_types`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 5 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Views\home.php(34): get_low_stock_items()
+ 7 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 8 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+10 APPPATH\Controllers\Home.php(12): view('home')
+11 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 08:43:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-16 08:43:07 --> mysqli_sql_exception: Unknown column 'inventory_types.name' in 'field list' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `invento...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `invento...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `invento...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `invento...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\app\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\inventory_system\app\Views\home.php(34): get_low_stock_items()
+#6 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(228): include('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Common.php(1178): CodeIgniter\View\View->render('home', Array, true)
+#9 C:\xampp\htdocs\inventory_system\app\Controllers\Home.php(12): view('home')
+#10 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\Home->index()
+#11 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#12 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2025-05-16 08:43:07 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 2 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Views\home.php(34): get_low_stock_items()
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 7 APPPATH\Controllers\Home.php(12): view('home')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:08 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 4 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Views\home.php(34): get_low_stock_items()
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 9 APPPATH\Controllers\Home.php(12): view('home')
+10 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+11 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:08 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 5 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Views\home.php(34): get_low_stock_items()
+ 7 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 8 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+10 APPPATH\Controllers\Home.php(12): view('home')
+11 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 08:43:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-16 08:43:09 --> mysqli_sql_exception: Unknown column 'inventory_types.name' in 'field list' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `invento...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `invento...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `invento...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `invento...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\app\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\inventory_system\app\Views\home.php(34): get_low_stock_items()
+#6 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(228): include('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Common.php(1178): CodeIgniter\View\View->render('home', Array, true)
+#9 C:\xampp\htdocs\inventory_system\app\Controllers\Home.php(12): view('home')
+#10 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\Home->index()
+#11 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#12 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2025-05-16 08:43:09 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 2 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Views\home.php(34): get_low_stock_items()
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 7 APPPATH\Controllers\Home.php(12): view('home')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:09 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 4 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Views\home.php(34): get_low_stock_items()
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 9 APPPATH\Controllers\Home.php(12): view('home')
+10 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+11 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:09 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 5 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Views\home.php(34): get_low_stock_items()
+ 7 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 8 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+10 APPPATH\Controllers\Home.php(12): view('home')
+11 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 08:43:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-16 08:43:11 --> mysqli_sql_exception: Unknown column 'inventory_types.name' in 'field list' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `invento...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `invento...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `invento...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `invento...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\app\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\inventory_system\app\Views\home.php(34): get_low_stock_items()
+#6 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(228): include('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Common.php(1178): CodeIgniter\View\View->render('home', Array, true)
+#9 C:\xampp\htdocs\inventory_system\app\Controllers\Home.php(12): view('home')
+#10 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\Home->index()
+#11 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#12 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2025-05-16 08:43:11 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 2 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Views\home.php(34): get_low_stock_items()
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 7 APPPATH\Controllers\Home.php(12): view('home')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:11 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 4 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Views\home.php(34): get_low_stock_items()
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 9 APPPATH\Controllers\Home.php(12): view('home')
+10 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+11 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:11 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 5 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Views\home.php(34): get_low_stock_items()
+ 7 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 8 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+10 APPPATH\Controllers\Home.php(12): view('home')
+11 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 08:43:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-16 08:43:12 --> mysqli_sql_exception: Unknown column 'inventory_types.name' in 'field list' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `invento...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `invento...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `invento...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `invento...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\app\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\inventory_system\app\Views\home.php(34): get_low_stock_items()
+#6 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(228): include('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Common.php(1178): CodeIgniter\View\View->render('home', Array, true)
+#9 C:\xampp\htdocs\inventory_system\app\Controllers\Home.php(12): view('home')
+#10 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\Home->index()
+#11 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#12 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2025-05-16 08:43:12 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 2 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Views\home.php(34): get_low_stock_items()
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 7 APPPATH\Controllers\Home.php(12): view('home')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:12 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 4 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Views\home.php(34): get_low_stock_items()
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 9 APPPATH\Controllers\Home.php(12): view('home')
+10 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+11 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:12 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory_types.name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_types`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 5 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Views\home.php(34): get_low_stock_items()
+ 7 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 8 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+10 APPPATH\Controllers\Home.php(12): view('home')
+11 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 08:43:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-16 08:43:26 --> mysqli_sql_exception: Unknown column 'inventory.inventory_type_id' in 'on clause' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `invento...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `invento...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `invento...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `invento...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\app\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\inventory_system\app\Views\home.php(34): get_low_stock_items()
+#6 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(228): include('C:\\xampp\\htdocs...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Common.php(1178): CodeIgniter\View\View->render('home', Array, true)
+#9 C:\xampp\htdocs\inventory_system\app\Controllers\Home.php(12): view('home')
+#10 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\Home->index()
+#11 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#12 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#13 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#14 {main}
+CRITICAL - 2025-05-16 08:43:26 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.inventory_type_id' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 2 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 3 APPPATH\Views\home.php(34): get_low_stock_items()
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 7 APPPATH\Controllers\Home.php(12): view('home')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:26 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.inventory_type_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 4 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 5 APPPATH\Views\home.php(34): get_low_stock_items()
+ 6 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 7 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 8 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+ 9 APPPATH\Controllers\Home.php(12): view('home')
+10 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+11 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+12 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+13 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 08:43:26 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory.inventory_type_id' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < 1
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory`.`icon`, `inventory`.`name`, `inventory`.`description`, `inventory`.`current_quantity`, `inventory`.`current_price`, `inventory`.`reordering_level`, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory`
+LEFT JOIN `inventory_type` ON `inventory`.`inventory_type_id` = `inventory_type`.`id`
+WHERE   (
+`reordering_level` > current_quantity
+OR `current_quantity` IS NULL
+OR `current_quantity` < :current_quantity:
+ )', [...], false)
+ 5 APPPATH\Helpers\my_helper.php(76): CodeIgniter\Database\BaseBuilder->get()
+ 6 APPPATH\Views\home.php(34): get_low_stock_items()
+ 7 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\home.php')
+ 8 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 9 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('home', [], true)
+10 APPPATH\Controllers\Home.php(12): view('home')
+11 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\Home->index()
+12 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+13 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+14 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 08:43:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 08:47:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 09:02:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 09:02:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 09:02:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 09:02:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 09:02:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 09:02:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 09:02:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 09:04:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 09:05:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:21:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:24:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:24:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:25:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:25:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:25:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:25:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:25:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:25:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:26:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:26:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:26:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:26:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:26:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:26:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-16 10:27:11 --> TypeError: CodeIgniter\BaseModel::paginate(): Argument #1 ($perPage) must be of type ?int, string given, called in C:\xampp\htdocs\inventory_system\app\Controllers\InventoryHistoryController.php on line 61
+in SYSTEMPATH\BaseModel.php on line 1231.
+ 1 APPPATH\Controllers\InventoryHistoryController.php(61): CodeIgniter\BaseModel->paginate('', 'inventory_history')
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 10:27:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:27:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:28:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:29:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:29:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:30:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-16 10:30:53 --> CodeIgniter\HTTP\Exceptions\BadRequestException: The URI you submitted has disallowed characters: "inventory_historypage=2"
+in SYSTEMPATH\Router\Router.php on line 704.
+ 1 SYSTEMPATH\Router\Router.php(195): CodeIgniter\Router\Router->checkDisallowedChars('inventory_historypage=2')
+ 2 SYSTEMPATH\CodeIgniter.php(825): CodeIgniter\Router\Router->handle('inventory_historypage=2')
+ 3 SYSTEMPATH\CodeIgniter.php(450): CodeIgniter\CodeIgniter->tryToRouteIt(Object(CodeIgniter\Router\RouteCollection))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 10:30:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:31:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-16 10:31:56 --> ErrorException: Undefined array key "totalItems"
+in APPPATH\Controllers\InventoryHistoryController.php on line 74.
+ 1 APPPATH\Controllers\InventoryHistoryController.php(74): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined array key "totalItems"', 'C:\\xampp\\htdocs\\inventory_system\\app\\Controllers\\InventoryHistoryController.php', 74)
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 10:32:05 --> TypeError: Unsupported operand types: array / string
+in APPPATH\Controllers\InventoryHistoryController.php on line 74.
+ 1 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 2 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 3 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 4 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 10:32:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:32:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:32:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:33:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:33:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:33:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:33:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:33:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:34:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:34:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:34:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:34:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 10:34:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:20:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:20:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:21:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:21:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:21:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:21:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:21:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:21:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:21:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:22:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:22:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-16 11:25:20 --> TypeError: CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\InventoryHistoryController.php(71): CodeIgniter\Pager\Pager->getTotal()
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 11:25:43 --> TypeError: CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\InventoryHistoryController.php(71): CodeIgniter\Pager\Pager->getTotal()
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 11:26:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:26:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:26:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:26:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:26:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:27:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-16 11:27:09 --> TypeError: CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\InventoryHistoryController.php(60): CodeIgniter\Pager\Pager->getTotal()
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 11:27:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-16 11:27:21 --> TypeError: CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\InventoryHistoryController.php(60): CodeIgniter\Pager\Pager->getTotal()
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 11:27:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:27:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:29:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-16 11:29:03 --> ErrorException: Undefined variable $totalItems
+in APPPATH\Views\inventory_history\index.php on line 146.
+ 1 APPPATH\Views\inventory_history\index.php(146): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $totalItems', 'C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory_history\\index.php', 146)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory_history\\index.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('inventory_history/index', [], true)
+ 5 APPPATH\Controllers\InventoryHistoryController.php(69): view('inventory_history/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 11:29:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:29:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:29:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:29:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:30:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:30:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:30:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:31:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:31:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:31:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:31:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:31:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:31:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:31:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:33:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:34:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:34:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:34:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:34:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:34:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:34:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:35:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:35:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:35:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:35:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:35:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:37:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:37:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:37:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:37:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:37:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:37:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:37:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:37:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:38:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:38:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:38:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:38:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:38:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:38:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:38:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:38:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:39:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:39:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:39:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:39:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:39:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:39:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:39:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:39:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:39:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:44:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:44:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:44:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:44:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:44:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:51:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:51:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:51:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:52:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:53:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:53:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:53:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:53:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:53:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:53:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:53:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:53:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:54:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-16 11:55:46 --> TypeError: CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\InventoryTypeController.php(23): CodeIgniter\Pager\Pager->getTotal('inventory_type')
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryTypeController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryTypeController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-16 11:56:38 --> TypeError: CodeIgniter\Pager\Pager::getTotal(): Return value must be of type int, null returned
+in SYSTEMPATH\Pager\Pager.php on line 197.
+ 1 APPPATH\Controllers\InventoryTypeController.php(24): CodeIgniter\Pager\Pager->getTotal('inventory_type')
+ 2 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryTypeController->index()
+ 3 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryTypeController))
+ 4 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 5 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-16 11:57:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:57:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:57:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:58:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:58:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:58:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:58:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:58:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:58:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:58:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 11:58:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:00:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:01:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-16 12:15:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

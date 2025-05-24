@@ -1,0 +1,1223 @@
+INFO - 2025-05-10 00:14:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 00:14:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 00:23:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 00:23:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 00:45:36 --> CodeIgniter\Pager\Exceptions\PagerException: "tailwind_full" is not a valid Pager template.
+in SYSTEMPATH\Pager\Pager.php on line 122.
+ 1 SYSTEMPATH\Pager\Pager.php(122): CodeIgniter\Pager\Exceptions\PagerException::forInvalidTemplate('tailwind_full')
+ 2 SYSTEMPATH\Pager\Pager.php(85): CodeIgniter\Pager\Pager->displayLinks('default', 'tailwind_full')
+ 3 APPPATH\Views\supplier\index.php(34): CodeIgniter\Pager\Pager->links('default', 'tailwind_full')
+ 4 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\supplier\\index.php')
+ 5 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 6 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('supplier/index', [], true)
+ 7 APPPATH\Controllers\SupplierController.php(17): view('supplier/index', [...])
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\SupplierController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SupplierController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 00:54:35 --> ErrorException: Undefined variable $totalPages
+in APPPATH\Views\supplier\index.php on line 60.
+ 1 APPPATH\Views\supplier\index.php(60): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $totalPages', 'C:\\xampp\\htdocs\\inventory_system\\app\\Views\\supplier\\index.php', 60)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\supplier\\index.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('supplier/index', [], true)
+ 5 APPPATH\Controllers\SupplierController.php(17): view('supplier/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\SupplierController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SupplierController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 01:07:19 --> ErrorException: Undefined variable $currentPage
+in APPPATH\Views\supplier\index.php on line 57.
+ 1 APPPATH\Views\supplier\index.php(57): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $currentPage', 'C:\\xampp\\htdocs\\inventory_system\\app\\Views\\supplier\\index.php', 57)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\supplier\\index.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('supplier/index', [], true)
+ 5 APPPATH\Controllers\SupplierController.php(17): view('supplier/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\SupplierController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SupplierController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 01:10:42 --> ErrorException: Undefined variable $totalItems
+in APPPATH\Views\supplier\index.php on line 53.
+ 1 APPPATH\Views\supplier\index.php(53): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $totalItems', 'C:\\xampp\\htdocs\\inventory_system\\app\\Views\\supplier\\index.php', 53)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\supplier\\index.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('supplier/index', [], true)
+ 5 APPPATH\Controllers\SupplierController.php(18): view('supplier/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\SupplierController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\SupplierController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 01:22:51 --> ErrorException: Undefined variable $inventoryTypes
+in APPPATH\Views\inventory_type\index.php on line 25.
+ 1 APPPATH\Views\inventory_type\index.php(25): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $inventoryTypes', 'C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory_type\\index.php', 25)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory_type\\index.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('inventory_type/index', [], true)
+ 5 APPPATH\Controllers\InventoryTypeController.php(23): view('inventory_type/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryTypeController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryTypeController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 01:48:41 --> ErrorException: Undefined variable $inventory
+in APPPATH\Views\inventory\index.php on line 30.
+ 1 APPPATH\Views\inventory\index.php(30): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $inventory', 'C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory\\index.php', 30)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory\\index.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('inventory/index', [], true)
+ 5 APPPATH\Controllers\InventoryController.php(11): view('inventory/index')
+ 6 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 01:52:15 --> ErrorException: fopen(http://localhost/inventory_system/uploads/icons/index.html): Failed to open stream: HTTP wrapper does not support writeable connections
+in SYSTEMPATH\HTTP\Files\UploadedFile.php on line 182.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(http://localhost/inventory_system/uploads/icons/index.html): Failed to open stream: HTTP wrapper does not support writeable connections', 'C:\\xampp\\htdocs\\inventory_system\\vendor\\codeigniter4\\framework\\system\\HTTP\\Files\\UploadedFile.php', 182)
+ 2 SYSTEMPATH\HTTP\Files\UploadedFile.php(182): fopen('http://localhost/inventory_system/uploads/icons/index.html', 'x+b')
+ 3 SYSTEMPATH\HTTP\Files\UploadedFile.php(133): CodeIgniter\HTTP\Files\UploadedFile->setPath('http://localhost/inventory_system/uploads/icons/')
+ 4 APPPATH\Controllers\InventoryController.php(66): CodeIgniter\HTTP\Files\UploadedFile->move('http://localhost/inventory_system/uploads/icons/', '1746841935_d0a8d882a79ce935b83a.jpg')
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 01:52:41 --> ErrorException: fopen(http://localhost/inventory_system/uploads/icons/index.html): Failed to open stream: HTTP wrapper does not support writeable connections
+in SYSTEMPATH\HTTP\Files\UploadedFile.php on line 182.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(http://localhost/inventory_system/uploads/icons/index.html): Failed to open stream: HTTP wrapper does not support writeable connections', 'C:\\xampp\\htdocs\\inventory_system\\vendor\\codeigniter4\\framework\\system\\HTTP\\Files\\UploadedFile.php', 182)
+ 2 SYSTEMPATH\HTTP\Files\UploadedFile.php(182): fopen('http://localhost/inventory_system/uploads/icons/index.html', 'x+b')
+ 3 SYSTEMPATH\HTTP\Files\UploadedFile.php(133): CodeIgniter\HTTP\Files\UploadedFile->setPath('http://localhost/inventory_system/uploads/icons/')
+ 4 APPPATH\Controllers\InventoryController.php(38): CodeIgniter\HTTP\Files\UploadedFile->move('http://localhost/inventory_system/uploads/icons/', '1746841961_7205507dd5f7da4bbbf3.jpg')
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->store()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 02:25:54 --> ErrorException: fopen(http://localhost/inventory_system/uploads/icons/index.html): Failed to open stream: HTTP wrapper does not support writeable connections
+in SYSTEMPATH\HTTP\Files\UploadedFile.php on line 182.
+ 1 [internal function]: CodeIgniter\Debug\Exceptions->errorHandler(2, 'fopen(http://localhost/inventory_system/uploads/icons/index.html): Failed to open stream: HTTP wrapper does not support writeable connections', 'C:\\xampp\\htdocs\\inventory_system\\vendor\\codeigniter4\\framework\\system\\HTTP\\Files\\UploadedFile.php', 182)
+ 2 SYSTEMPATH\HTTP\Files\UploadedFile.php(182): fopen('http://localhost/inventory_system/uploads/icons/index.html', 'x+b')
+ 3 SYSTEMPATH\HTTP\Files\UploadedFile.php(133): CodeIgniter\HTTP\Files\UploadedFile->setPath('http://localhost/inventory_system/uploads/icons/')
+ 4 APPPATH\Controllers\InventoryController.php(108): CodeIgniter\HTTP\Files\UploadedFile->move('http://localhost/inventory_system/uploads/icons/', '1746843954_79833d69c16f95878c64.jpg')
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->update('1')
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 02:45:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 02:45:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 02:46:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 02:46:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 02:46:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 02:46:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 02:46:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 02:46:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 02:46:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 03:05:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:38:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:38:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:38:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:38:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:38:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:38:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:38:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:39:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:40:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:40:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:40:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:40:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:42:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:42:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:42:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:42:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:42:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:44:35 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:44:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:44:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:46:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:47:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:47:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:47:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:47:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 05:47:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 06:31:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:41:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:41:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:41:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:41:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:41:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:42:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:43:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:43:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:43:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:38 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:45:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:46:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:46:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:46:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:47:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:47:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 10:47:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 18:49:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 18:49:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 19:46:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 19:46:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 19:47:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 19:51:56 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 19:52:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:00:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:00:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:00:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:10:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:11:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:11:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:11:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:11:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:12:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:12:20 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 973.
+ 1 SYSTEMPATH\BaseModel.php(973): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(812): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\InventoryController.php(95): CodeIgniter\Model->update('1', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:12:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:12:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:12:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:13:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:13:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:13:18 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 973.
+ 1 SYSTEMPATH\BaseModel.php(973): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(812): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\InventoryController.php(95): CodeIgniter\Model->update('4', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:19:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:21:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:21:42 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 973.
+ 1 SYSTEMPATH\BaseModel.php(973): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(812): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\InventoryController.php(97): CodeIgniter\Model->update('4', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:23:12 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:23:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:23:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:23:50 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 973.
+ 1 SYSTEMPATH\BaseModel.php(973): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(812): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\InventoryController.php(97): CodeIgniter\Model->update('2', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:24:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:24:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-10 21:24:06 --> mysqli_sql_exception: Table 'inventory_system.history' doesn't exist in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `hi...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `hi...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `hi...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `hi...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+#5 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\BaseModel.php(805): CodeIgniter\Model->doInsert(Array)
+#6 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Model.php(749): CodeIgniter\BaseModel->insert(Array, true)
+#7 C:\xampp\htdocs\inventory_system\app\Controllers\InventoryController.php(113): CodeIgniter\Model->insert(Array)
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+#9 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+#10 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#11 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#12 {main}
+CRITICAL - 2025-05-10 21:24:06 --> CodeIgniter\Database\Exceptions\DatabaseException: Table 'inventory_system.history' doesn't exist
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `history` (`name`, `description`, `price`, `quantity`, `return_quantity`, `in_out`, `inventory_id`, `user_id`, `remarks`, `supplier_id`, `created_at`, `updated_at`) VALUES (:name:, :description:, :price:, :quantity:, :return_quantity:, :in_out:, :inventory_id:, :user_id:, :remarks:, :supplier_id:, :created_at:, :updated_at:)', [...], false)
+ 2 SYSTEMPATH\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+ 3 SYSTEMPATH\BaseModel.php(805): CodeIgniter\Model->doInsert([...])
+ 4 SYSTEMPATH\Model.php(749): CodeIgniter\BaseModel->insert([...], true)
+ 5 APPPATH\Controllers\InventoryController.php(113): CodeIgniter\Model->insert([...])
+ 6 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 7 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:24:06 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Table 'inventory_system.history' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `history` (`name`, `description`, `price`, `quantity`, `return_quantity`, `in_out`, `inventory_id`, `user_id`, `remarks`, `supplier_id`, `created_at`, `updated_at`) VALUES (\'inventory 2\', \'inventory 2\', 300, 3, 0, \'in\', \'2\', \'1\', \'Stock added via form\', \'16\', \'2025-05-10 21:24:06\', \'2025-05-10 21:24:06\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `history` (`name`, `description`, `price`, `quantity`, `return_quantity`, `in_out`, `inventory_id`, `user_id`, `remarks`, `supplier_id`, `created_at`, `updated_at`) VALUES (\'inventory 2\', \'inventory 2\', 300, 3, 0, \'in\', \'2\', \'1\', \'Stock added via form\', \'16\', \'2025-05-10 21:24:06\', \'2025-05-10 21:24:06\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `history` (`name`, `description`, `price`, `quantity`, `return_quantity`, `in_out`, `inventory_id`, `user_id`, `remarks`, `supplier_id`, `created_at`, `updated_at`) VALUES (:name:, :description:, :price:, :quantity:, :return_quantity:, :in_out:, :inventory_id:, :user_id:, :remarks:, :supplier_id:, :created_at:, :updated_at:)', [...], false)
+ 4 SYSTEMPATH\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+ 5 SYSTEMPATH\BaseModel.php(805): CodeIgniter\Model->doInsert([...])
+ 6 SYSTEMPATH\Model.php(749): CodeIgniter\BaseModel->insert([...], true)
+ 7 APPPATH\Controllers\InventoryController.php(113): CodeIgniter\Model->insert([...])
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:24:06 --> [Caused by] mysqli_sql_exception: Table 'inventory_system.history' doesn't exist
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('INSERT INTO `history` (`name`, `description`, `price`, `quantity`, `return_quantity`, `in_out`, `inventory_id`, `user_id`, `remarks`, `supplier_id`, `created_at`, `updated_at`) VALUES (\'inventory 2\', \'inventory 2\', 300, 3, 0, \'in\', \'2\', \'1\', \'Stock added via form\', \'16\', \'2025-05-10 21:24:06\', \'2025-05-10 21:24:06\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `history` (`name`, `description`, `price`, `quantity`, `return_quantity`, `in_out`, `inventory_id`, `user_id`, `remarks`, `supplier_id`, `created_at`, `updated_at`) VALUES (\'inventory 2\', \'inventory 2\', 300, 3, 0, \'in\', \'2\', \'1\', \'Stock added via form\', \'16\', \'2025-05-10 21:24:06\', \'2025-05-10 21:24:06\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `history` (`name`, `description`, `price`, `quantity`, `return_quantity`, `in_out`, `inventory_id`, `user_id`, `remarks`, `supplier_id`, `created_at`, `updated_at`) VALUES (\'inventory 2\', \'inventory 2\', 300, 3, 0, \'in\', \'2\', \'1\', \'Stock added via form\', \'16\', \'2025-05-10 21:24:06\', \'2025-05-10 21:24:06\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2307): CodeIgniter\Database\BaseConnection->query('INSERT INTO `history` (`name`, `description`, `price`, `quantity`, `return_quantity`, `in_out`, `inventory_id`, `user_id`, `remarks`, `supplier_id`, `created_at`, `updated_at`) VALUES (:name:, :description:, :price:, :quantity:, :return_quantity:, :in_out:, :inventory_id:, :user_id:, :remarks:, :supplier_id:, :created_at:, :updated_at:)', [...], false)
+ 5 SYSTEMPATH\Model.php(327): CodeIgniter\Database\BaseBuilder->insert()
+ 6 SYSTEMPATH\BaseModel.php(805): CodeIgniter\Model->doInsert([...])
+ 7 SYSTEMPATH\Model.php(749): CodeIgniter\BaseModel->insert([...], true)
+ 8 APPPATH\Controllers\InventoryController.php(113): CodeIgniter\Model->insert([...])
+ 9 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+10 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+11 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+12 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:24:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:24:35 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 973.
+ 1 SYSTEMPATH\BaseModel.php(973): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(812): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\InventoryController.php(97): CodeIgniter\Model->update('4', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:24:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:24:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:24:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:24:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:25:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:25:57 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 973.
+ 1 SYSTEMPATH\BaseModel.php(973): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(812): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\InventoryController.php(97): CodeIgniter\Model->update('3', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:27:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:27:39 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 973.
+ 1 SYSTEMPATH\BaseModel.php(973): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(812): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\InventoryController.php(98): CodeIgniter\Model->update('1', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:28:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:29:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:29:41 --> CodeIgniter\Database\Exceptions\DataException: There is no data to update.
+in SYSTEMPATH\BaseModel.php on line 973.
+ 1 SYSTEMPATH\BaseModel.php(973): CodeIgniter\Database\Exceptions\DataException::forEmptyDataset('update')
+ 2 SYSTEMPATH\Model.php(812): CodeIgniter\BaseModel->update([...], [])
+ 3 APPPATH\Controllers\InventoryController.php(98): CodeIgniter\Model->update('2', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->saveStock()
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:30:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:30:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:30:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:31:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:31:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:31:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:31:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:31:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:32:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:32:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:32:16 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:32:18 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:32:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:32:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:33:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:33:45 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:33:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:36:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:36:50 --> ErrorException: Undefined variable $history
+in APPPATH\Views\inventory\inventory_history.php on line 34.
+ 1 APPPATH\Views\inventory\inventory_history.php(34): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $history', 'C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory\\inventory_history.php', 34)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory\\inventory_history.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('inventory/inventory_history', [], true)
+ 5 APPPATH\Controllers\InventoryController.php(273): view('inventory/inventory_history')
+ 6 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->inventoryHistory()
+ 7 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:37:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:39:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:40:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:40:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:40:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:41:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:41:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:41:08 --> CodeIgniter\View\Exceptions\ViewException: Invalid file: "inventory_history/indexss.php"
+in SYSTEMPATH\Exceptions\FrameworkException.php on line 39.
+ 1 SYSTEMPATH\View\View.php(216): CodeIgniter\Exceptions\FrameworkException::forInvalidFile('inventory_history/indexss.php')
+ 2 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('inventory_history/indexss', [], true)
+ 3 APPPATH\Controllers\InventoryController.php(291): view('inventory_history/indexss', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryController->inventoryHistory()
+ 5 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryController))
+ 6 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:41:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:41:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:42:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:42:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:43:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:43:49 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:44:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:44:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:44:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:45:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:45:59 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:46:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:47:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:47:24 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:47:41 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:47:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:48:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:48:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:48:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:48:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:48:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:48:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:48:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:49:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-10 21:49:44 --> mysqli_sql_exception: Unknown column 'inventory.inventory_type' in 'on clause' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `invento...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `invento...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `invento...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `invento...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\inventory_system\app\Controllers\InventoryHistoryController.php(27): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+#9 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2025-05-10 21:49:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'', [...], false)
+ 2 SYSTEMPATH\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\InventoryHistoryController.php(27): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:49:44 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'', [...], false)
+ 4 SYSTEMPATH\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\InventoryHistoryController.php(27): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:49:44 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'', [...], false)
+ 5 SYSTEMPATH\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\InventoryHistoryController.php(27): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:49:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-10 21:49:44 --> mysqli_sql_exception: Unknown column 'inventory.inventory_type' in 'on clause' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `invento...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `invento...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `invento...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `invento...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+#6 C:\xampp\htdocs\inventory_system\app\Controllers\InventoryHistoryController.php(27): CodeIgniter\BaseModel->findAll()
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+#9 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2025-05-10 21:49:44 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'', [...], false)
+ 2 SYSTEMPATH\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+ 3 SYSTEMPATH\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+ 4 APPPATH\Controllers\InventoryHistoryController.php(27): CodeIgniter\BaseModel->findAll()
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:49:44 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'', [...], false)
+ 4 SYSTEMPATH\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+ 5 SYSTEMPATH\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+ 6 APPPATH\Controllers\InventoryHistoryController.php(27): CodeIgniter\BaseModel->findAll()
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:49:44 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1616): CodeIgniter\Database\BaseConnection->query('SELECT `inventory_history`.*, `inventory_type`.`name` as `inventory_type_name`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE `inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'', [...], false)
+ 5 SYSTEMPATH\Model.php(243): CodeIgniter\Database\BaseBuilder->get()
+ 6 SYSTEMPATH\BaseModel.php(641): CodeIgniter\Model->doFindAll(0, 0)
+ 7 APPPATH\Controllers\InventoryHistoryController.php(27): CodeIgniter\BaseModel->findAll()
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:52:03 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+CRITICAL - 2025-05-10 21:52:03 --> ErrorException: Undefined variable $inventory_history
+in APPPATH\Views\inventory_history\index.php on line 32.
+ 1 APPPATH\Views\inventory_history\index.php(32): CodeIgniter\Debug\Exceptions->errorHandler(2, 'Undefined variable $inventory_history', 'C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory_history\\index.php', 32)
+ 2 SYSTEMPATH\View\View.php(228): include('C:\\xampp\\htdocs\\inventory_system\\app\\Views\\inventory_history\\index.php')
+ 3 SYSTEMPATH\View\View.php(231): CodeIgniter\View\View->CodeIgniter\View\{closure}()
+ 4 SYSTEMPATH\Common.php(1178): CodeIgniter\View\View->render('inventory_history/index', [], true)
+ 5 APPPATH\Controllers\InventoryHistoryController.php(33): view('inventory_history/index', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 7 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 8 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2025-05-10 21:52:36 --> mysqli_sql_exception: Unknown column 'inventory.name' in 'where clause' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+#5 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+#6 C:\xampp\htdocs\inventory_system\app\Controllers\InventoryHistoryController.php(43): CodeIgniter\BaseModel->paginate(10, 'inventory')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+#9 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2025-05-10 21:52:36 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE :inventory.name: ESCAPE \'!\'
+OR  `inventory`.`description` LIKE :inventory.description: ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE :inventory_type.name: ESCAPE \'!\'
+ )', [...], false)
+ 2 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 3 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 4 APPPATH\Controllers\InventoryHistoryController.php(43): CodeIgniter\BaseModel->paginate(10, 'inventory')
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:52:36 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.name' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE :inventory.name: ESCAPE \'!\'
+OR  `inventory`.`description` LIKE :inventory.description: ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE :inventory_type.name: ESCAPE \'!\'
+ )', [...], false)
+ 4 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 5 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 6 APPPATH\Controllers\InventoryHistoryController.php(43): CodeIgniter\BaseModel->paginate(10, 'inventory')
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:52:36 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory.name' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE :inventory.name: ESCAPE \'!\'
+OR  `inventory`.`description` LIKE :inventory.description: ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE :inventory_type.name: ESCAPE \'!\'
+ )', [...], false)
+ 5 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 6 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 7 APPPATH\Controllers\InventoryHistoryController.php(43): CodeIgniter\BaseModel->paginate(10, 'inventory')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2025-05-10 21:52:51 --> mysqli_sql_exception: Unknown column 'inventory.name' in 'where clause' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+#5 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+#6 C:\xampp\htdocs\inventory_system\app\Controllers\InventoryHistoryController.php(43): CodeIgniter\BaseModel->paginate(10, 'inventory_histo...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+#9 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2025-05-10 21:52:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.name' in 'where clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE :inventory.name: ESCAPE \'!\'
+OR  `inventory`.`description` LIKE :inventory.description: ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE :inventory_type.name: ESCAPE \'!\'
+ )', [...], false)
+ 2 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 3 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 4 APPPATH\Controllers\InventoryHistoryController.php(43): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:52:51 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.name' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE :inventory.name: ESCAPE \'!\'
+OR  `inventory`.`description` LIKE :inventory.description: ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE :inventory_type.name: ESCAPE \'!\'
+ )', [...], false)
+ 4 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 5 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 6 APPPATH\Controllers\InventoryHistoryController.php(43): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:52:51 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory.name' in 'where clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_type` ON `inventory`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory`.`name` LIKE :inventory.name: ESCAPE \'!\'
+OR  `inventory`.`description` LIKE :inventory.description: ESCAPE \'!\'
+OR  `inventory_type`.`name` LIKE :inventory_type.name: ESCAPE \'!\'
+ )', [...], false)
+ 5 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 6 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 7 APPPATH\Controllers\InventoryHistoryController.php(43): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2025-05-10 21:54:24 --> mysqli_sql_exception: Unknown column 'inventory.inventory' in 'on clause' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+#5 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+#6 C:\xampp\htdocs\inventory_system\app\Controllers\InventoryHistoryController.php(44): CodeIgniter\BaseModel->paginate(10, 'inventory_histo...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+#9 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2025-05-10 21:54:24 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.inventory' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory` ON `inventory`.`inventory` = `inventory`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'
+ )', [...], false)
+ 2 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 3 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 4 APPPATH\Controllers\InventoryHistoryController.php(44): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:54:24 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory.inventory' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory` ON `inventory`.`inventory` = `inventory`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory` ON `inventory`.`inventory` = `inventory`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory` ON `inventory`.`inventory` = `inventory`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'
+ )', [...], false)
+ 4 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 5 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 6 APPPATH\Controllers\InventoryHistoryController.php(44): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:54:24 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory.inventory' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory` ON `inventory`.`inventory` = `inventory`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory` ON `inventory`.`inventory` = `inventory`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory` ON `inventory`.`inventory` = `inventory`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory` ON `inventory`.`inventory` = `inventory`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'
+ )', [...], false)
+ 5 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 6 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 7 APPPATH\Controllers\InventoryHistoryController.php(44): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:54:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:54:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:54:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:55:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:55:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:55:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:56:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:56:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:56:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:56:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2025-05-10 21:57:26 --> mysqli_sql_exception: Unknown column 'inventory_history.inventory_type' in 'on clause' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+#5 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+#6 C:\xampp\htdocs\inventory_system\app\Controllers\InventoryHistoryController.php(46): CodeIgniter\BaseModel->paginate(10, 'inventory_histo...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+#9 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2025-05-10 21:57:26 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_history.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'
+ )', [...], false)
+ 2 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 3 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 4 APPPATH\Controllers\InventoryHistoryController.php(46): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:57:26 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_history.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'
+ )', [...], false)
+ 4 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 5 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 6 APPPATH\Controllers\InventoryHistoryController.php(46): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:57:26 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory_history.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'
+ )', [...], false)
+ 5 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 6 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 7 APPPATH\Controllers\InventoryHistoryController.php(46): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+ERROR - 2025-05-10 21:57:45 --> mysqli_sql_exception: Unknown column 'inventory_history.inventory_type' in 'on clause' in C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php:306
+Stack trace:
+#0 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*)...', 0)
+#1 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*)...')
+#2 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*)...')
+#3 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*)...', Array, false)
+#4 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+#5 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+#6 C:\xampp\htdocs\inventory_system\app\Controllers\InventoryHistoryController.php(46): CodeIgniter\BaseModel->paginate(10, 'inventory_histo...')
+#7 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+#8 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+#9 C:\xampp\htdocs\inventory_system\vendor\codeigniter4\framework\system\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#10 C:\xampp\htdocs\inventory_system\index.php(79): CodeIgniter\CodeIgniter->run()
+#11 {main}
+CRITICAL - 2025-05-10 21:57:45 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_history.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\BaseConnection.php on line 647.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'
+ )', [...], false)
+ 2 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 3 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 4 APPPATH\Controllers\InventoryHistoryController.php(46): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 5 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 6 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 7 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:57:45 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'inventory_history.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 311.
+ 1 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 2 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'
+ )', [...], false)
+ 4 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 5 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 6 APPPATH\Controllers\InventoryHistoryController.php(46): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 7 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 8 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+ 9 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+CRITICAL - 2025-05-10 21:57:45 --> [Caused by] mysqli_sql_exception: Unknown column 'inventory_history.inventory_type' in 'on clause'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 306.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(306): mysqli->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(693): CodeIgniter\Database\MySQLi\Connection->execute('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 3 SYSTEMPATH\Database\BaseConnection.php(607): CodeIgniter\Database\BaseConnection->simpleQuery('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE \'%inventory 3%\' ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE \'%inventory 3%\' ESCAPE \'!\'
+ )')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(1700): CodeIgniter\Database\BaseConnection->query('SELECT COUNT(*) AS `numrows`
+FROM `inventory_history`
+JOIN `inventory_supplier` ON `inventory_history`.`supplier_id` = `inventory_supplier`.`id`
+JOIN `inventory` ON `inventory_history`.`inventory_id` = `inventory`.`id`
+JOIN `inventory_type` ON `inventory_history`.`inventory_type` = `inventory_type`.`id`
+WHERE   (
+`inventory_history`.`name` LIKE :inventory_history.name: ESCAPE \'!\'
+OR  `inventory_history`.`description` LIKE :inventory_history.description: ESCAPE \'!\'
+OR  `inventory_history`.`in_out` LIKE :inventory_history.in_out: ESCAPE \'!\'
+OR  `inventory_history`.`remarks` LIKE :inventory_history.remarks: ESCAPE \'!\'
+ )', [...], false)
+ 5 SYSTEMPATH\Model.php(625): CodeIgniter\Database\BaseBuilder->countAllResults(false)
+ 6 SYSTEMPATH\BaseModel.php(1242): CodeIgniter\Model->countAllResults(false)
+ 7 APPPATH\Controllers\InventoryHistoryController.php(46): CodeIgniter\BaseModel->paginate(10, 'inventory_history')
+ 8 SYSTEMPATH\CodeIgniter.php(943): App\Controllers\InventoryHistoryController->index()
+ 9 SYSTEMPATH\CodeIgniter.php(503): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\InventoryHistoryController))
+10 SYSTEMPATH\CodeIgniter.php(361): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+11 FCPATH\index.php(79): CodeIgniter\CodeIgniter->run()
+INFO - 2025-05-10 21:58:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:58:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:59:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:59:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 21:59:53 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:00:09 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:00:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:00:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:00:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:00:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:00:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:00:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:01:01 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:01:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:01:47 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:03:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:03:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:04:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:04:55 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:05:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:05:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:05:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:05:48 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+INFO - 2025-05-10 22:05:52 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
