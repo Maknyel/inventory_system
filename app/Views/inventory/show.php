@@ -37,6 +37,10 @@
                 class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition">
                 Return
             </a>
+            <a href="<?= base_url('inventory_return_history?inventory_type=' . $inventory_type_parse['id'] . '&sub_inventory_type=' . $sub_inventory_type_parse['id']) ?>"
+                class="px-3 py-1 bg-white text-black rounded hover:bg-white transition">
+                Return History
+            </a>
         <?php } ?>
         <a href="<?= base_url('inventory_history_filter?inventory_type=' . $inventory_type_parse['id'] . '&sub_inventory_type=' . $sub_inventory_type_parse['id']) ?>"
             class="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 transition">

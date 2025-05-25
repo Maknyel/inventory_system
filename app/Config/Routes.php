@@ -32,6 +32,7 @@ $routes->post('inventory/save-pos-out', 'InventoryController::savePosOut');
 $routes->get('/inventory_in', 'InventoryController::inventoryIn');
 $routes->get('/inventory_out', 'InventoryController::inventoryOut');
 $routes->get('/inventory_return', 'InventoryController::inventoryReturn');
+$routes->get('/inventory_return_history', 'InventoryController::inventoryReturnHistory');
 $routes->get('/inventory_out_pos', 'InventoryController::inventoryOutPos');
 
 $routes->get('/inventory_history', 'InventoryHistoryController::index');
