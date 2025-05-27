@@ -418,7 +418,10 @@ createApp({
             };
 
             html2pdf().set(options).from(element).save();
-            this.generateReceiptPurchaceOrder = false;
+            setTimeout(() => {
+                this.generateReceiptPurchaceOrder = false;    
+            }, 1000);
+            
         },
         downloadPDFCustomer(){
             const element = document.getElementById('dr-form-to-customer');
@@ -431,7 +434,10 @@ createApp({
             };
 
             html2pdf().set(options).from(element).save();
-            this.generateReceiptCustomer = false;
+            setTimeout(() => {
+                this.generateReceiptCustomer = false;    
+            }, 1000);
+            
         },
         downloadPDFDistributors() {
             const element = document.getElementById('dr-form-to-distributors');
@@ -444,7 +450,10 @@ createApp({
             };
 
             html2pdf().set(options).from(element).save();
-            this.generateReceiptDistributors = false;
+            setTimeout(() => {
+                this.generateReceiptDistributors = false;    
+            }, 1000);
+            
         },
         async getInventory() {
             const res = await fetch(`${base_url}inventory/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`);
