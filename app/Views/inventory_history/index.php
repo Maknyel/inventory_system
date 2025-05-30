@@ -174,8 +174,8 @@
                     <td class="px-4 py-2 border-b">${sub.description}</td>
                     <td class="px-4 py-2 border-b">₱ ${parseFloat(sub.price).toFixed(2)}</td>
                     <td class="px-4 py-2 border-b">${sub.quantity}</td>
-                    <td class="px-4 py-2 border-b">${sub.inventory_type_name}</td>
-                    <td class="px-4 py-2 border-b">${sub.sub_inventory_type_name}</td>
+                    <td class="px-4 py-2 border-b">${sub.inventory_type_name ?? ""}</td>
+                    <td class="px-4 py-2 border-b">${sub.sub_inventory_type_name ?? ""}</td>
                     <td class="px-4 py-2 border-b">${sub.supplier_name ?? ''}</td>
                     <td class="px-4 py-2 border-b">${sub.distributor_name ?? ''}</td>
                     
