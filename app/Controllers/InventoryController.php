@@ -7,6 +7,7 @@ use App\Models\InventoryTypeModel;
 use App\Models\SubInventoryTypeModel;
 use App\Models\InventoryHistoryModel;
 use App\Models\InventoryHistoryReturnModel;
+use App\Models\InventoryHistoryGroupModel;
 
 class InventoryController extends Controller
 {
@@ -121,6 +122,7 @@ class InventoryController extends Controller
 
     public function savePosOut(){
         if ($this->request->isAJAX()) {
+            $dr_number = get_dr_number();
             $json = $this->request->getJSON(true);
 
             $items = $json['items'] ?? [];
@@ -164,7 +166,7 @@ class InventoryController extends Controller
                     ->update();
 
                 // Insert into inventory history
-                $inventoryHistoryModel->insert([
+                $insertedId = $inventoryHistoryModel->insert([
                     'name'                          => $inventory['name'],
                     'description'                   => $inventory['description'],
                     'price'                         => $inventory['current_price'],
@@ -180,6 +182,16 @@ class InventoryController extends Controller
                     'created_at'                    => date('Y-m-d H:i:s'),
                     'updated_at'                    => date('Y-m-d H:i:s')
                 ]);
+
+                $inventoryHistoryGroupModel = new InventoryHistoryGroupModel();
+                $inventoryHistoryGroupModel->insert([
+                    'inventory_history_id'              => $insertedId,
+                    'dr_number'                         => $dr_number,
+                    'created_at'                        => ('Y-m-d H:i:s'),
+                    'updated_at'                        => ('Y-m-d H:i:s'),
+                ]);
+                
+                
             }
 
             $db->transComplete();
@@ -188,7 +200,7 @@ class InventoryController extends Controller
                 return $this->response->setStatusCode(500)->setJSON(['error' => 'POS transaction failed.']);
             }
 
-            return $this->response->setJSON(['message' => 'POS transaction recorded successfully!']);
+            return $this->response->setJSON(['dr_number' => $dr_number, 'message' => 'POS transaction recorded successfully!']);
         }
 
         return $this->response->setStatusCode(400)->setJSON(['error' => 'Invalid request.']);

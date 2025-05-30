@@ -155,7 +155,7 @@
                     <td class="px-4 py-2 border-b"><?= esc($record['in_out']) ?></td>
                     <td class="px-4 py-2 border-b"><?= esc($record['name']) ?></td>
                     <td class="px-4 py-2 border-b"><?= esc($record['description']) ?></td>
-                    <td class="px-4 py-2 border-b"><?= number_format($record['price'], 2) ?></td>
+                    <td class="px-4 py-2 border-b">₱ <?= number_format($record['price'], 2) ?></td>
                     <td class="px-4 py-2 border-b"><?= $record['quantity'] ?></td>
                     
                     

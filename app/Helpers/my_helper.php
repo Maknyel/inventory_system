@@ -7,6 +7,10 @@ function global_name()
     return "Faithconstruct Epoxy Resin Specialist";
 }
 
+function get_dr_number(){
+    return date('y-m-d-h-i-s');
+}
+
 function generateInitialsImage($name) {
     $parts = explode(' ', $name);
     $initials = strtoupper(substr($parts[0], 0, 1) . (isset($parts[1]) ? substr($parts[1], 0, 1) : ''));

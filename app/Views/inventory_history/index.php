@@ -13,12 +13,13 @@
 
 
 <form id="filterForm" class="mb-4 flex items-center gap-2">
-    <input type="text" name="search" placeholder="Search history..." class="px-3 py-2 border rounded w-64" />
+    <input type="text" name="search" placeholder="Search Name..." class="px-3 py-2 border rounded w-64" />
+    <input type="text" name="search_dr" placeholder="Search DR..." class="px-3 py-2 border rounded w-64" />
     
     <select name="in_out" class="px-3 py-2 border rounded">
         <option value="">All</option>
-        <option value="IN">IN</option>
-        <option value="OUT">OUT</option>
+        <option value="in">IN</option>
+        <option value="out">OUT</option>
     </select>
     
     <select name="number_per_page" class="px-3 py-2 border rounded">
@@ -63,20 +64,31 @@
                         Quantity
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                        Return Qty
+                        Inventory Type
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                        In/Out
-                </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                        Remarks
+                        Sub Inventory Type
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                         Supplier
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                        Inventory Type
+                        Distributor
                 </th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                        Purpose
+                </th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                        Return Qty
+                </th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                        Remarks
+                </th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                        In/Out
+                </th>
+                
+                
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                         Created At
                 </th>
@@ -116,6 +128,7 @@
         const formData = new FormData(form);
 
         const search = formData.get('search') || '';
+        const search_dr = formData.get('search_dr') || '';
         const in_out = formData.get('in_out') || '';
         const number_per_page = formData.get('number_per_page') || 10;
         const order_by = formData.get('order_by') || 'created_at';
@@ -123,6 +136,7 @@
 
         const url = new URL(base_url + 'api/inventory-history');
         url.searchParams.set('search', search);
+        url.searchParams.set('search_dr', search_dr);
         url.searchParams.set('in_out', in_out);
         url.searchParams.set('number_per_page', number_per_page);
         url.searchParams.set('page', page);
@@ -135,26 +149,64 @@
         const tableBody = document.getElementById('inventoryTableBody');
         tableBody.innerHTML = ''; // clear old rows
 
-        result.data.forEach(record => {
+        result.data.forEach((recordv2, index) => {
+            const drRowId = `sub-rows-${index}`;
+
+            // DR Header Row with Toggle Button
             const row = document.createElement('tr');
+            row.classList.add('bg-gray-100');
             row.innerHTML = `
-                <td class="px-4 py-2 border-b">${record.name}</td>
-                <td class="px-4 py-2 border-b">${record.description}</td>
-                <td class="px-4 py-2 border-b">${parseFloat(record.price).toFixed(2)}</td>
-                <td class="px-4 py-2 border-b">${record.quantity}</td>
-                <td class="px-4 py-2 border-b">${record.return_quantity}</td>
-                <td class="px-4 py-2 border-b">${record.in_out}</td>
-                <td class="px-4 py-2 border-b">${record.remarks}</td>
-                <td class="px-4 py-2 border-b">${record.supplier_name ?? ""}</td>
-                <td class="px-4 py-2 border-b">${record.inventory_type_name}</td>
-                <td class="px-4 py-2 border-b">${formatDate(record.created_at)}</td>
-                <td class="px-4 py-2 border-b">${formatDate(record.updated_at)}</td>
+                <td class="bg-[#FFFFFF80] cursor-pointer px-4 py-2 border-b font-bold" colspan="14">
+                    <button onclick="toggleSubRows('${drRowId}', this, '${recordv2.dr_number}')" class="mr-2 text-yellow-600 hover:underline">
+                        &rarr; DR Number: ${recordv2.dr_number}
+                    </button>
+                    
+                </td>
             `;
             tableBody.appendChild(row);
+
+            // Sub Rows (initially hidden)
+            recordv2.sub.forEach(sub => {
+                const subRow = document.createElement('tr');
+                subRow.classList.add('sub-row', drRowId, 'hidden'); // toggle this class
+                subRow.innerHTML = `
+                    <td class="px-4 py-2 border-b">${sub.name}</td>
+                    <td class="px-4 py-2 border-b">${sub.description}</td>
+                    <td class="px-4 py-2 border-b">₱ ${parseFloat(sub.price).toFixed(2)}</td>
+                    <td class="px-4 py-2 border-b">${sub.quantity}</td>
+                    <td class="px-4 py-2 border-b">${sub.inventory_type_name}</td>
+                    <td class="px-4 py-2 border-b">${sub.sub_inventory_type_name}</td>
+                    <td class="px-4 py-2 border-b">${sub.supplier_name ?? ''}</td>
+                    <td class="px-4 py-2 border-b">${sub.distributor_name ?? ''}</td>
+                    
+                    <td class="px-4 py-2 border-b">${((sub.customer_own_distribution=='For Own Consumption')?'For Own Consumption':((sub.customer_own_distribution=='For Distribution')?'For Customer Distribution':''))}</td>
+
+                    <td class="px-4 py-2 border-b">${sub.return_quantity}</td>                    
+                    <td class="px-4 py-2 border-b">${sub.remarks}</td>
+                    <td class="px-4 py-2 border-b">${sub.in_out}</td>
+                    
+                    <td class="px-4 py-2 border-b">${formatDate(sub.created_at)}</td>
+                    <td class="px-4 py-2 border-b">${formatDate(sub.updated_at)}</td>
+                `;
+                tableBody.appendChild(subRow);
+            });
         });
 
         renderPagination(result.pagination);
     }
+
+    function toggleSubRows(className, toggleButton, dr_number) {
+        const rows = document.querySelectorAll(`.${className}`);
+        const isHidden = rows[0]?.classList.contains('hidden');
+
+        rows.forEach(row => row.classList.toggle('hidden'));
+
+        if (toggleButton) {
+            toggleButton.innerHTML = `${isHidden ? '&darr;' : '&rarr;'}` + ` DR Number: ${dr_number}`;
+            // toggleButton.nextSibling.textContent = ;
+        }
+    }
+
 
 
     function renderPagination({ total, total_pages, current_page }) {

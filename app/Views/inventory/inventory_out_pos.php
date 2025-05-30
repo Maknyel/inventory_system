@@ -39,7 +39,7 @@
                 <p><strong>Address:</strong> {{ attention }}</p>
             </div>
             <div>
-                <p><strong>REF. P.O. #:</strong> {{ poRefNo }}</p>
+                <p><strong>REF. P.O. #:</strong> {{ dr_number }}</p>
                 <p><strong>DATE:</strong> {{ orderDate }}</p>
             </div>
         </div>
@@ -119,7 +119,7 @@
                 <p><strong>Address:</strong> {{ attention }}</p>
             </div>
             <div>
-                <p><strong>REF. P.O. #:</strong> {{ poRefNo }}</p>
+                <p><strong>REF. P.O. #:</strong> {{ dr_number }}</p>
                 <p><strong>DATE:</strong> {{ orderDate }}</p>
             </div>
         </div>
@@ -201,7 +201,7 @@
             </div>
             <div>
                 <p><strong>ORDER DATE:</strong> {{ orderDate }}</p>
-                <p><strong>PO REF. NO:</strong> {{ poRefNo }}</p>
+                <p><strong>PO REF. NO:</strong> {{ dr_number }}</p>
             </div>
         </div>
 
@@ -253,7 +253,7 @@
     <h2 class="text-xl font-semibold mb-4">Point of Sale</h2>
 
     <!-- Item Selection -->
-    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+    <div  v-show="!dr_number" class="grid grid-cols-1 md:grid-cols-3 gap-4">
         <div>
             <label class="block font-medium mb-1">Inventory Item</label>
             <select v-model="selectedInventoryId" class="w-full border rounded px-3 py-2">
@@ -280,7 +280,7 @@
     </div>
 
     <!-- Cart -->
-    <div class="mt-6">
+    <div v-show="!dr_number" class="mt-6">
         <h3 class="text-lg font-semibold mb-2">Cart</h3>
         <table class="min-w-full border">
             <thead>
@@ -311,10 +311,10 @@
     </div>
 
     <!-- Type and Distributor -->
-    <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+    <div  v-show="!dr_number" class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
         <div class="<?=($sub_inventory_type_parse['has_purpose'] == 0)?'hidden':''?>">
             <label class="block font-medium mb-1">Purpose</label>
-            <select v-model="type" @change="changeType" class="w-full border rounded px-3 py-2">
+            <select :disabled="dr_number?true:false" v-model="type" @change="changeType" class="w-full border rounded px-3 py-2">
                 <option value="">Select Purpose</option>
                 <option>For Own Consumption</option>
                 <option>For Distribution</option>
@@ -323,7 +323,7 @@
 
         <div class="<?=($sub_inventory_type_parse['has_distributor'] == 0)?'hidden':''?>">
             <label class="block font-medium mb-1">Distributor</label>
-            <select v-model="distributor_id" class="w-full border rounded px-3 py-2" :disabled="type !== 'For Distribution'">
+            <select v-model="distributor_id" class="w-full border rounded px-3 py-2" :disabled="(type !== 'For Distribution' || dr_number)?true:false">
                 <option disabled value="">Select distributor</option>
                 <option v-for="item in distributorList" :key="item.id" :value="item.id">
                     {{ item.type }} | {{ item.name }}
@@ -332,10 +332,19 @@
         </div>
     </div>
 
-    <div class="mt-4 text-right font-semibold text-lg">
+    <div v-show="!dr_number" class="mt-4 text-right font-semibold text-lg">
         Total Price: ₱ {{ totalAmount }}
     </div>
-    <div class="flex mt-6 items-center justify-between">
+    
+    <div v-show="!dr_number" class="mt-6">
+        <button @click="submitPOS" type="button" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Checkout</button>
+    </div>
+
+    <div v-show="dr_number" class="text-yellow-600 w-full text-center font-semibold text-3xl mt-4">
+        Transaction submitted successfully!
+    </div>
+
+    <div v-show="dr_number" class="flex mt-6 items-center justify-between">
     
         <div class="w-3/4">
             <label class="block font-medium mb-1">Download Forms</label>
@@ -352,9 +361,6 @@
             </button>
         </div>
     </div>
-    <div class="mt-6">
-        <button @click="submitPOS" type="button" class="bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">Checkout</button>
-    </div>
     
 </div>
 
@@ -367,6 +373,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+            dr_number: "",
             selectedForms: [],
             price: 0,
             supplier: '',
@@ -559,12 +566,13 @@ createApp({
             })
             .then(res => res.json())
             .then(response => {
+                this.dr_number = response.dr_number;
                 alert('POS transaction completed!');
                 // this.cart = [];
                 // this.type = '';
                 // this.distributor_id = '';
                 // this.getInventory();
-                location.reload();
+                // location.reload();
             });
         }
     }

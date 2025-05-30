@@ -5,6 +5,7 @@ use CodeIgniter\Controller;
 use App\Models\InventoryHistoryModel;
 use App\Models\InventoryTypeModel;
 use App\Models\SubInventoryTypeModel;
+use App\Models\InventoryHistoryGroupModel;
 
 class InventoryHistoryController extends Controller
 {
@@ -20,35 +21,121 @@ class InventoryHistoryController extends Controller
 
     public function getInventoryHistoryApi()
     {
+        $group = new \App\Models\InventoryHistoryGroupModel();
         $model = new \App\Models\InventoryHistoryModel();
 
         // Apply filters from GET parameters
         $search = $this->request->getGet('search');
+        $search_dr = $this->request->getGet('search_dr');
         $in_out = $this->request->getGet('in_out');
         $number_per_page = $this->request->getGet('number_per_page') ?? 10;
         $page = $this->request->getGet('page') ?? 1;
 
-        $query = $model->select('inventory_history.*, inventory_supplier.name as supplier_name, distributor.name as distributor_name, inventory_type.name as inventory_type_name, sub_inventory_type.name as sub_inventory_type_name, inventory.inventory_type, inventory.sub_inventory_type')
-            ->join('inventory_supplier', 'inventory_history.supplier_id = inventory_supplier.id','left')
-            ->join('distributor', 'inventory_history.distributor_id = distributor.id','left')
-            ->join('inventory', 'inventory_history.inventory_id = inventory.id')
-            ->join('inventory_type', 'inventory.inventory_type = inventory_type.id')
-            ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id');
+        
 
-        if ($search) {
-            $query->like('inventory_history.name', $search);
+        $query = $group->select('*');
+        if ($search_dr) {
+            if (!empty($search_dr)) {
+            $query->groupStart()
+                    ->like('dr_number', $search_dr)
+                    ->groupEnd();
+            }
         }
+        $query->groupBy('dr_number');
+        $query->orderBy('dr_number');
 
-        if ($in_out) {
-            $query->where('inventory_history.in_out', $in_out);
-        }
 
         // Pagination
         $data = $query->paginate($number_per_page, 'inventory_history', $page);
         $pager = \Config\Services::pager();
 
+
+        $fullData = [];
+
+        foreach ($data as $groupItem) {
+            // Step 2: Fetch sub records (detailed inventory history per dr_number)
+            $subQuery = $model->select('
+                    inventory_history.*,
+                    inventory_supplier.name as supplier_name,
+                    distributor.name as distributor_name,
+                    inventory_type.name as inventory_type_name,
+                    sub_inventory_type.name as sub_inventory_type_name,
+                    inventory.inventory_type,
+                    inventory.sub_inventory_type
+                ')
+                ->join('inventory_supplier', 'inventory_history.supplier_id = inventory_supplier.id', 'left')
+                ->join('distributor', 'inventory_history.distributor_id = distributor.id', 'left')
+                ->join('inventory', 'inventory_history.inventory_id = inventory.id', 'left')
+                ->join('inventory_type', 'inventory.inventory_type = inventory_type.id', 'left')
+                ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left')
+                ->where('inventory_history_group.dr_number', $groupItem['dr_number'])
+                ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id')
+                ->findAll();
+
+            // Optional filters if needed:
+            if ($search) {
+                $subQuery = array_filter($subQuery, function ($item) use ($search) {
+                    return stripos($item['name'], $search) !== false;
+                });
+            }
+
+            if ($in_out) {
+                $subQuery = array_filter($subQuery, function ($item) use ($in_out) {
+                    return $item['in_out'] === $in_out;
+                });
+            }
+
+            // Add the sub data to the group item
+            $groupItem['sub'] = array_values($subQuery); // Ensure it's a reindexed array
+
+            $fullData[] = $groupItem;
+        }
+
+        // Fetch ungrouped inventory history
+        if (empty($search_dr)) {
+            $ungroupedItems = $model->select('
+                    inventory_history.*,
+                    inventory_supplier.name as supplier_name,
+                    distributor.name as distributor_name,
+                    inventory_type.name as inventory_type_name,
+                    sub_inventory_type.name as sub_inventory_type_name,
+                    inventory.inventory_type,
+                    inventory.sub_inventory_type
+                ')
+                ->join('inventory_supplier', 'inventory_history.supplier_id = inventory_supplier.id', 'left')
+                ->join('distributor', 'inventory_history.distributor_id = distributor.id', 'left')
+                ->join('inventory', 'inventory_history.inventory_id = inventory.id', 'left')
+                ->join('inventory_type', 'inventory.inventory_type = inventory_type.id', 'left')
+                ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left')
+                ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id', 'left')
+                ->where('inventory_history_group.inventory_history_id IS NULL')
+                ->findAll();
+
+            // Apply optional filters
+            if ($search) {
+                $ungroupedItems = array_filter($ungroupedItems, function ($item) use ($search) {
+                    return stripos($item['name'], $search) !== false;
+                });
+            }
+
+            if ($in_out) {
+                $ungroupedItems = array_filter($ungroupedItems, function ($item) use ($in_out) {
+                    return $item['in_out'] === $in_out;
+                });
+            }
+
+            // Group ungrouped items under a fake dr_number
+            if (!empty($ungroupedItems)) {
+                $fullData[] = [
+                    'dr_number' => 'UNGROUPED',
+                    'sub' => array_values($ungroupedItems),
+                ];
+            }
+        }
+
+
         return $this->response->setJSON([
-            'data' => $data,
+            'data' => $fullData,
             'pagination' => [
                 'total' => $pager->getTotal('inventory_history'),
                 'current_page' => $pager->getCurrentPage('inventory_history'),
