@@ -35,6 +35,7 @@ $routes->get('/inventory_return', 'InventoryController::inventoryReturn');
 $routes->get('/inventory_return_history', 'InventoryController::inventoryReturnHistory');
 $routes->get('/inventory_out_pos', 'InventoryController::inventoryOutPos');
 
+$routes->get('api/inventory-history', 'InventoryHistoryController::getInventoryHistoryApi');
 $routes->get('/inventory_history', 'InventoryHistoryController::index');
 $routes->get('/inventory_history_filter', 'InventoryHistoryController::filter');
 

@@ -21,6 +21,7 @@
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Has Purpose</th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Has Distributor</th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Has Return</th>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Show In Inventory</th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Created At</th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left" >Updated At</th>
             </tr>
@@ -40,6 +41,8 @@
                     <td class="px-4 py-2 border-b"><?= ($type['has_purpose'] != 0)?"Yes":"No" ?> </td>
                     <td class="px-4 py-2 border-b"><?= ($type['has_distributor'] != 0)?"Yes":"No" ?> </td>
                     <td class="px-4 py-2 border-b"><?= ($type['has_reeturn'] != 0)?"Yes":"No" ?> </td>
+                    <td class="px-4 py-2 border-b"><?= ($type['show_in_inventory'] != 0)?"Yes":"No" ?> </td>
+                    
                     <td class="px-4 py-2 border-b">
                         <?= ($type['created_at'] !== '0000-00-00 00:00:00' && $type['created_at']) ? date('F j, Y h:i a', strtotime($type['created_at'])) : '' ?>
                     </td>
@@ -129,6 +132,15 @@
                     <option value="0">No</option>    
                 </select>
             </div>
+
+            <div class="mb-4">
+                <label for="subinventorytype-show_in_inventory" class="block font-medium">Show In Inventory</label>
+                <select id="subinventorytype-show_in_inventory" class="w-full px-3 py-2 border rounded" required>
+                    <option value="1">Yes</option>
+                    <option value="0">No</option>    
+                </select>
+            </div>
+            
             
             <div class="flex justify-end gap-2">
                 <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
@@ -146,6 +158,8 @@
         document.getElementById('subinventorytype-has_purpose').value = 0;
         document.getElementById('subinventorytype-has_distributor').value = 0;
         document.getElementById('subinventorytype-has_reeturn').value = 0;
+        document.getElementById('subinventorytype-show_in_inventory').value = 0;
+        
         document.getElementById('subinventorytype-description').value = '';
         document.getElementById('modal-title').textContent = 'Add Sub Inventory Type';
         document.getElementById('subinventorytype-modal').classList.remove('hidden');
@@ -161,6 +175,7 @@
                 document.getElementById('subinventorytype-has_purpose').value = data.has_purpose;
                 document.getElementById('subinventorytype-has_distributor').value = data.has_distributor;
                 document.getElementById('subinventorytype-has_reeturn').value = data.has_reeturn;
+                document.getElementById('subinventorytype-show_in_inventory').value = data.show_in_inventory;
                 
                 document.getElementById('subinventorytype-description').value = data.description;
                 document.getElementById('modal-title').textContent = 'Edit Sub Inventory Type';
@@ -180,13 +195,15 @@
         const has_purpose = document.getElementById('subinventorytype-has_purpose').value;
         const has_distributor = document.getElementById('subinventorytype-has_distributor').value;
         const has_reeturn = document.getElementById('subinventorytype-has_reeturn').value;
+        const show_in_inventory = document.getElementById('subinventorytype-show_in_inventory').value;
+        
         const description = document.getElementById('subinventorytype-description').value;
         const url = id ? base_url + `subinventorytype/api/update/${id}` : base_url + 'subinventorytype/api/store';
 
         fetch(url, {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({ name, inventory_type_id, has_purpose, has_distributor, has_reeturn, description })
+            body: JSON.stringify({ name, inventory_type_id, has_purpose, has_distributor, has_reeturn, show_in_inventory, description })
         })
         .then(res => res.json())
         .then(() => location.reload());

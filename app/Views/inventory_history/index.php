@@ -9,39 +9,37 @@
 
 </div>
 
-<ul class="flex w-full h-24 gap-2 mb-4 overflow-x-auto whitespace-nowrap">
-    <li>
-        <a href="<?= current_url() ?>?<?= http_build_query(array_merge($_GET, ['inventory_type' => ''])) ?>"
-           class="px-3 py-2 rounded <?= empty($inventory_type) ? 'bg-yellow-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100' ?>">
-            All
-        </a>
-    </li>
-    <?php foreach ($inventory_type_data as $type): ?>
-        <li>
-            <a href="<?= current_url() ?>?<?= http_build_query(array_merge($_GET, ['inventory_type' => $type['id']])) ?>"
-               class="px-3 py-2 rounded <?= ($inventory_type == $type['id']) ? 'bg-yellow-600 text-white' : 'bg-white text-gray-700 hover:bg-gray-100' ?>">
-                <?= esc($type['name']) ?>
-            </a>
-        </li>
-    <?php endforeach; ?>
-</ul>
+    
 
 
-<form method="get" class="mb-4 flex items-center gap-2">
-    <input type="text" name="search" value="<?= esc($search ?? '') ?>" placeholder="Search history..." class="px-3 py-2 border rounded w-64">
-
+<form id="filterForm" class="mb-4 flex items-center gap-2">
+    <input type="text" name="search" placeholder="Search history..." class="px-3 py-2 border rounded w-64" />
+    
     <select name="in_out" class="px-3 py-2 border rounded">
         <option value="">All</option>
-        <option value="IN" <?= $in_out === 'IN' ? 'selected' : '' ?>>IN</option>
-        <option value="OUT" <?= $in_out === 'OUT' ? 'selected' : '' ?>>OUT</option>
+        <option value="IN">IN</option>
+        <option value="OUT">OUT</option>
     </select>
-
+    
     <select name="number_per_page" class="px-3 py-2 border rounded">
-        <?php foreach ([5, 10, 25, 50, 100] as $num): ?>
-            <option value="<?= $num ?>" <?= $number_per_page == $num ? 'selected' : '' ?>><?= $num ?> per page</option>
-        <?php endforeach; ?>
+        <option value="5">5 per page</option>
+        <option value="10" selected>10 per page</option>
+        <option value="25">25 per page</option>
+        <option value="50">50 per page</option>
+        <option value="100">100 per page</option>
+    </select>
+    <select name="order_by" class="px-3 py-2 border rounded">
+        <option value="created_at" selected>Sort by Created At</option>
+        <option value="name">Sort by Name</option>
+        <option value="price">Sort by Price</option>
+        <option value="quantity">Sort by Quantity</option>
+        <!-- add more as you want -->
     </select>
 
+    <select name="order_dir" class="px-3 py-2 border rounded">
+        <option value="asc">Ascending</option>
+        <option value="desc" selected>Descending</option>
+    </select>
     <button type="submit" class="px-4 py-2 bg-yellow-600 text-white rounded">Filter</button>
 </form>
 
@@ -51,135 +49,169 @@
             <tr>
                 <!-- <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">#</th> -->
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.name&orderdir=<?= $orderby == 'inventory_history.name' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
-                        Name
-                        <i class="ion-<?= ($orderby == 'inventory_history.name' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.name' ? 'text-black' : 'text-gray-400' ?>"></i>
-                    </a>
+                    Name
+                  
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.description&orderdir=<?= $orderby == 'inventory_history.description' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
-                        Description
-                        <i class="ion-<?= ($orderby == 'inventory_history.description' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.description' ? 'text-black' : 'text-gray-400' ?>"></i>
-                    </a>
+                    Description
+                  
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.price&orderdir=<?= $orderby == 'inventory_history.price' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Price
-                        <i class="ion-<?= ($orderby == 'inventory_history.price' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.price' ? 'text-black' : 'text-gray-400' ?>"></i>
-                    </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.name&orderdir=<?= $orderby == 'inventory_history.quantity' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Quantity
-                        <i class="ion-<?= ($orderby == 'inventory_history.quantity' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.quantity' ? 'text-black' : 'text-gray-400' ?>"></i>
-                    </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.return_quantity&orderdir=<?= $orderby == 'inventory_history.return_quantity' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Return Qty
-                        <i class="ion-<?= ($orderby == 'inventory_history.return_quantity' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.return_quantity' ? 'text-black' : 'text-gray-400' ?>"></i>
-                    </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.in_out&orderdir=<?= $orderby == 'inventory_history.in_out' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         In/Out
-                        <i class="ion-<?= ($orderby == 'inventory_history.in_out' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.in_out' ? 'text-black' : 'text-gray-400' ?>"></i>
-                    </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.remarks&orderdir=<?= $orderby == 'inventory_history.remarks' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Remarks
-                        <i class="ion-<?= ($orderby == 'inventory_history.remarks' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.remarks' ? 'text-black' : 'text-gray-400' ?>"></i>
-                    </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=supplier_name&orderdir=<?= $orderby == 'supplier_name' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Supplier
-                        <i class="ion-<?= ($orderby == 'supplier_name' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'supplier_name' ? 'text-black' : 'text-gray-400' ?>"></i>
-                    </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_type_name&orderdir=<?= $orderby == 'inventory_type_name' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Inventory Type
-                        <i class="ion-<?= ($orderby == 'inventory_type_name' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_type_name' ? 'text-black' : 'text-gray-400' ?>"></i>
-                    </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.created_at&orderdir=<?= $orderby == 'inventory_history.created_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Created At
-                        <i class="ion-<?= ($orderby == 'inventory_history.created_at' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.created_at' ? 'text-black' : 'text-gray-400' ?>"></i>
-                        
-                    </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
-                    <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&orderby=inventory_history.updated_at&orderdir=<?= $orderby == 'inventory_history.updated_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Updated At
-                        <i class="ion-<?= ($orderby == 'inventory_history.updated_at' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory_history.updated_at' ? 'text-black' : 'text-gray-400' ?>"></i>
-                        
-                    </a>
                 </th>
             </tr>
         </thead>
-        <tbody>
-            <?php foreach ($inventory_history as $record): ?>
-                <tr>
-                    <!-- <td class="px-4 py-2 border-b"><?= $record['id'] ?></td> -->
-                    <td class="px-4 py-2 border-b"><?= esc($record['name']) ?></td>
-                    <td class="px-4 py-2 border-b"><?= esc($record['description']) ?></td>
-                    <td class="px-4 py-2 border-b"><?= number_format($record['price'], 2) ?></td>
-                    <td class="px-4 py-2 border-b"><?= $record['quantity'] ?></td>
-                    <td class="px-4 py-2 border-b"><?= $record['return_quantity'] ?></td>
-                    <td class="px-4 py-2 border-b"><?= esc($record['in_out']) ?></td>
-                    <td class="px-4 py-2 border-b"><?= esc($record['remarks']) ?></td>
-                    <td class="px-4 py-2 border-b"><?= $record['supplier_name'] ?></td>
-                    <td class="px-4 py-2 border-b"><?= $record['inventory_type_name'] ?></td>
-                    
-                    <td class="px-4 py-2 border-b"><?= date('M d, Y h:i A', strtotime($record['created_at'])) ?></td>
-                    <td class="px-4 py-2 border-b"><?= date('M d, Y h:i A', strtotime($record['updated_at'])) ?></td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
+        <tbody id="inventoryTableBody"></tbody>
     </table>
 </div>
-<div class="flex justify-between items-center mt-4">
-    <div class="text-sm text-gray-700">
-        Total of <?= $totalItems ?> items | Page <?= $currentPage ?> of <?= $totalPages ?>
-    </div>
-
-    <?php
-        // Get current query params and preserve them (e.g., search, order_by)
-        $queryParams = $_GET;
-    ?>
-
-    <div class="flex gap-2">
-        <?php if ($currentPage > 1): ?>
-            <?php $queryParams['page_inventory_history'] = $currentPage - 1; ?>
-            <a href="?<?= http_build_query($queryParams) ?>" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-600">Previous</a>
-        <?php endif; ?>
-
-        <?php
-            $start = max(1, $currentPage - 1);
-            $end = min($totalPages, $start + 2);
-            if ($end - $start < 2 && $start > 1) {
-                $start = max(1, $end - 2);
-            }
-        ?>
-
-        <?php for ($i = $start; $i <= $end; $i++): ?>
-            <?php $queryParams['page_inventory_history'] = $i; ?>
-            <a href="?<?= http_build_query($queryParams) ?>"
-            class="px-4 py-2 rounded <?= $i == $currentPage ? 'bg-yellow-600 text-white' : 'bg-white text-black hover:bg-yellow-600 hover:text-white' ?>">
-                <?= $i ?>
-            </a>
-        <?php endfor; ?>
-
-        <?php if ($currentPage < $totalPages): ?>
-            <?php $queryParams['page_inventory_history'] = $currentPage + 1; ?>
-            <a href="?<?= http_build_query($queryParams) ?>" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-600">Next</a>
-        <?php endif; ?>
-    </div>
+<div class="flex items-center justify-between w-full">
+    <div id="paginationSummary" class="text-gray-600 mb-2 text-center"></div>
+    <div id="pagination" class="flex justify-center gap-2 mt-4"></div>
 </div>
 <script>
+    document.addEventListener('DOMContentLoaded', () => {
+        populateFormFromURL();
+        loadTable(1);
+
+        // Optional: add event listener for your filter form
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            loadTable();
+        });
+    });
+
+    document.getElementById('filterForm').addEventListener('submit', function(e) {
+        e.preventDefault(); // prevent full page reload
+
+        // When filter form submits, load page 1 with new filters
+        loadTable(1);
+    });
+
+    async function loadTable(page = 1) {
+        const form = document.getElementById('filterForm');
+        const formData = new FormData(form);
+
+        const search = formData.get('search') || '';
+        const in_out = formData.get('in_out') || '';
+        const number_per_page = formData.get('number_per_page') || 10;
+        const order_by = formData.get('order_by') || 'created_at';
+        const order_dir = formData.get('order_dir') || 'desc';
+
+        const url = new URL(base_url + 'api/inventory-history');
+        url.searchParams.set('search', search);
+        url.searchParams.set('in_out', in_out);
+        url.searchParams.set('number_per_page', number_per_page);
+        url.searchParams.set('page', page);
+        url.searchParams.set('order_by', order_by);
+        url.searchParams.set('order_dir', order_dir);
+
+        const response = await fetch(url);
+        const result = await response.json();
+
+        const tableBody = document.getElementById('inventoryTableBody');
+        tableBody.innerHTML = ''; // clear old rows
+
+        result.data.forEach(record => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td class="px-4 py-2 border-b">${record.name}</td>
+                <td class="px-4 py-2 border-b">${record.description}</td>
+                <td class="px-4 py-2 border-b">${parseFloat(record.price).toFixed(2)}</td>
+                <td class="px-4 py-2 border-b">${record.quantity}</td>
+                <td class="px-4 py-2 border-b">${record.return_quantity}</td>
+                <td class="px-4 py-2 border-b">${record.in_out}</td>
+                <td class="px-4 py-2 border-b">${record.remarks}</td>
+                <td class="px-4 py-2 border-b">${record.supplier_name ?? ""}</td>
+                <td class="px-4 py-2 border-b">${record.inventory_type_name}</td>
+                <td class="px-4 py-2 border-b">${formatDate(record.created_at)}</td>
+                <td class="px-4 py-2 border-b">${formatDate(record.updated_at)}</td>
+            `;
+            tableBody.appendChild(row);
+        });
+
+        renderPagination(result.pagination);
+    }
+
+
+    function renderPagination({ total, total_pages, current_page }) {
+        const pagination = document.getElementById('pagination');
+        const summary = document.getElementById('paginationSummary');
+
+        pagination.innerHTML = ''; // clear existing
+
+        summary.textContent = `Total of ${total} items | Page ${current_page} of ${total_pages}`;
+
+        // Previous button
+        const prevBtn = document.createElement('button');
+        prevBtn.textContent = 'Previous';
+        prevBtn.disabled = current_page === 1;
+        prevBtn.className = `px-4 py-2 rounded ${prevBtn.disabled ? 'bg-gray-300 cursor-not-allowed' : 'bg-yellow-600 text-white hover:bg-yellow-700'}`;
+        prevBtn.onclick = () => {
+            if (current_page > 1) loadTable(current_page - 1);
+        };
+        pagination.appendChild(prevBtn);
+
+        // Page numbers
+        for (let i = 1; i <= total_pages; i++) {
+            const pageBtn = document.createElement('button');
+            pageBtn.textContent = i;
+            pageBtn.className = `px-4 py-2 rounded ${i === current_page ? 'bg-yellow-600 text-white' : 'bg-white text-black hover:bg-yellow-600 hover:text-white'}`;
+            pageBtn.onclick = () => loadTable(i);
+            pagination.appendChild(pageBtn);
+        }
+
+        // Next button
+        const nextBtn = document.createElement('button');
+        nextBtn.textContent = 'Next';
+        nextBtn.disabled = current_page === total_pages;
+        nextBtn.className = `px-4 py-2 rounded ${nextBtn.disabled ? 'bg-gray-300 cursor-not-allowed' : 'bg-yellow-600 text-white hover:bg-yellow-700'}`;
+        nextBtn.onclick = () => {
+            if (current_page < total_pages) loadTable(current_page + 1);
+        };
+        pagination.appendChild(nextBtn);
+    }
+
+    function populateFormFromURL() {
+        const params = new URLSearchParams(window.location.search);
+        const form = document.getElementById('filterForm');
+
+        ['search', 'in_out', 'number_per_page', 'order_by', 'order_dir'].forEach(name => {
+            if (params.has(name)) {
+                form.elements[name].value = params.get(name);
+            }
+        });
+    }
+
+
+
+    function formatDate(dateString) {
+        const options = { year: 'numeric', month: 'short', day: 'numeric', hour: '2-digit', minute:'2-digit' };
+        return new Date(dateString).toLocaleDateString(undefined, options);
+    }
     function downloadCSV() {
         const table = document.getElementById("myTable");
         let csv = [];

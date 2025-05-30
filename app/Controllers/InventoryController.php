@@ -408,15 +408,18 @@ class InventoryController extends Controller
         $subInventoryType = $this->request->getGet('sub_inventory_type');
 
         // Build query
-        $query = $model->select('id, name, current_quantity, current_price, unit, description');
+        $query = $model->select('inventory.id, inventory.name, inventory.current_quantity, inventory.current_price, inventory.unit, inventory.description')
+        ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left');
 
         if ($inventoryType) {
-            $query->where('inventory_type', $inventoryType);
+            $query->where('inventory.inventory_type', $inventoryType);
         }
 
-        if ($subInventoryType) {
-            $query->where('sub_inventory_type', $subInventoryType);
-        }
+        // Apply filter: if subInventoryType is set, use it; otherwise, filter where show_in_inventory = 1
+        $query->groupStart()
+            ->where('inventory.sub_inventory_type', $subInventoryType)
+            ->orWhere('sub_inventory_type.show_in_inventory', 1)
+        ->groupEnd();
 
         $data = $query->findAll();
 
