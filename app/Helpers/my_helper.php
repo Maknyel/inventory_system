@@ -1,14 +1,49 @@
 <?php
 use CodeIgniter\Database\Database;
 use App\Models\UserModel;
-
+use CodeIgniter\Database\BaseConnection;
 function global_name()
 {
     return "Faithconstruct Epoxy Resin Specialist";
 }
 
 function get_dr_number(){
-    return date('y-m-d-h-i-s');
+    $db = \Config\Database::connect();
+    $currentYear = date('Y');
+
+    // Fetch the latest dr_number for the current year
+    $builder = $db->table('inventory_history_group');
+    $builder->select('dr_number')
+            ->like('dr_number', $currentYear . '-', 'after')
+            ->orderBy('dr_number', 'DESC')
+            ->limit(1);
+
+    $query = $builder->get();
+    $row = $query->getRow();
+
+    if ($row) {
+        // Found, increment
+        $latestDrNumber = $row->dr_number;
+        // Example: '2025-00002'
+        $numberPart = (int) substr($latestDrNumber, 5); // get '00002' and convert to int
+
+        $nextNumber = $numberPart + 1;
+        $nextDrNumber = sprintf('%s-%05d', $currentYear, $nextNumber);
+
+        return $nextDrNumber;
+    } else {
+        // No data for current year, start from 00001
+        return sprintf('%s-'.startNumber(), $currentYear);
+    }
+}
+
+function startNumber() {
+    if(date('Y') == '2025'){
+        return '00458';
+    }else{
+        return '00001';
+    }
+    
 }
 
 function generateInitialsImage($name) {

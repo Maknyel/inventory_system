@@ -111,7 +111,9 @@ createApp({
             fetch(`${base_url}inventory/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`)
             .then(res => res.json())
             .then(data => {
-                this.inventoryList = data;
+                this.inventoryList = data.filter(item => {
+                    return item.current_quantity !== null && Number(item.current_quantity) !== 0;
+                });
             });
         },
         async distributorListFunction(){

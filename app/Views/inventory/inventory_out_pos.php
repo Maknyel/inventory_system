@@ -465,6 +465,9 @@ createApp({
         async getInventory() {
             const res = await fetch(`${base_url}inventory/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`);
             this.inventoryList = await res.json();
+            this.inventoryList = this.inventoryList.filter(item => {
+                return item.current_quantity !== null && Number(item.current_quantity) !== 0;
+            });
         },
         async getDistributors() {
             const res = await fetch(`${base_url}distributor/list`);
