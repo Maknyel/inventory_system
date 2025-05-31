@@ -52,45 +52,6 @@ class InventoryHistoryController extends Controller
 
         $fullData = [];
 
-        foreach ($data as $groupItem) {
-            // Step 2: Fetch sub records (detailed inventory history per dr_number)
-            $subQuery = $model->select('
-                    inventory_history.*,
-                    inventory_supplier.name as supplier_name,
-                    distributor.name as distributor_name,
-                    inventory_type.name as inventory_type_name,
-                    sub_inventory_type.name as sub_inventory_type_name,
-                    inventory.inventory_type,
-                    inventory.sub_inventory_type
-                ')
-                ->join('inventory_supplier', 'inventory_history.supplier_id = inventory_supplier.id', 'left')
-                ->join('distributor', 'inventory_history.distributor_id = distributor.id', 'left')
-                ->join('inventory', 'inventory_history.inventory_id = inventory.id', 'left')
-                ->join('inventory_type', 'inventory.inventory_type = inventory_type.id', 'left')
-                ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left')
-                ->where('inventory_history_group.dr_number', $groupItem['dr_number'])
-                ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id')
-                ->findAll();
-
-            // Optional filters if needed:
-            if ($search) {
-                $subQuery = array_filter($subQuery, function ($item) use ($search) {
-                    return stripos($item['name'], $search) !== false;
-                });
-            }
-
-            if ($in_out) {
-                $subQuery = array_filter($subQuery, function ($item) use ($in_out) {
-                    return $item['in_out'] === $in_out;
-                });
-            }
-
-            // Add the sub data to the group item
-            $groupItem['sub'] = array_values($subQuery); // Ensure it's a reindexed array
-
-            $fullData[] = $groupItem;
-        }
-
         // Fetch ungrouped inventory history
         if (empty($search_dr)) {
             $ungroupedItems = $model->select('
@@ -132,6 +93,47 @@ class InventoryHistoryController extends Controller
                 ];
             }
         }
+
+        foreach ($data as $groupItem) {
+            // Step 2: Fetch sub records (detailed inventory history per dr_number)
+            $subQuery = $model->select('
+                    inventory_history.*,
+                    inventory_supplier.name as supplier_name,
+                    distributor.name as distributor_name,
+                    inventory_type.name as inventory_type_name,
+                    sub_inventory_type.name as sub_inventory_type_name,
+                    inventory.inventory_type,
+                    inventory.sub_inventory_type
+                ')
+                ->join('inventory_supplier', 'inventory_history.supplier_id = inventory_supplier.id', 'left')
+                ->join('distributor', 'inventory_history.distributor_id = distributor.id', 'left')
+                ->join('inventory', 'inventory_history.inventory_id = inventory.id', 'left')
+                ->join('inventory_type', 'inventory.inventory_type = inventory_type.id', 'left')
+                ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left')
+                ->where('inventory_history_group.dr_number', $groupItem['dr_number'])
+                ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id')
+                ->findAll();
+
+            // Optional filters if needed:
+            if ($search) {
+                $subQuery = array_filter($subQuery, function ($item) use ($search) {
+                    return stripos($item['name'], $search) !== false;
+                });
+            }
+
+            if ($in_out) {
+                $subQuery = array_filter($subQuery, function ($item) use ($in_out) {
+                    return $item['in_out'] === $in_out;
+                });
+            }
+
+            // Add the sub data to the group item
+            $groupItem['sub'] = array_values($subQuery); // Ensure it's a reindexed array
+
+            $fullData[] = $groupItem;
+        }
+
+        
 
 
         return $this->response->setJSON([

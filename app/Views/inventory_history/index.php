@@ -17,12 +17,14 @@
     <input type="text" name="search_dr" placeholder="Search DR..." class="px-3 py-2 border rounded w-64" />
     
     <select name="in_out" class="px-3 py-2 border rounded">
-        <option value="">All</option>
+        <option value="all">All</option>
         <option value="in">IN</option>
-        <option value="out">OUT</option>
+        <option value="out" selected>OUT</option>
     </select>
     
     <select name="number_per_page" class="px-3 py-2 border rounded">
+        <option value="1">1 per page</option>
+        <option value="2">2 per page</option>
         <option value="5">5 per page</option>
         <option value="10" selected>10 per page</option>
         <option value="25">25 per page</option>
@@ -129,7 +131,10 @@
 
         const search = formData.get('search') || '';
         const search_dr = formData.get('search_dr') || '';
-        const in_out = formData.get('in_out') || '';
+        let in_out = formData.get('in_out') || 'out';
+        if(in_out == 'all'){
+            in_out = '';
+        }
         const number_per_page = formData.get('number_per_page') || 10;
         const order_by = formData.get('order_by') || 'created_at';
         const order_dir = formData.get('order_dir') || 'desc';
@@ -155,14 +160,23 @@
             // DR Header Row with Toggle Button
             const row = document.createElement('tr');
             row.classList.add('bg-gray-100');
-            row.innerHTML = `
-                <td class="bg-[#FFFFFF80] cursor-pointer px-4 py-2 border-b font-bold" colspan="14">
-                    <button onclick="toggleSubRows('${drRowId}', this, '${recordv2.dr_number}')" class="mr-2 text-yellow-600 hover:underline">
-                        &rarr; DR Number: ${recordv2.dr_number}
-                    </button>
-                    
-                </td>
-            `;
+            if(recordv2.sub.length > 0){
+                row.innerHTML = `
+                    <td class="bg-[#FFFFFF80] cursor-pointer px-4 py-2 border-b font-bold" colspan="14">
+                        <button onclick="toggleSubRows('${drRowId}', this, '${recordv2.dr_number}')" class="mr-2 text-yellow-600 hover:underline">
+                            &rarr; DR Number: ${recordv2.dr_number}
+                        </button>
+                        
+                    </td>
+                `;
+            }else{
+                    row.innerHTML = `
+                    <td class="bg-[#FFFFFF80] px-4 py-2 border-b font-bold" colspan="14">
+                        DR Number: ${recordv2.dr_number}
+                        
+                    </td>
+                `;
+            }
             tableBody.appendChild(row);
 
             // Sub Rows (initially hidden)
