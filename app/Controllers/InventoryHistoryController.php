@@ -72,8 +72,7 @@ class InventoryHistoryController extends Controller
                 ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left')
                 ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id', 'left')
                 ->where('inventory_history_group.inventory_history_id IS NULL');
-                
-                
+                // ✅ Add date filters if both are set
                 if ($start_date && $end_date) {
                     $builder->where('inventory_history.created_at >=', $start_date.' 00:00:00')
                             ->where('inventory_history.created_at <=', $end_date.' 23:59:59');
@@ -122,8 +121,7 @@ class InventoryHistoryController extends Controller
                 ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left')
                 ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id')
                 ->where('inventory_history_group.dr_number', $groupItem['dr_number']);
-                
-                
+                // ✅ Add date filters if both are set
                 if ($start_date && $end_date) {
                     $builder->where('inventory_history.created_at >=', $start_date.' 00:00:00')
                             ->where('inventory_history.created_at <=', $end_date.' 23:59:59');
