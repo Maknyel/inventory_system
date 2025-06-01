@@ -4,14 +4,14 @@ use App\Models\UserModel;
 use CodeIgniter\Database\BaseConnection;
 function global_name()
 {
-    return "Testing";
-    // return "Faithconstruct Epoxy Resin Specialist";
+    return "Faithconstruct Epoxy Resin Specialist";
 }
 
 function get_dr_number(){
     $db = \Config\Database::connect();
     $currentYear = date('Y');
 
+    // Fetch the latest dr_number for the current year
     $builder = $db->table('inventory_history_group');
     $builder->select('dr_number')
             ->like('dr_number', $currentYear . '-', 'after')
