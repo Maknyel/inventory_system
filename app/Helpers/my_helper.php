@@ -4,7 +4,8 @@ use App\Models\UserModel;
 use CodeIgniter\Database\BaseConnection;
 function global_name()
 {
-    return "Faithconstruct Epoxy Resin Specialist";
+    return "Testing";
+    // return "Faithconstruct Epoxy Resin Specialist";
 }
 
 function get_dr_number(){
