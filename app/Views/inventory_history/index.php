@@ -16,6 +16,11 @@
     <input type="text" name="search" placeholder="Search Name..." class="px-3 py-2 border rounded w-64" />
     <input type="text" name="search_dr" placeholder="Search DR..." class="px-3 py-2 border rounded w-64" />
     
+
+     <!-- ✅ Add these date inputs -->
+    <input type="date" name="start_date" class="px-3 py-2 border rounded" />
+    <input type="date" name="end_date" class="px-3 py-2 border rounded" />
+
     <select name="in_out" class="px-3 py-2 border rounded">
         <option value="all">All</option>
         <option value="in">IN</option>
@@ -50,51 +55,51 @@
     <table id="myTable" class="min-w-full table-auto border-collapse border border-gray-300">
         <thead>
             <tr>
-                <!-- <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">#</th> -->
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <!-- <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">#</th> -->
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                     Name
                   
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                     Description
                   
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Price
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Quantity
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Inventory Type
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Sub Inventory Type
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Supplier
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Distributor
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Purpose
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Return Qty
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Remarks
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         In/Out
                 </th>
                 
                 
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Created At
                 </th>
-                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
+                <th class="sticky z-10 top-0 bg-white px-4 py-2 border-b text-left">
                         Updated At
                 </th>
             </tr>
@@ -131,6 +136,10 @@
 
         const search = formData.get('search') || '';
         const search_dr = formData.get('search_dr') || '';
+        const start_date = formData.get('start_date') || '';
+        const end_date = formData.get('end_date') || '';
+        
+        
         let in_out = formData.get('in_out') || 'out';
         if(in_out == 'all'){
             in_out = '';
@@ -147,6 +156,10 @@
         url.searchParams.set('page', page);
         url.searchParams.set('order_by', order_by);
         url.searchParams.set('order_dir', order_dir);
+        url.searchParams.set('start_date', start_date);
+        url.searchParams.set('end_date', end_date);
+        
+        
 
         const response = await fetch(url);
         const result = await response.json();
@@ -162,7 +175,7 @@
             row.classList.add('bg-gray-100');
             if(recordv2.sub.length > 0){
                 row.innerHTML = `
-                    <td class="bg-[#FFFFFF80] cursor-pointer px-4 py-2 border-b font-bold" colspan="14">
+                    <td class=" main-group-data bg-[#FFFFFF80] cursor-pointer px-4 py-2 border-b font-bold" colspan="14">
                         <button onclick="toggleSubRows('${drRowId}', this, '${recordv2.dr_number}')" class="mr-2 text-yellow-600 hover:underline">
                             &rarr; DR Number: ${recordv2.dr_number}
                         </button>
@@ -171,7 +184,7 @@
                 `;
             }else{
                     row.innerHTML = `
-                    <td class="bg-[#FFFFFF80] px-4 py-2 border-b font-bold" colspan="14">
+                    <td class=" main-group-data bg-[#FFFFFF80] px-4 py-2 border-b font-bold" colspan="14">
                         DR Number: ${recordv2.dr_number}
                         
                     </td>
@@ -281,12 +294,17 @@
     function downloadCSV() {
         const table = document.getElementById("myTable");
         let csv = [];
+
         for (let row of table.rows) {
-            let cols = Array.from(row.cells).map(cell => `"${cell.innerText.trim()}"`);
+            // Skip rows that contain the "exclude" class
+            if ([...row.classList].includes("main-group-data")) continue;
+
+            const cols = Array.from(row.cells).map(cell => `"${cell.innerText.trim()}"`);
             csv.push(cols.join(","));
         }
+
         const csvContent = csv.join("\n");
-        
+
         const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
         const url = URL.createObjectURL(blob);
 

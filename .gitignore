@@ -77,6 +77,7 @@ phpunit
 # Composer Dependencies
 #-------------------------
 vendor/
+uploads/user
 
 #-------------------------
 # IDE / Editor Files

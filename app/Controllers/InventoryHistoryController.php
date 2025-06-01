@@ -30,6 +30,8 @@ class InventoryHistoryController extends Controller
         $in_out = $this->request->getGet('in_out');
         $number_per_page = $this->request->getGet('number_per_page') ?? 10;
         $page = $this->request->getGet('page') ?? 1;
+        $start_date = $this->request->getGet('start_date');
+        $end_date = $this->request->getGet('end_date');
 
         
 
@@ -54,7 +56,7 @@ class InventoryHistoryController extends Controller
 
         // Fetch ungrouped inventory history
         if (empty($search_dr)) {
-            $ungroupedItems = $model->select('
+            $builder = $model->select('
                     inventory_history.*,
                     inventory_supplier.name as supplier_name,
                     distributor.name as distributor_name,
@@ -69,8 +71,15 @@ class InventoryHistoryController extends Controller
                 ->join('inventory_type', 'inventory.inventory_type = inventory_type.id', 'left')
                 ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left')
                 ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id', 'left')
-                ->where('inventory_history_group.inventory_history_id IS NULL')
-                ->findAll();
+                ->where('inventory_history_group.inventory_history_id IS NULL');
+                // ✅ Add date filters if both are set
+                if ($start_date && $end_date) {
+                    $builder->where('inventory_history.created_at >=', $start_date.' 00:00:00')
+                            ->where('inventory_history.created_at <=', $end_date.' 23:59:59');
+                }
+
+                // 🔍 Run query
+                $ungroupedItems = $builder->findAll();
 
             // Apply optional filters
             if ($search) {
@@ -96,7 +105,7 @@ class InventoryHistoryController extends Controller
 
         foreach ($data as $groupItem) {
             // Step 2: Fetch sub records (detailed inventory history per dr_number)
-            $subQuery = $model->select('
+            $builder = $model->select('
                     inventory_history.*,
                     inventory_supplier.name as supplier_name,
                     distributor.name as distributor_name,
@@ -110,9 +119,16 @@ class InventoryHistoryController extends Controller
                 ->join('inventory', 'inventory_history.inventory_id = inventory.id', 'left')
                 ->join('inventory_type', 'inventory.inventory_type = inventory_type.id', 'left')
                 ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left')
-                ->where('inventory_history_group.dr_number', $groupItem['dr_number'])
                 ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id')
-                ->findAll();
+                ->where('inventory_history_group.dr_number', $groupItem['dr_number']);
+                // ✅ Add date filters if both are set
+                if ($start_date && $end_date) {
+                    $builder->where('inventory_history.created_at >=', $start_date.' 00:00:00')
+                            ->where('inventory_history.created_at <=', $end_date.' 23:59:59');
+                }
+
+                // 🔍 Run query
+                $subQuery = $builder->findAll();
 
             // Optional filters if needed:
             if ($search) {
