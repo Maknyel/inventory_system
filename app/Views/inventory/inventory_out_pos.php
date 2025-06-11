@@ -462,6 +462,7 @@ createApp({
             }, 1000);
             
         },
+        
         async getInventory() {
             const res = await fetch(`${base_url}inventory/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`);
             this.inventoryList = await res.json();
