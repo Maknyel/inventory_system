@@ -432,11 +432,23 @@ class InventoryController extends Controller
         //     ->where('inventory.sub_inventory_type', $subInventoryType)
         //     ->orWhere('sub_inventory_type.show_in_inventory', 1)
         // ->groupEnd();
-        $query->groupStart()
-            ->where('inventory.inventory_type', $inventoryType)
-            ->where('inventory.sub_inventory_type', $subInventoryType)
-        ->groupEnd()
-        ->orWhere('sub_inventory_type.show_in_inventory', 1);
+        if ($inventoryType && !$subInventoryType) {
+            $query->groupStart()
+                ->where('inventory.inventory_type', $inventoryType)
+            ->groupEnd()
+            ->orWhere('sub_inventory_type.show_in_inventory', 1);
+        }else if(!$inventoryType && $subInventoryType){
+            $query->groupStart()
+                ->where('inventory.sub_inventory_type', $subInventoryType)
+            ->groupEnd()
+            ->orWhere('sub_inventory_type.show_in_inventory', 1);
+        }else{
+            $query->groupStart()
+                ->where('inventory.inventory_type', $inventoryType)
+                ->where('inventory.sub_inventory_type', $subInventoryType)
+            ->groupEnd()
+            ->orWhere('sub_inventory_type.show_in_inventory', 1);
+        }
 
         $data = $query->findAll();
 
