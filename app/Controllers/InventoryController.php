@@ -369,6 +369,50 @@ class InventoryController extends Controller
         return $this->response->setJSON(['message' => 'Stock added successfully']);
     }
 
+    public function savePosStock()
+    {
+        $json = $this->request->getJSON(true);
+        $supplierId = $json['supplier_id'];
+        $items = $json['items'] ?? [];
+
+        $inventoryModel = new InventoryModel();
+        $historyModel = new InventoryHistoryModel();
+        $db = \Config\Database::connect();
+        $userId = session()->get('user_id') ?? 1;
+
+        foreach ($items as $item) {
+            $inventory = $inventoryModel->find($item['id']);
+            if (!$inventory) continue;
+
+            // Update stock
+            $newQty = $inventory['current_quantity'] + $item['quantity'];
+            $db->table('inventory')
+                ->where('id', $item['id'])
+                ->set('current_quantity', $newQty)
+                ->set('current_price', $item['price'])
+                ->update();
+
+            // Add to history
+            $historyModel->insert([
+                'name' => $inventory['name'],
+                'description' => $inventory['description'],
+                'price' => $item['price'],
+                'quantity' => $item['quantity'],
+                'return_quantity' => 0,
+                'in_out' => 'in',
+                'inventory_id' => $item['id'],
+                'user_id' => $userId,
+                'remarks' => 'POS Stock In',
+                'supplier_id' => $supplierId,
+                'created_at' => date('Y-m-d H:i:s'),
+                'updated_at' => date('Y-m-d H:i:s')
+            ]);
+        }
+
+        return $this->response->setJSON(['message' => 'POS stock-in successful']);
+    }
+
+
     public function getInventoryInList()
     {
         $model = new \App\Models\InventoryHistoryModel();
