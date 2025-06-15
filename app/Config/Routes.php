@@ -24,6 +24,8 @@ $routes->get('inventory/export', 'InventoryController::export');
 $routes->get('/inventory/list', 'InventoryController::getInventoryList');
 $routes->get('/inventory/in/list', 'InventoryController::getInventoryInList');
 $routes->post('/inventory/save-stock', 'InventoryController::saveStock');
+$routes->post('/inventory/save-pos-stock', 'InventoryController::savePosStock');
+
 $routes->post('inventory/save-out', 'InventoryController::saveOut');
 $routes->post('inventory/save-return', 'InventoryController::saveReturn');
 
