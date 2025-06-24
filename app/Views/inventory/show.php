@@ -2,19 +2,19 @@
 
 <?= $this->section('content') ?>
 <nav class="text-sm text-gray-600" aria-label="Breadcrumb">
-  <ol class="flex items-center space-x-2">
-    <li>
-      <a href="<?=base_url('inventory')?>" class="text-blue-600 hover:underline">Inventory</a>
-    </li>
-    <li><span class="mx-1 text-gray-400">/</span></li>
-    <li>
-      <a href="<?=base_url('inventory/'.$inventory_type_parse['id'])?>" class="text-blue-600 hover:underline"><?=($inventory_type_parse['name'])?></a>
-    </li>
-    <li><span class="mx-1 text-gray-400">/</span></li>
-    <li>
-      <span class="text-black"><?=($sub_inventory_type_parse['name'])?></span>
-    </li>
-  </ol>
+    <ol class="flex items-center space-x-2">
+        <li>
+            <a href="<?= base_url('inventory') ?>" class="text-blue-600 hover:underline">Inventory</a>
+        </li>
+        <li><span class="mx-1 text-gray-400">/</span></li>
+        <li>
+            <a href="<?= base_url('inventory/' . $inventory_type_parse['id']) ?>" class="text-blue-600 hover:underline"><?= ($inventory_type_parse['name']) ?></a>
+        </li>
+        <li><span class="mx-1 text-gray-400">/</span></li>
+        <li>
+            <span class="text-black"><?= ($sub_inventory_type_parse['name']) ?></span>
+        </li>
+    </ol>
 </nav>
 
 <div class="flex items-center justify-between mt-6 mb-4">
@@ -32,7 +32,7 @@
             class="px-3 py-1 bg-black text-white rounded hover:bg-black transition">
             POS
         </a>
-        <?php if($sub_inventory_type_parse['has_reeturn'] != 0){ ?>
+        <?php if ($sub_inventory_type_parse['has_reeturn'] != 0) { ?>
             <a href="<?= base_url('inventory_return?inventory_type=' . $inventory_type_parse['id'] . '&sub_inventory_type=' . $sub_inventory_type_parse['id']) ?>"
                 class="px-3 py-1 bg-yellow-500 text-white rounded hover:bg-yellow-600 transition">
                 Return
@@ -53,7 +53,7 @@
         </button> -->
 
 
-        
+
         <?php if (current_user()['role_id'] == 1 || current_user()['role_id'] == 4) { ?>
             <button onclick="openAddModal()" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-700">Add Inventory</button>
         <?php } ?>
@@ -65,7 +65,7 @@
     <button type="submit" class="px-4 py-2 bg-yellow-600 text-white rounded">Search</button>
 </form>
 <div class="flex flex-col h-full overflow-auto">
-    
+
     <table class="min-w-full table-auto border-collapse border border-gray-300">
         <thead>
             <tr>
@@ -96,77 +96,95 @@
                     <a href="?search=<?= esc($search) ?>&orderby=inventory.reordering_level&orderdir=<?= $orderby == 'inventory.reordering_level' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Reordering Level
                         <i class="ion-<?= ($orderby == 'inventory.reordering_level' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.reordering_level' ? 'text-black' : 'text-gray-400' ?>"></i>
-                        
+
                     </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
                     <a href="?search=<?= esc($search) ?>&orderby=inventory.current_quantity&orderdir=<?= $orderby == 'inventory.current_quantity' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Current Quantity
                         <i class="ion-<?= ($orderby == 'inventory.current_quantity' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.current_quantity' ? 'text-black' : 'text-gray-400' ?>"></i>
-                        
+
                     </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
                     <a href="?search=<?= esc($search) ?>&orderby=inventory.current_price&orderdir=<?= $orderby == 'inventory.current_price' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Current Price
                         <i class="ion-<?= ($orderby == 'inventory.current_price' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.current_price' ? 'text-black' : 'text-gray-400' ?>"></i>
-                        
+
                     </a>
-                    
+
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
                     <a href="?search=<?= esc($search) ?>&orderby=inventory.created_at&orderdir=<?= $orderby == 'inventory.created_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Created At
                         <i class="ion-<?= ($orderby == 'inventory.created_at' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.created_at' ? 'text-black' : 'text-gray-400' ?>"></i>
-                        
+
                     </a>
-                    
+
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
                     <a href="?search=<?= esc($search) ?>&orderby=inventory.updated_at&orderdir=<?= $orderby == 'inventory.updated_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Updated At
-                        <i class="ion-<?= ($orderby == 'inventory.updated_at' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.updated_at' ? 'text-black' : 'text-gray-400' ?>"></i>                        
+                        <i class="ion-<?= ($orderby == 'inventory.updated_at' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.updated_at' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
-                    
+
                 </th>
             </tr>
         </thead>
         <tbody id="table-body">
-            <?php foreach ($inventory as $item): ?>
+            <?php foreach ($inventory as $index => $item): ?>
+                <!-- Main Row -->
                 <tr>
                     
-                    <?php if (current_user()['role_id'] == 1 || current_user()['role_id'] == 4) { ?>
-                        <td class="px-4 py-2 border-b text-left">
-                            <button onclick="openEditModal(<?= $item['id'] ?>)" class="text-yellow-600 hover:underline">Edit</button> |
-                            <button onclick="deleteInventory(<?= $item['id'] ?>)" class="text-red-600 hover:underline">Delete</button>
-                        </td>
-                    <?php } ?>
-                    
-                    <td class="px-4 py-2 border-b text-left">
-                        <?php if ($item['icon'] != null){ ?>
-                            <img src="<?= base_url('uploads/icons/'.$item['icon']) ?>" alt="Icon" class="w-6 h-6">
-                        <?php }else{ ?>
-                            <span>No Icon</span>
-                        <?php } ?>
-                    </td>
-                    <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['name'] ?></td>
-                    <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['unit'] ?></td>
-                    <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['description'] ?></td>
-                    <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['reordering_level'] ?></td>
-                    <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['current_quantity'] ?></td>
-                    <td class="px-4 py-2 border-b text-left cursor-pointer"><?= $item['current_price'] ?></td>
-                    <td class="px-4 py-2 border-b text-left cursor-pointer">
-                        <?php if ($item['created_at'] != '0000-00-00 00:00:00'): ?>
-                            <?= date('F j, Y h:i a', strtotime($item['created_at'])) ?>
-                        <?php endif; ?>
-                    </td>
-                    <td class="px-4 py-2 border-b text-left cursor-pointer">
-                        <?php if ($item['updated_at'] != '0000-00-00 00:00:00'): ?>
-                            <?= date('F j, Y h:i a', strtotime($item['updated_at'])) ?>
-                        <?php endif; ?>
+                    <td class="main-group-data bg-[#FFFFFF80] cursor-pointer px-4 py-2 border-b font-bold" colspan="10">
+                        <button onclick="toggleSubinventory('sub<?= $index ?>', this)" class="mr-2 text-yellow-600 hover:underline">
+                            <span class="arrow">&rarr;</span> <?= esc($item['name']) ?>
+                        </button>
                     </td>
                 </tr>
+
+                <!-- Expandable Subinventory Row -->
+                <?php if (!empty($item['subinventorydata'])): ?>
+                    <?php foreach ($item['subinventorydata'] as $sub): ?>
+                        <tr id="sub<?= $index ?>" class="hidden bg-gray-50">
+                            <?php if (current_user()['role_id'] == 1 || current_user()['role_id'] == 4): ?>
+                                <td class="px-4 py-2 border-b text-left">
+                                    <button onclick="openEditModal(<?= $sub['id'] ?>)" class="text-yellow-600 hover:underline">Edit</button> |
+                                    <button onclick="deleteInventory(<?= $sub['id'] ?>)" class="text-red-600 hover:underline">Delete</button>
+                                </td>
+                            <?php endif; ?>
+
+                            <td class="px-4 py-2 border-b text-left">
+                                <?php if ($sub['icon'] != null): ?>
+                                    <img src="<?= base_url('uploads/icons/' . $sub['icon']) ?>" alt="Icon" class="w-6 h-6">
+                                <?php else: ?>
+                                    <span>No Icon</span>
+                                <?php endif; ?>
+                            </td>
+
+                            <td class="px-4 py-2 border-b text-left cursor-pointer">
+                                <?= esc($sub['name']) ?>
+                                <?php if (!empty($sub['subinventorydata'])): ?>
+                                    <button onclick="toggleSubinventory('sub<?= $index ?>')" class="text-xs text-blue-600 underline ml-2">Expand</button>
+                                <?php endif; ?>
+                            </td>
+
+                            <td class="px-4 py-2 border-b text-left"><?= esc($sub['unit']) ?></td>
+                            <td class="px-4 py-2 border-b text-left"><?= esc($sub['description']) ?></td>
+                            <td class="px-4 py-2 border-b text-left"><?= esc($sub['reordering_level']) ?></td>
+                            <td class="px-4 py-2 border-b text-left"><?= esc($sub['current_quantity']) ?></td>
+                            <td class="px-4 py-2 border-b text-left"><?= esc($sub['current_price']) ?></td>
+                            <td class="px-4 py-2 border-b text-left">
+                                <?= $sub['created_at'] !== '0000-00-00 00:00:00' ? date('F j, Y h:i a', strtotime($sub['created_at'])) : '' ?>
+                            </td>
+                            <td class="px-4 py-2 border-b text-left">
+                                <?= $sub['updated_at'] !== '0000-00-00 00:00:00' ? date('F j, Y h:i a', strtotime($sub['updated_at'])) : '' ?>
+                            </td>
+                        </tr>
+                    <?php endforeach; ?>
+                <?php endif; ?>
             <?php endforeach; ?>
+
         </tbody>
     </table>
 </div>
@@ -177,8 +195,8 @@
     </div>
 
     <?php
-        // Get current query params and preserve them (e.g., search, order_by)
-        $queryParams = $_GET;
+    // Get current query params and preserve them (e.g., search, order_by)
+    $queryParams = $_GET;
     ?>
 
     <div class="flex gap-2">
@@ -188,17 +206,17 @@
         <?php endif; ?>
 
         <?php
-            $start = max(1, $currentPage - 1);
-            $end = min($totalPages, $start + 2);
-            if ($end - $start < 2 && $start > 1) {
-                $start = max(1, $end - 2);
-            }
+        $start = max(1, $currentPage - 1);
+        $end = min($totalPages, $start + 2);
+        if ($end - $start < 2 && $start > 1) {
+            $start = max(1, $end - 2);
+        }
         ?>
 
         <?php for ($i = $start; $i <= $end; $i++): ?>
             <?php $queryParams['page_inventory'] = $i; ?>
             <a href="?<?= http_build_query($queryParams) ?>"
-            class="px-4 py-2 rounded <?= $i == $currentPage ? 'bg-yellow-600 text-white' : 'bg-white text-black hover:bg-yellow-600 hover:text-white' ?>">
+                class="px-4 py-2 rounded <?= $i == $currentPage ? 'bg-yellow-600 text-white' : 'bg-white text-black hover:bg-yellow-600 hover:text-white' ?>">
                 <?= $i ?>
             </a>
         <?php endfor; ?>
@@ -252,30 +270,30 @@
 </div>
 
 <script>
-    document.getElementById('file').addEventListener('change', function () {
+    document.getElementById('file').addEventListener('change', function() {
         const fileInput = this;
         const formData = new FormData();
         formData.append('file', fileInput.files[0]);
 
         fetch("<?= base_url('upload/doUpload') ?>", {
-            method: 'POST',
-            body: formData
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.success) {
-                // Set the hidden input value with the uploaded file name
-                document.getElementById('inventory-icon').value = data.filename;
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Set the hidden input value with the uploaded file name
+                    document.getElementById('inventory-icon').value = data.filename;
 
-                alert('File uploaded successfully!');
-            } else {
-                alert('Upload failed: ' + data.error);
-            }
-        })
-        .catch(error => {
-            console.error('Error uploading file:', error);
-            alert('An unexpected error occurred.');
-        });
+                    alert('File uploaded successfully!');
+                } else {
+                    alert('Upload failed: ' + data.error);
+                }
+            })
+            .catch(error => {
+                console.error('Error uploading file:', error);
+                alert('An unexpected error occurred.');
+            });
     });
     // Open Modal for Add/Edit
     function openAddModal() {
@@ -283,7 +301,7 @@
         document.getElementById('inventory-name').value = '';
         document.getElementById('inventory-unit').value = '';
         document.getElementById('inventory-icon').value = '';
-        
+
         document.getElementById('inventory-description').value = '';
         document.getElementById('inventory-reordering-level').value = '';
         document.getElementById('inventory-icon').value = ''; // Reset icon input
@@ -319,10 +337,10 @@
         const unit = document.getElementById('inventory-unit').value;
         const icon = document.getElementById('inventory-icon').value;
         const description = document.getElementById('inventory-description').value;
-        const inventory_type = `<?=$inventory_type_parse['id']?>`;
-        const sub_inventory_type = `<?=$sub_inventory_type_parse['id']?>`;
+        const inventory_type = `<?= $inventory_type_parse['id'] ?>`;
+        const sub_inventory_type = `<?= $sub_inventory_type_parse['id'] ?>`;
         const reordering_level = document.getElementById('inventory-reordering-level').value;
-        
+
         const formData = new FormData();
         formData.append('name', name);
         formData.append('unit', unit);
@@ -331,22 +349,24 @@
         formData.append('inventory_type', inventory_type);
         formData.append('sub_inventory_type', sub_inventory_type);
         formData.append('reordering_level', reordering_level);
-        
+
         const url = id ? base_url + `inventory/api/update/${id}` : base_url + 'inventory/api/store';
         const method = id ? 'POST' : 'POST';
 
         fetch(url, {
-            method: method,
-            body: formData
-        })
-        .then(res => res.json())
-        .then(() => location.reload());
+                method: method,
+                body: formData
+            })
+            .then(res => res.json())
+            .then(() => location.reload());
     });
 
     // Delete Inventory Item
     function deleteInventory(id) {
         if (!confirm('Are you sure?')) return;
-        fetch(base_url + `inventory/api/delete/${id}`, { method: 'DELETE' })
+        fetch(base_url + `inventory/api/delete/${id}`, {
+                method: 'DELETE'
+            })
             .then(() => location.reload());
     }
 
@@ -354,6 +374,24 @@
     function exportInventory() {
         window.location.href = base_url + 'inventory/export';
     }
+
+    function toggleSubinventory(id, btn) {
+    // Toggle visibility of rows with matching id prefix
+    document.querySelectorAll(`tr[id^="${id}"]`).forEach(row => {
+        row.classList.toggle('hidden');
+    });
+
+    // Get the arrow span inside the button
+    const arrowSpan = btn.querySelector('.arrow');
+
+    // Check if any of the rows are now visible
+    const anyVisible = Array.from(document.querySelectorAll(`tr[id^="${id}"]`))
+        .some(row => !row.classList.contains('hidden'));
+
+    // Update arrow symbol
+    arrowSpan.innerHTML = anyVisible ? '&darr;' : '&rarr;';
+}
 </script>
+
 
 <?= $this->endSection() ?>
