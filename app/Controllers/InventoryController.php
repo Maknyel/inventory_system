@@ -34,11 +34,11 @@ class InventoryController extends Controller
         }
         return view('inventory/sub_inventory_type', $data);
     }
-    public function show($inventory_type_id, $sub_inventory_type)
+    public function showv2($inventory_type_id, $sub_inventory_type)
     {
 
         $inventoryModel = new InventoryModel();
-        
+
         $perPage = 10;
 
 
@@ -56,7 +56,7 @@ class InventoryController extends Controller
 
         // Fetch paginated inventory data
         $inventoryModel->select('inventory.*, inventory_type.name as inventory_type_name')
-                   ->join('inventory_type', 'inventory.inventory_type = inventory_type.id');
+            ->join('inventory_type', 'inventory.inventory_type = inventory_type.id');
 
         // Apply search
         if (!empty($search)) {
@@ -77,7 +77,7 @@ class InventoryController extends Controller
                 ->like('inventory.sub_inventory_type', $sub_inventory_type)
                 ->groupEnd();
         }
-        
+
         if (!empty($sub_inventory_type)) {
             $inventoryModel->groupStart()
                 ->like('inventory.sub_inventory_type', $sub_inventory_type)
@@ -120,7 +120,112 @@ class InventoryController extends Controller
         return view('inventory/show', $data);
     }
 
-    public function savePosOut(){
+    public function show($inventory_type_id, $sub_inventory_type)
+    {
+
+        $inventoryModel = new InventoryModel();
+
+        $perPage = 10;
+
+
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_parse'] = $inventoryTypeModel->find($inventory_type_id);
+
+        $subInventoryTypeModel = new SubInventoryTypeModel();
+        $data['sub_inventory_type_parse'] = $subInventoryTypeModel->find($sub_inventory_type);
+
+        // Get the current page number from the URL, default to 1
+        $currentPage = $this->request->getVar('page_inventory') ?: 1;
+        $search = $this->request->getGet('search');
+        $orderBy = $this->request->getGet('orderby') ?? 'inventory.name';
+        $orderDir = $this->request->getGet('orderdir') ?? 'asc';
+
+        // Fetch paginated inventory data
+        $inventoryModel->select('inventory.*, inventory_type.name as inventory_type_name')
+            ->join('inventory_type', 'inventory.inventory_type = inventory_type.id')
+            ->groupBy('inventory.name');
+
+        // Apply search
+        if (!empty($search)) {
+            $inventoryModel->groupStart()
+                ->like('inventory.name', $search)
+                ->orLike('inventory.description', $search)
+                ->orLike('inventory_type.name', $search)
+                ->groupEnd();
+        }
+
+        if (!empty($inventory_type_id)) {
+            $inventoryModel->groupStart()
+                ->like('inventory.inventory_type', $inventory_type_id)
+                ->groupEnd();
+        }
+        if (!empty($sub_inventory_type)) {
+            $inventoryModel->groupStart()
+                ->like('inventory.sub_inventory_type', $sub_inventory_type)
+                ->groupEnd();
+        }
+
+        if (!empty($sub_inventory_type)) {
+            $inventoryModel->groupStart()
+                ->like('inventory.sub_inventory_type', $sub_inventory_type)
+                ->groupEnd();
+        }
+
+        // Apply ordering
+        $inventoryModel->orderBy($orderBy, $orderDir);
+
+        $data['inventory'] = $inventoryModel->paginate($perPage, 'inventory');
+        foreach ($data['inventory'] as &$item) {
+            $inventoryModel1 = new InventoryModel();
+            $inventoryModel1->select('inventory.*, inventory_type.name as inventory_type_name')
+                ->join('inventory_type', 'inventory.inventory_type = inventory_type.id')
+                ->where('inventory.name', $item['name'])
+                ->where('inventory.inventory_type', $item['inventory_type'])
+                ->where('inventory.sub_inventory_type', $item['sub_inventory_type']);
+
+            if (!empty($search)) {
+                $inventoryModel1->groupStart()
+                    ->like('inventory.name', $search)
+                    ->orLike('inventory.description', $search)
+                    ->orLike('inventory_type.name', $search)
+                    ->groupEnd();
+            }
+
+            $inventoryModel1->orderBy($orderBy, $orderDir);
+
+            $item['subinventorydata'] = $inventoryModel1->findAll();
+        }
+
+        // Get paginated results
+
+
+
+        // Get pager instance to render pagination links
+        $data['pager'] = $inventoryModel->pager;
+
+        // Current page
+        $data['currentPage'] = $currentPage;
+
+        $data['totalItems'] = $inventoryModel->pager->getTotal('inventory');
+        $data['totalPages'] = $data['totalItems'] ? ceil($data['totalItems'] / $perPage) : 1;
+
+        // Fetch inventory types for the dropdown
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_data'] = $inventoryTypeModel->findAll();
+
+        $data['search'] = $search;
+        // $data['inventory_type'] = $inventory_type;
+        $data['orderby'] = $orderBy;
+        $data['orderdir'] = $orderDir;
+
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        return view('inventory/show', $data);
+    }
+
+    public function savePosOut()
+    {
         if ($this->request->isAJAX()) {
             $dr_number = get_dr_number();
             $json = $this->request->getJSON(true);
@@ -190,8 +295,6 @@ class InventoryController extends Controller
                     'created_at'                        => ('Y-m-d H:i:s'),
                     'updated_at'                        => ('Y-m-d H:i:s'),
                 ]);
-                
-                
             }
 
             $db->transComplete();
@@ -206,7 +309,8 @@ class InventoryController extends Controller
         return $this->response->setStatusCode(400)->setJSON(['error' => 'Invalid request.']);
     }
 
-    public function saveReturn(){
+    public function saveReturn()
+    {
         $json = $this->request->getJSON(true);
 
         $id = $json['inventory_history_id'];
@@ -217,8 +321,8 @@ class InventoryController extends Controller
         $inventoryHistoryModel = new InventoryHistoryModel();
         $inventoryHistoryReturnModel = new InventoryHistoryReturnModel();
 
-        
-        
+
+
         // Fetch current inventory record
         $inventoryHistory = $inventoryHistoryModel->find($id);
 
@@ -265,7 +369,8 @@ class InventoryController extends Controller
         return $this->response->setJSON(['message' => 'Inventory return recorded successfully']);
     }
 
-    public function saveOut(){
+    public function saveOut()
+    {
         $json = $this->request->getJSON(true);
 
         $id = $json['inventory_id'];
@@ -341,14 +446,14 @@ class InventoryController extends Controller
 
         // Update current_quantity and current_price
         $quantityVal = (int)$inventory['current_quantity'] + $quantity;
-        
+
         $db = \Config\Database::connect();
         $db->table('inventory')
             ->where('id', $id)
             ->set('current_quantity', $quantityVal)
             ->set('current_price', $price)
             ->update();
-        
+
 
         // Insert into history
         $InventoryhistoryModel->insert([
@@ -416,8 +521,8 @@ class InventoryController extends Controller
     public function getInventoryInList()
     {
         $model = new \App\Models\InventoryHistoryModel();
-        
-        
+
+
         // Get query parameters
         $inventoryType = $this->request->getGet('inventory_type');
         $subInventoryType = $this->request->getGet('sub_inventory_type');
@@ -457,15 +562,15 @@ class InventoryController extends Controller
     public function getInventoryList()
     {
         $model = new \App\Models\InventoryModel();
-        
-        
+
+
         // Get query parameters
         $inventoryType = $this->request->getGet('inventory_type');
         $subInventoryType = $this->request->getGet('sub_inventory_type');
 
         // Build query
         $query = $model->select('inventory.id, inventory.name, inventory.current_quantity, inventory.current_price, inventory.unit, inventory.description')
-        ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left');
+            ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left');
 
         // if ($inventoryType) {
         //     $query->where('inventory.inventory_type', $inventoryType);
@@ -479,19 +584,19 @@ class InventoryController extends Controller
         if ($inventoryType && !$subInventoryType) {
             $query->groupStart()
                 ->where('inventory.inventory_type', $inventoryType)
-            ->groupEnd()
-            ->orWhere('sub_inventory_type.show_in_inventory', 1);
-        }else if(!$inventoryType && $subInventoryType){
+                ->groupEnd()
+                ->orWhere('sub_inventory_type.show_in_inventory', 1);
+        } else if (!$inventoryType && $subInventoryType) {
             $query->groupStart()
                 ->where('inventory.sub_inventory_type', $subInventoryType)
-            ->groupEnd()
-            ->orWhere('sub_inventory_type.show_in_inventory', 1);
-        }else{
+                ->groupEnd()
+                ->orWhere('sub_inventory_type.show_in_inventory', 1);
+        } else {
             $query->groupStart()
                 ->where('inventory.inventory_type', $inventoryType)
                 ->where('inventory.sub_inventory_type', $subInventoryType)
-            ->groupEnd()
-            ->orWhere('sub_inventory_type.show_in_inventory', 1);
+                ->groupEnd()
+                ->orWhere('sub_inventory_type.show_in_inventory', 1);
         }
 
         $data = $query->findAll();
@@ -686,14 +791,15 @@ class InventoryController extends Controller
         ]);
     }
 
-    public function inventoryReturnHistory(){
+    public function inventoryReturnHistory()
+    {
         if (!session()->has('user_id')) {
             return redirect()->to(base_url('login'));
         }
-        
+
         $inventoryHistoryReturnModel = new InventoryHistoryReturnModel();
         $subInventoryType = $this->request->getGet('sub_inventory_type');
-        
+
         // Get the current page number from the URL, default to 1
         $currentPage = $this->request->getVar('page_inventory_history_return') ?: 1;
         $search = $this->request->getGet('search');
@@ -701,9 +807,10 @@ class InventoryController extends Controller
         $orderBy = $this->request->getGet('orderby') ?? 'inventory_history.name';
         $orderDir = $this->request->getGet('orderdir') ?? 'asc';
         $perPage = $this->request->getGet('number_per_page') ?? 10;
-        
+
         // Fetch paginated inventory data
-        $inventoryHistoryReturnModel->select('
+        $inventoryHistoryReturnModel->select(
+            '
             inventory_history_return.*,
             inventory_history.id,
             inventory_history.supplier_id,
@@ -720,8 +827,8 @@ class InventoryController extends Controller
             inventory.sub_inventory_type'
         )
             ->join('inventory_history', 'inventory_history.id = inventory_history_return.inventory_out_id')
-            ->join('inventory_supplier', 'inventory_history.supplier_id = inventory_supplier.id','left')
-            ->join('distributor', 'inventory_history.distributor_id = distributor.id','left')
+            ->join('inventory_supplier', 'inventory_history.supplier_id = inventory_supplier.id', 'left')
+            ->join('distributor', 'inventory_history.distributor_id = distributor.id', 'left')
             ->join('inventory', 'inventory_history.inventory_id = inventory.id')
             ->join('inventory_type', 'inventory.inventory_type = inventory_type.id')
             ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id');
@@ -754,18 +861,18 @@ class InventoryController extends Controller
         $data['totalItems'] = $inventoryHistoryReturnModel->pager->getTotal('inventory_history_return');
         $data['totalPages'] = $data['totalItems'] ? ceil($data['totalItems'] / $perPage) : 1;
         $inventoryTypeModel = new InventoryTypeModel();
-        $data['inventory_type_data'] = $inventoryTypeModel->findAll();        
+        $data['inventory_type_data'] = $inventoryTypeModel->findAll();
         $data['search'] = $search;
         $data['orderby'] = $orderBy;
         $data['orderdir'] = $orderDir;
         $data['inventory_type'] = $inventory_type;
         $data['number_per_page'] = $perPage;
-        
+
         $inventoryTypeModel = new InventoryTypeModel();
         $data['inventory_type_parse'] = $inventoryTypeModel->find($inventory_type);
 
         $subInventoryTypeModel = new SubInventoryTypeModel();
         $data['sub_inventory_type_parse'] = $subInventoryTypeModel->find($subInventoryType);
-        return view('inventory_return/index', $data);        
+        return view('inventory_return/index', $data);
     }
 }

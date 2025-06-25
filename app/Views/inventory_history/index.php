@@ -28,13 +28,12 @@
     </select>
     
     <select name="number_per_page" class="px-3 py-2 border rounded">
-        <option value="1">1 per page</option>
-        <option value="2">2 per page</option>
-        <option value="5">5 per page</option>
         <option value="10" selected>10 per page</option>
         <option value="25">25 per page</option>
         <option value="50">50 per page</option>
         <option value="100">100 per page</option>
+        <option value="100">500 per page</option>
+        <option value="100">1000 per page</option>
     </select>
     <select name="order_by" class="px-3 py-2 border rounded">
         <option value="created_at" selected>Sort by Created At</option>
