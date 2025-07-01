@@ -69,4 +69,4 @@ This is a web-based Inventory Management System built with **CodeIgniter 3**, **
 ## 🛠 Installation
 1. Clone the repository:
    ```bash
-   git clone https://github.com/your-repo/inventory-system.git
+   git clone https://github.com/Maknyel/inventory_system.git
