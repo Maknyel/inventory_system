@@ -254,14 +254,26 @@
 
     <!-- Item Selection -->
     <div  v-show="!dr_number" class="grid grid-cols-1 md:grid-cols-3 gap-4">
-        <div>
-            <label class="block font-medium mb-1">Inventory Item</label>
-            <select v-model="selectedInventoryId" class="w-full border rounded px-3 py-2">
-                <option disabled value="">Select inventory</option>
-                <option v-for="item in inventoryList" :key="item.id" :value="item.id">
-                    {{ item.name }} - {{ item.description }} - ({{ item.unit }}) - ₱{{ (item.current_price) }}, Qty: {{ (item.current_quantity) }}
-                </option>
-            </select>
+        <div style="position: relative;">
+        <label class="block font-medium mb-1">Inventory Item</label>
+        <input
+            type="text"
+            v-model="inventorySearch"
+            @input="filterInventory"
+            @focus="showInventorySuggestions = true"
+            @blur="hideInventorySuggestions"
+            autocomplete="off"
+            class="w-full border rounded px-3 py-2"
+            placeholder="Search inventory..."
+        />
+        <ul v-if="showInventorySuggestions && filteredInventory.length" 
+            class="absolute z-10 w-full bg-white border rounded max-h-40 overflow-auto shadow mt-1">
+            <li v-for="item in filteredInventory" :key="item.id"
+                @mousedown.prevent="selectInventory(item)"
+                class="px-3 py-2 hover:bg-blue-500 hover:text-white cursor-pointer">
+            {{ item.name }} - {{ item.description }} - ({{ item.unit }}) - ₱{{ item.current_price }}, Qty: {{ item.current_quantity }}
+            </li>
+        </ul>
         </div>
 
         <input type="text" class="hidden" v-model="selectedInventoryPrice">
@@ -321,15 +333,29 @@
             </select>
         </div>
 
-        <div class="<?=($sub_inventory_type_parse['has_distributor'] == 0)?'hidden':''?>">
+        <div class="<?=($sub_inventory_type_parse['has_distributor'] == 0)?'hidden':''?>" style="position: relative;">
             <label class="block font-medium mb-1">Distributor</label>
-            <select v-model="distributor_id" class="w-full border rounded px-3 py-2" :disabled="(type !== 'For Distribution' || dr_number)?true:false">
-                <option disabled value="">Select distributor</option>
-                <option v-for="item in distributorList" :key="item.id" :value="item.id">
-                    {{ item.type }} | {{ item.name }}
-                </option>
-            </select>
-        </div>
+            <input
+                type="text"
+                v-model="distributorSearch"
+                @input="filterDistributor"
+                @focus="showDistributorSuggestions = true"
+                @blur="hideDistributorSuggestions"
+                :disabled="type !== 'For Distribution'"
+                autocomplete="off"
+                class="w-full border rounded px-3 py-2"
+                placeholder="Search distributor..."
+            />
+            <ul v-if="showDistributorSuggestions && filteredDistributor.length && type == 'For Distribution'" 
+                class="absolute z-10 w-full bg-white border rounded max-h-40 overflow-auto shadow mt-1">
+                <li v-for="item in filteredDistributor" :key="item.id"
+                    @mousedown.prevent="selectDistributor(item)"
+                    class="px-3 py-2 hover:bg-blue-500 hover:text-white cursor-pointer">
+                {{ item.type }} | {{ item.name }}
+                </li>
+            </ul>
+            </div>
+
     </div>
 
     <div v-show="!dr_number" class="mt-4 text-right font-semibold text-lg">
@@ -389,7 +415,15 @@ createApp({
             quantity: 1,
             cart: [],
             type: '',
-            distributor_id: ''
+            distributor_id: '',
+
+            inventorySearch: '',
+            filteredInventory: [],
+            showInventorySuggestions: false,
+
+            distributorSearch: '',
+            filteredDistributor: [],
+            showDistributorSuggestions: false,
         };
     },
     computed: {
@@ -414,6 +448,41 @@ createApp({
         this.getDistributors();
     },
     methods: {
+        filterInventory() {
+            const search = this.inventorySearch.toLowerCase();
+            this.filteredInventory = this.inventoryList.filter(item =>
+            item.name.toLowerCase().includes(search) ||
+            (item.description && item.description.toLowerCase().includes(search))
+            );
+        },
+        selectInventory(item) {
+            this.selectedInventoryId = item.id;
+            this.inventorySearch = `${item.name} - ${item.description} - (${item.unit}) - ₱${item.current_price}, Qty: ${item.current_quantity}`;
+            this.showInventorySuggestions = false;
+        },
+
+        hideInventorySuggestions() {
+            setTimeout(() => { this.showInventorySuggestions = false }, 100);
+        },
+
+        filterDistributor() {
+            const search = this.distributorSearch.toLowerCase();
+            this.filteredDistributor = this.distributorList.filter(item =>
+            item.name.toLowerCase().includes(search) ||
+            (item.type && item.type.toLowerCase().includes(search))
+            );
+        },
+
+        selectDistributor(item) {
+            this.distributor_id = item.id;
+            this.distributorSearch = `${item.type} | ${item.name}`;
+            this.showDistributorSuggestions = false;
+        },
+        hideDistributorSuggestions() {
+            setTimeout(() => { this.showDistributorSuggestions = false }, 100);
+        },
+
+
         downloadPDFPurchaseOrder() {
             const element = document.getElementById('purchase-order');
             const options = {
@@ -520,9 +589,12 @@ createApp({
         },
         changeType() {
             if (this.type !== 'For Distribution') {
-                this.distributor_id = '';
+                this.distributor_id = null;
+                this.distributorSearch = '';
+                this.showDistributorSuggestions = false;
             }
         },
+
         handleDownloads(){
             if (this.cart.length === 0) {
                 alert("Cart is empty!");
