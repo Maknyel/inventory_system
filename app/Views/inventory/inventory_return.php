@@ -22,15 +22,31 @@
     <h2 class="text-xl font-semibold mb-4">Inventory Return</h2>
 
     <form @submit.prevent="submitForm" class="space-y-4 max-w-md">
-        <div>
+        <div style="position: relative;">
             <label class="block font-medium mb-1">Inventory History List</label>
-            <select v-model="selectedInventoryId" class="w-full border rounded px-3 py-2">
-                <option disabled value="">Select Inventory History</option>
-                <option v-for="item in inventoryHistoryList" :key="item.id" :value="item.id">
+            <input
+                type="text"
+                v-model="inventoryHistorySearch"
+                @input="filterInventoryHistory"
+                @focus="showInventoryHistorySuggestions = true"
+                @blur="hideInventoryHistorySuggestions"
+                autocomplete="off"
+                placeholder="Search inventory history..."
+                class="w-full border rounded px-3 py-2"
+            />
+            <ul v-if="showInventoryHistorySuggestions && filteredInventoryHistory.length" 
+                class="absolute z-10 w-full bg-white border rounded max-h-40 overflow-auto shadow mt-1">
+                <li
+                    v-for="item in filteredInventoryHistory"
+                    :key="item.id"
+                    @mousedown.prevent="selectInventoryHistory(item)"
+                    class="px-3 py-2 hover:bg-blue-500 hover:text-white cursor-pointer"
+                >
                     {{ item.name }} - {{ item.description }} - ₱{{ item.price }} - Qty: {{ item.quantity }} - Returned: {{ item.return_quantity ?? 0 }} - Created: {{ formatDate(item.created_at) }}
-                </option>
-            </select>
+                </li>
+            </ul>
         </div>
+
 
         <div>
             <label class="block font-medium mb-1">Quantity</label>
@@ -70,6 +86,10 @@ createApp({
             selectedInventoryId: '',
             quantity: 0,
             remarks: '',
+
+            inventoryHistorySearch: '',
+            filteredInventoryHistory: [],
+            showInventoryHistorySuggestions: false,
         };
     },
     computed: {
@@ -82,6 +102,25 @@ createApp({
         this.getInventoryHistory();
     },
     methods: {
+        filterInventoryHistory() {
+            const search = this.inventoryHistorySearch.toLowerCase();
+            this.filteredInventoryHistory = this.inventoryHistoryList.filter(item =>
+                item.name.toLowerCase().includes(search) ||
+                (item.description && item.description.toLowerCase().includes(search)) ||
+                String(item.price).includes(search) ||
+                String(item.quantity).includes(search)
+            );
+        },
+        selectInventoryHistory(item) {
+            this.selectedInventoryId = item.id;
+            this.inventoryHistorySearch = `${item.name} - ${item.description} - ₱${item.price} - Qty: ${item.quantity} - Returned: ${item.return_quantity ?? 0} - Created: ${this.formatDate(item.created_at)}`;
+            this.showInventoryHistorySuggestions = false;
+        },
+        hideInventoryHistorySuggestions() {
+            setTimeout(() => {
+                this.showInventoryHistorySuggestions = false;
+            }, 100);
+        },
         formatDate (dateString){
             const date = new Date(dateString);
             return date.toLocaleString();

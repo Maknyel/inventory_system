@@ -15,6 +15,16 @@
 <form id="filterForm" class="mb-4 flex items-center gap-2">
     <input type="text" name="search" placeholder="Search Name..." class="px-3 py-2 border rounded w-64" />
     <input type="text" name="search_dr" placeholder="Search DR..." class="px-3 py-2 border rounded w-64" />
+
+    <select name="purpose" placeholder="Purpose" class="px-3 py-2 border rounded">
+        <option></option>
+        <option>For Own Consumption</option>
+
+        <?php foreach (getAllDistributors() as $key => $value) { ?>
+
+            <option value="<?=$value['id']?>"><?=$value['type']?> | <?=$value['name']?></option>
+        <?php } ?>
+    </select>
     
 
      <!-- ✅ Add these date inputs -->
@@ -136,6 +146,8 @@
         const search = formData.get('search') || '';
         const search_dr = formData.get('search_dr') || '';
         const start_date = formData.get('start_date') || '';
+        const purpose = formData.get('purpose') || '';
+        
         const end_date = formData.get('end_date') || '';
         
         
@@ -156,6 +168,7 @@
         url.searchParams.set('order_by', order_by);
         url.searchParams.set('order_dir', order_dir);
         url.searchParams.set('start_date', start_date);
+        url.searchParams.set('purpose', purpose);
         url.searchParams.set('end_date', end_date);
         
         

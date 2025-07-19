@@ -25,12 +25,27 @@
     <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
         <div>
             <label class="block mb-1 font-semibold">Select Inventory Item</label>
-            <select v-model="selectedInventoryId" class="w-full border rounded px-3 py-2">
-                <option disabled value="">-- Choose Item --</option>
-                <option v-for="item in inventoryList" :key="item.id" :value="item.id">
-                    {{ item.name }} ({{ item.unit }}) - {{ item.description }}
-                </option>
-            </select>
+            <div class="relative">
+                <input
+                    type="text"
+                    v-model="search"
+                    @focus="showSuggestions = true"
+                    @input="filterInventory"
+                    @blur="hideWithDelay"
+                    placeholder="Search inventory item"
+                    class="w-full border rounded px-3 py-2" />
+                <ul
+                    v-if="showSuggestions && filteredInventory.length"
+                    class="absolute z-10 bg-white border border-gray-300 w-full max-h-60 overflow-y-auto rounded mt-1 shadow-md">
+                    <li
+                        v-for="item in filteredInventory"
+                        :key="item.id"
+                        @mousedown.prevent="selectItem(item)"
+                        class="px-4 py-2 hover:bg-gray-100 cursor-pointer">
+                        <strong>{{ item.name }}</strong> ({{ item.unit }}) - {{ item.description }}
+                    </li>
+                </ul>
+            </div>
         </div>
         <div>
             <label class="block mb-1 font-semibold">Quantity</label>
@@ -96,81 +111,119 @@
 
 <script src="https://cdn.jsdelivr.net/npm/vue@3/dist/vue.global.prod.js"></script>
 <script>
-const inventoryType = <?= json_encode($_GET['inventory_type'] ?? ''); ?>;
-const subInventoryType = <?= json_encode($_GET['sub_inventory_type'] ?? ''); ?>;
-const { createApp } = Vue;
+    const inventoryType = <?= json_encode($_GET['inventory_type'] ?? ''); ?>;
+    const subInventoryType = <?= json_encode($_GET['sub_inventory_type'] ?? ''); ?>;
+    const { createApp } = Vue;
 
-createApp({
-    data() {
-        return {
-            inventoryList: [],
-            supplierList: [],
-            selectedInventoryId: '',
-            selectedSupplierId: '',
-            quantity: 1,
-            price: 0,
-            cart: [],
-        };
-    },
-    computed: {
-        cartTotal() {
-            return this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-        }
-    },
-    mounted() {
-        fetch(`${base_url}inventory/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`)
-            .then(res => res.json()).then(data => this.inventoryList = data);
+    createApp({
+        data() {
+            return {
+                inventoryList: [],
+                supplierList: [],
+                selectedInventoryId: '',
+                selectedSupplierId: '',
+                quantity: 1,
+                price: 0,
+                cart: [],
 
-        fetch(base_url + 'supplier/list')
-            .then(res => res.json()).then(data => this.supplierList = data);
-    },
-    methods: {
-        addToCart() {
-            const selected = this.inventoryList.find(i => i.id === this.selectedInventoryId);
-            if (!selected || this.quantity <= 0 || this.price < 0) return alert("Invalid input");
+                selectedInventory: null, // 👈 hold the full object now
+                search: '', // for filtering input
+                filteredInventory: [],
+                showSuggestions: false,
 
-            this.cart.push({
-                id: this.selectedInventoryId,
-                name: selected.name,
-                quantity: this.quantity,
-                price: this.price,
-            });
-
-            // Reset
-            this.selectedInventoryId = '';
-            this.quantity = 1;
-            this.price = 0;
-        },
-        removeFromCart(index) {
-            this.cart.splice(index, 1);
-        },
-        checkout() {
-            if (!this.selectedSupplierId || this.cart.length === 0) {
-                return alert("Please add items and select a supplier.");
-            }
-
-            const payload = {
-                supplier_id: this.selectedSupplierId,
-                items: this.cart
             };
+        },
+        computed: {
+            cartTotal() {
+                return this.cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+            }
+        },
+        mounted() {
+            fetch(`${base_url}inventory/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`)
+                .then(res => res.json()).then(data => this.inventoryList = data);
 
-            fetch(base_url + 'inventory/save-pos-stock', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
-                },
-                body: JSON.stringify(payload)
-            })
-            .then(res => res.json())
-            .then(response => {
-                alert('Transaction completed!');
-                this.cart = [];
-                this.selectedSupplierId = '';
-            });
+            fetch(base_url + 'supplier/list')
+                .then(res => res.json()).then(data => this.supplierList = data);
+        },
+        methods: {
+            filterInventory() {
+                const query = this.search.toLowerCase();
+                this.filteredInventory = this.inventoryList.filter(item =>
+                    `${item.name} ${item.unit} ${item.description}`.toLowerCase().includes(query)
+                );
+            },
+            selectItem(item) {
+                this.selectedInventory = item;
+                this.search = `${item.name} (${item.unit}) - ${item.description}`;
+                this.showSuggestions = false;
+            },
+            hideWithDelay() {
+                setTimeout(() => {
+                    this.showSuggestions = false;
+                }, 100);
+            },
+            addToCart() {
+                // const selected = this.inventoryList.find(i => i.id === this.selectedInventoryId);
+                // if (!selected || this.quantity <= 0 || this.price < 0) return alert("Invalid input");
+                if (!this.selectedInventory || this.quantity <= 0 || this.price < 0) {
+                    return alert("Please select a valid item and quantity.");
+                }
+
+
+                // this.cart.push({
+                //     id: this.selectedInventoryId,
+                //     name: selected.name,
+                //     quantity: this.quantity,
+                //     price: this.price,
+                // });
+
+                // // Reset
+                // this.selectedInventoryId = '';
+                // this.quantity = 1;
+                // this.price = 0;
+                this.cart.push({
+                    id: this.selectedInventory.id,
+                    name: this.selectedInventory.name,
+                    quantity: this.quantity,
+                    price: this.price,
+                });
+
+                // Reset
+                this.selectedInventory = null;
+                this.search = '';
+                this.quantity = 1;
+                this.price = 0;
+            },
+            removeFromCart(index) {
+                this.cart.splice(index, 1);
+            },
+            checkout() {
+                if (!this.selectedSupplierId || this.cart.length === 0) {
+                    return alert("Please add items and select a supplier.");
+                }
+
+                const payload = {
+                    supplier_id: this.selectedSupplierId,
+                    items: this.cart
+                };
+
+                fetch(base_url + 'inventory/save-pos-stock', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRF-TOKEN': '<?= csrf_hash() ?>'
+                        },
+                        body: JSON.stringify(payload)
+                    })
+                    .then(res => res.json())
+                    .then(response => {
+                        alert('Transaction completed!');
+                        this.cart = [];
+                        this.selectedSupplierId = '';
+                    });
+            }
         }
-    }
-}).mount('#pos-app');
+    }).mount('#pos-app');
 </script>
 <?= $this->endSection() ?>

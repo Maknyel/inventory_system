@@ -32,7 +32,7 @@ class InventoryHistoryController extends Controller
         $page = $this->request->getGet('page') ?? 1;
         $start_date = $this->request->getGet('start_date');
         $end_date = $this->request->getGet('end_date');
-
+        $purpose = $this->request->getGet('purpose');
         
 
         $query = $group->select('*');
@@ -43,6 +43,8 @@ class InventoryHistoryController extends Controller
                     ->groupEnd();
             }
         }
+
+
         $query->groupBy('dr_number');
         $query->orderBy('dr_number');
 
@@ -77,6 +79,16 @@ class InventoryHistoryController extends Controller
                 if ($start_date && $end_date) {
                     $builder->where('inventory_history.created_at >=', $start_date.' 00:00:00')
                             ->where('inventory_history.created_at <=', $end_date.' 23:59:59');
+                }
+
+                if($purpose){
+                    if($purpose == 'For Own Consumption'){
+                        $builder->where('inventory_history.customer_own_distribution', 'For Own Consumption');
+                        
+                    }else{
+                        $builder->where('inventory_history.distributor_id', $purpose);
+                        
+                    }
                 }
 
                 // 🔍 Run query
@@ -127,6 +139,13 @@ class InventoryHistoryController extends Controller
                 if ($start_date && $end_date) {
                     $builder->where('inventory_history.created_at >=', $start_date.' 00:00:00')
                             ->where('inventory_history.created_at <=', $end_date.' 23:59:59');
+                }
+
+                if($purpose){
+                    if($purpose == 'For Own Consumption'){
+                        $builder->where('inventory_history.customer_own_distribution', 'For Own Consumption');
+                        
+                    }
                 }
 
                 // 🔍 Run query

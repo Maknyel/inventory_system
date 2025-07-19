@@ -233,7 +233,10 @@ class InventoryController extends Controller
             $items = $json['items'] ?? [];
             $customer_own_distribution = $json['type'] ?? null;
             $distributor_id = $json['distributor_id'] ?? null;
-
+            $total_amount = $json['total_amount'] ?? null;
+            $discount = $json['discount'] ?? null;
+            $discount_amount = $json['discount_amount'] ?? null;
+            $grand_total_amount = $json['grand_total_amount'] ?? null;
             if (empty($items)) {
                 return $this->response->setStatusCode(400)->setJSON(['error' => 'Cart is empty.']);
             }
@@ -292,6 +295,10 @@ class InventoryController extends Controller
                 $inventoryHistoryGroupModel->insert([
                     'inventory_history_id'              => $insertedId,
                     'dr_number'                         => $dr_number,
+                    'total_amount'                      => $total_amount,
+                    'discount'                          => $discount,
+                    'discount_amount'                   => $discount_amount,
+                    'grand_total_amount'                => $grand_total_amount,
                     'created_at'                        => ('Y-m-d H:i:s'),
                     'updated_at'                        => ('Y-m-d H:i:s'),
                 ]);
