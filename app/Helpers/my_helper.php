@@ -1,11 +1,22 @@
 <?php
 use CodeIgniter\Database\Database;
-use App\Models\UserModel;
+use App\Models\{
+    UserModel,
+    DistributorModel
+};
 use CodeIgniter\Database\BaseConnection;
 function global_name()
 {
     return "Faithconstruct Epoxy Resin Specialist";
     
+}
+
+function getAllDistributors()
+{
+    $model = new DistributorModel();
+    $distributors = $model->findAll(); // Get all rows from the distributor table
+
+    return $distributors;
 }
 
 function get_dr_number(){

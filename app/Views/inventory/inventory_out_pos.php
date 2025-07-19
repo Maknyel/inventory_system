@@ -77,11 +77,11 @@
                 </tr>
                 <tr>
                     <td colspan="5" class="border p-2 text-right font-semibold">DISCOUNT:</td>
-                    <td class="border p-2 text-left font-semibold">₱ </td>
+                    <td class="border p-2 text-left font-semibold">₱ {{ discountComputation }}</td>
                 </tr>
                 <tr>
-                    <td colspan="5" class="border p-2 text-right font-semibold">TOTAL DISCOUNTED AMAOUNT:</td>
-                    <td class="border p-2 text-left font-semibold">₱ </td>
+                    <td colspan="5" class="border p-2 text-right font-semibold">TOTAL DISCOUNTED AMOUNT:</td>
+                    <td class="border p-2 text-left font-semibold">₱ {{ grandTotalAmount }}</td>
                 </tr>
             </tfoot>
         </table>
@@ -146,14 +146,18 @@
                     <td class="border p-2 text-left">₱ {{ ((item.unit_cost ?? 0) * item.quantity).toFixed(2) }}</td>
                 </tr>
                 <tr>
-                    <td colspan="4" class="border p-2 text-left font-semibold">SUBTOTAL:</td>
+                    <td colspan="4" class="border p-2 text-right font-semibold">SUBTOTAL:</td>
                     <td class="border p-2 text-left font-semibold">₱ {{ totalAmount }}</td>
+                </tr>
+                <tr v-if="discount">
+                    <td colspan="4" class="border p-2 text-right font-semibold">{{ discount }} DISCOUNT:</td>
+                    <td class="border p-2 text-left font-semibold">₱ {{ discountComputation }}</td>
                 </tr>
             </tbody>
             <tfoot>
                 <tr>
-                    <td colspan="4" class="border p-2 text-left font-semibold">TOTAL:</td>
-                    <td class="border p-2 text-left font-semibold">₱ {{ totalAmount }}</td>
+                    <td colspan="4" class="border p-2 text-right font-semibold">TOTAL:</td>
+                    <td class="border p-2 text-left font-semibold">₱ {{ grandTotalAmount }}</td>
                 </tr>
             </tfoot>
         </table>
@@ -229,9 +233,17 @@
             </tr>
             </tbody>
             <tfoot>
+            <tr v-if="discount">
+                <td colspan="5" class="border p-2 text-right font-semibold">SUBTOTAL:</td>
+                <td class="border p-2 text-left font-semibold">₱ {{ totalAmount }}</td>
+            </tr>
+            <tr v-if="discount">
+                <td colspan="5" class="border p-2 text-right font-semibold">{{ discount }} DISCOUNT:</td>
+                <td class="border p-2 text-left font-semibold">₱ {{ discountComputation }}</td>
+            </tr>
             <tr>
                 <td colspan="5" class="border p-2 text-right font-semibold">TOTAL:</td>
-                <td class="border p-2 text-left font-semibold">₱ {{ totalAmount }}</td>
+                <td class="border p-2 text-left font-semibold">₱ {{ grandTotalAmount }}</td>
             </tr>
             </tfoot>
         </table>
@@ -354,12 +366,35 @@
                 {{ item.type }} | {{ item.name }}
                 </li>
             </ul>
-            </div>
+        </div>
+
+        
 
     </div>
 
-    <div v-show="!dr_number" class="mt-4 text-right font-semibold text-lg">
-        Total Price: ₱ {{ totalAmount }}
+    <div class="flex items-center justify-between mt-4 ">
+        <div style="position: relative;">
+            <label class="block font-medium mb-1">Discount</label>
+            <select v-model="discount" class="w-full border rounded px-3 py-2">
+                <option></option>
+                <option>5%</option>
+                <option>10%</option>
+                <option>15%</option>
+                <option>20%</option>
+            </select>
+        </div>
+        <div v-show="!dr_number" class="flex flex-col font-semibold text-lg">
+            <div>
+                Sub Total Price: ₱ {{ totalAmount }}
+            </div>
+            <div>
+                Discount: ₱ {{ discountComputation }}
+            </div>
+            <div>
+                Total Price: ₱ {{ grandTotalAmount }}
+            </div>
+            
+        </div>
     </div>
     
     <div v-show="!dr_number" class="mt-6">
@@ -399,6 +434,7 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+            discount: "",
             dr_number: "",
             selectedForms: [],
             price: 0,
@@ -432,6 +468,40 @@ createApp({
                 const unitCost = parseFloat(item.unit_cost ?? 0);
                 return sum + unitCost * item.quantity;
             }, 0).toFixed(2);
+        },
+
+        discountComputation() {
+            if (this.discount !== '') {
+                const total = this.cart.reduce((sum, item) => {
+                    const unitCost = parseFloat(item.unit_cost ?? 0);
+                    return sum + unitCost * item.quantity;
+                }, 0);
+
+                const discountValue = parseFloat(this.discount.replace('%', '')) / 100;
+                const totalDiscounted = total * (1 - discountValue);
+                return (total-totalDiscounted).toFixed(2); // Ensure 2 decimal places
+            } else {
+                return '0.00';
+            }
+        },
+
+
+        grandTotalAmount() {
+            // return this.cart.reduce((sum, item) => {
+            //     const unitCost = parseFloat(item.unit_cost ?? 0);
+            //     return sum + unitCost * item.quantity;
+            // }, 0).toFixed(2);
+            let total = this.cart.reduce((sum, item) => {
+                const unitCost = parseFloat(item.unit_cost ?? 0);
+                return sum + unitCost * item.quantity;
+            }, 0);
+
+            if (this.discount !== '') {
+                const discountValue = parseFloat(this.discount) / 100;
+                total = total * (1 - discountValue);
+            }
+
+            return total.toFixed(2);
         },
         selectedInventory() {
             return this.inventoryList.find(item => item.id == this.selectedInventoryId);
