@@ -707,7 +707,11 @@ createApp({
                 body: JSON.stringify({
                     items: this.cart,
                     type: this.type,
-                    distributor_id: this.distributor_id
+                    distributor_id: this.distributor_id,
+                    total_amount: this.totalAmount,
+                    discount: this.discount,
+                    discount_amount: this.discountComputation,
+                    grand_total_amount: this.grandTotalAmount
                 })
             })
             .then(res => res.json())
