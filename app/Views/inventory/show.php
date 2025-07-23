@@ -46,6 +46,11 @@
             class="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 transition">
             History
         </a>
+
+        <a href="<?= base_url('inventory_excess?inventory_type=' . $inventory_type_parse['id'] . '&sub_inventory_type=' . $sub_inventory_type_parse['id']) ?>"
+            class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">
+            Excess Stock
+        </a>
     </div>
     <div class="flex gap-2">
         <!-- <button onclick="exportInventory()" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-600">

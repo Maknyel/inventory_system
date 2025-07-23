@@ -2,7 +2,8 @@
 use CodeIgniter\Database\Database;
 use App\Models\{
     UserModel,
-    DistributorModel
+    DistributorModel,
+    NotificationModel
 };
 use CodeIgniter\Database\BaseConnection;
 function global_name()
@@ -81,6 +82,14 @@ if (!function_exists('current_user')) {
 
         $userModel = new UserModel();
         return $userModel->find($userId);
+    }
+}
+
+if (!function_exists('get_notification_count')) {
+    function get_notification_count()
+    {
+        $db = \Config\Database::connect();
+        return $db->table('notifications')->where('is_accepted', 0)->countAll();
     }
 }
 

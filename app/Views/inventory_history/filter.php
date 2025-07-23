@@ -51,7 +51,10 @@
 <div class="flex flex-col h-full overflow-auto">
     <table id="myTable" class="min-w-full table-auto border-collapse border border-gray-300">
         <thead>
+            
             <tr>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">Update Quantity</th>
+
                 <!-- <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">#</th> -->
                  <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&inventory_type=<?=$inventory_type_parse['id']?>&sub_inventory_type=<?=$sub_inventory_type_parse['id']?>&orderby=inventory_history.in_out&orderdir=<?= $orderby == 'inventory_history.in_out' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
@@ -151,6 +154,22 @@
         <tbody>
             <?php foreach ($inventory_history as $record): ?>
                 <tr>
+                    <td class="px-4 py-2 border-b">
+                    <?php if ($record['in_out'] === 'in'): ?>
+                        <!-- Update Quantity Form -->
+                        <form onsubmit="return handleUpdateQuantity(event, <?= $record['id'] ?>, <?= $record['inventory_id'] ?>, <?= $record['quantity'] ?>)" class="flex gap-1 items-center">
+                            <select name="type" required class="border rounded px-1 py-0.5 text-sm">
+                                <option value="add">Add</option>
+                                <option value="minus">Minus</option>
+                            </select>
+                            <input name="quantity" type="number" min="1" required placeholder="Qty" class="border rounded px-1 py-0.5 w-16 text-sm">
+                            <button type="submit" class="bg-yellow-600 text-white px-2 py-1 rounded text-sm hover:bg-yellow-700">Update</button>
+                        </form>
+                    <?php else: ?>
+                        <!-- No update allowed -->
+                        <span class="text-gray-400 text-sm italic">No update</span>
+                    <?php endif; ?>
+                </td>
                     <!-- <td class="px-4 py-2 border-b"><?= $record['id'] ?></td> -->
                     <td class="px-4 py-2 border-b"><?= esc($record['in_out']) ?></td>
                     <td class="px-4 py-2 border-b"><?= esc($record['name']) ?></td>
@@ -225,6 +244,62 @@
     </div>
 </div>
 <script>
+    async function handleUpdateQuantity(event, recordId, inventoryId, currentQuantity) {
+        event.preventDefault();
+
+        const form = event.target;
+        const type = form.type.value;
+        const quantity = parseInt(form.quantity.value, 10);
+
+        if (!quantity || quantity <= 0) {
+            alert('Please enter a valid quantity.');
+            return false;
+        }
+
+        // Calculate new quantity for notification
+        let newQuantity = 0;
+        if (type === 'add') {
+            newQuantity += quantity;
+        } else if (type === 'minus') {
+            newQuantity -= quantity;
+            
+        }
+
+        const notificationText = `Quantity ${type === 'add' ? 'added' : 'subtracted'} by ${quantity}.`;
+
+        try {
+            const response = await fetch(base_url+'notifications', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    inventory_history_id: recordId,
+                    inventory_id: inventoryId,
+                    text: notificationText,
+                    column_to_be_updated: 'quantity',
+                    column_from_value: currentQuantity.toString(),
+                    column_to_value: newQuantity.toString(),
+                    created_by: user_id, // change if you want actual user ID
+                    is_read: '0',
+                    is_accepted: '0',
+                    is_viewed: '0',
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create notification');
+            }
+
+            alert('Notification created successfully.');
+            form.reset();
+
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+
+        return false;
+    }
     function downloadCSV() {
         const table = document.getElementById("myTable");
         let csv = [];

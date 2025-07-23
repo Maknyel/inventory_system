@@ -224,6 +224,91 @@ class InventoryController extends Controller
         return view('inventory/show', $data);
     }
 
+
+
+
+    public function inventory_excess()
+    {
+        $inventory_type_id = $this->request->getGet('inventory_type');
+        $sub_inventory_type = $this->request->getGet('sub_inventory_type');
+
+        $perPage = 10;
+        $currentPage = $this->request->getVar('page_inventory') ?: 1;
+        $search = $this->request->getGet('search');
+        $orderBy = $this->request->getGet('orderby') ?? 'inventory.name';
+        $orderDir = $this->request->getGet('orderdir') ?? 'asc';
+
+        $inventoryTypeModel = new InventoryTypeModel();
+        $data['inventory_type_parse'] = $inventoryTypeModel->find($inventory_type_id);
+
+        $subInventoryTypeModel = new SubInventoryTypeModel();
+        $data['sub_inventory_type_parse'] = $subInventoryTypeModel->find($sub_inventory_type);
+
+        $inventoryModel = new InventoryModel();
+        $inventoryModelv2 = new InventoryModel();
+
+        $inventoryModel->select('
+            inventory.*, 
+            excess_inv.id as excess_id,
+            excess_inv.quantity, 
+            excess_inv.history, 
+            excess_inv.created_at as excess_created_at, 
+            excess_inv.updated_at as excess_updated_at
+        ')
+        ->join('excess_inv', 'inventory.id = excess_inv.inventory_id') // left join if some inventory might not have excess records
+        ->where('inventory.inventory_type', $inventory_type_id)
+        ->where('inventory.sub_inventory_type', $sub_inventory_type);
+
+        if (!empty($search)) {
+            $inventoryModel->groupStart()
+                ->like('inventory.name', $search)
+                ->orLike('inventory.description', $search)
+                ->orLike('inventory_type.name', $search)
+                ->groupEnd();
+        }
+
+        $inventoryModel->orderBy($orderBy, $orderDir);
+
+        // Use paginate to get the results and pager object
+        $data['inventory'] = $inventoryModel->paginate($perPage, 'inventory', $currentPage);
+        $builder = $inventoryModelv2->builder(); // Assuming $inventoryModelv2 is already initialized
+
+        $data['inventory_list'] = $builder
+            ->select('inventory.*')
+            ->where('inventory.inventory_type', $inventory_type_id)
+            ->where('inventory.sub_inventory_type', $sub_inventory_type)
+            ->whereNotIn('inventory.id', function($subQuery) {
+                return $subQuery
+                    ->select('inventory_id')
+                    ->from('excess_inv');
+            })
+            ->get()
+            ->getResultArray();
+
+        // Pager instance for rendering pagination links
+        $data['pager'] = $inventoryModel->pager;
+
+        // Total items and pages
+        $data['totalItems'] = $inventoryModel->pager->getTotal('inventory');
+        $data['totalPages'] = $data['totalItems'] ? ceil($data['totalItems'] / $perPage) : 1;
+
+        // Fetch all inventory types for the dropdown
+        $data['inventory_type_data'] = $inventoryTypeModel->findAll();
+
+        $data['search'] = $search;
+        $data['orderby'] = $orderBy;
+        $data['orderdir'] = $orderDir;
+        $data['currentPage'] = $currentPage;
+
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+
+        return view('inventory/excess', $data);
+    }
+
+    
+
     public function savePosOut()
     {
         if ($this->request->isAJAX()) {

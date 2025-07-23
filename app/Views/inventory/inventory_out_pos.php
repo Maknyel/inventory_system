@@ -375,13 +375,7 @@
     <div class="flex items-center justify-between mt-4 ">
         <div style="position: relative;">
             <label class="block font-medium mb-1">Discount</label>
-            <select v-model="discount" class="w-full border rounded px-3 py-2">
-                <option></option>
-                <option>5%</option>
-                <option>10%</option>
-                <option>15%</option>
-                <option>20%</option>
-            </select>
+            <input type="number" min="0" max="100" v-model="discount" class="w-full border rounded px-3 py-2">
         </div>
         <div v-show="!dr_number" class="flex flex-col font-semibold text-lg">
             <div>
@@ -477,7 +471,7 @@ createApp({
                     return sum + unitCost * item.quantity;
                 }, 0);
 
-                const discountValue = parseFloat(this.discount.replace('%', '')) / 100;
+                const discountValue = parseFloat(this.discount) / 100;
                 const totalDiscounted = total * (1 - discountValue);
                 return (total-totalDiscounted).toFixed(2); // Ensure 2 decimal places
             } else {
