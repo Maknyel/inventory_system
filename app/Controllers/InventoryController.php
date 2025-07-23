@@ -137,6 +137,7 @@ class InventoryController extends Controller
         // Get the current page number from the URL, default to 1
         $currentPage = $this->request->getVar('page_inventory') ?: 1;
         $search = $this->request->getGet('search');
+        $id = $this->request->getGet('id');
         $orderBy = $this->request->getGet('orderby') ?? 'inventory.name';
         $orderDir = $this->request->getGet('orderdir') ?? 'asc';
 
@@ -151,6 +152,13 @@ class InventoryController extends Controller
                 ->like('inventory.name', $search)
                 ->orLike('inventory.description', $search)
                 ->orLike('inventory_type.name', $search)
+                ->groupEnd();
+        }
+
+
+        if (!empty($id)) {
+            $inventoryModel->groupStart()
+                ->where('inventory.id', $id)
                 ->groupEnd();
         }
 
@@ -188,6 +196,12 @@ class InventoryController extends Controller
                     ->like('inventory.name', $search)
                     ->orLike('inventory.description', $search)
                     ->orLike('inventory_type.name', $search)
+                    ->groupEnd();
+            }
+
+            if (!empty($id)) {
+                $inventoryModel1->groupStart()
+                    ->where('inventory.id', $id)
                     ->groupEnd();
             }
 

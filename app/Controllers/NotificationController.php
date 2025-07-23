@@ -19,6 +19,13 @@ class NotificationController extends ResourceController
             ->select('
                 notifications.*, 
                 users.name as created_by_name, 
+                inventory.name as name,
+                inventory.description as description,
+
+                inventory.inventory_type as inventory_type_v1,
+                inventory.sub_inventory_type as sub_inventory_type_v1,
+
+                inventory.current_quantity as current_quantity,
                 inventory_history.name as inventory_name,
                 inventory_history.description as inventory_description,
                 inventory_history.quantity as inventory_quantity,
@@ -47,10 +54,16 @@ class NotificationController extends ResourceController
         $inventoryModel = model('InventoryModel');
         $inventoryHistoryModel = model('InventoryHistoryModel');
 
+        
+
         // 1. Get notification
         $notification = $notificationModel->find($id);
         if (!$notification) {
             return $this->response->setStatusCode(404)->setJSON(['status' => 'notification_not_found']);
+        }
+
+        if ($notification['is_accepted'] == 1) {
+            return $this->response->setJSON(['status' => 'success', 'message' => 'already updated']);
         }
 
         // 2. Get related inventory and inventory_history
@@ -93,6 +106,26 @@ class NotificationController extends ResourceController
                     ->set('quantity', $newHistoryQty)
                     ->update();
             }
+        }
+
+        if ($notification['column_to_be_updated'] === 'name') {
+            $db->table('inventory')
+                    ->where('id', $inventory['id'])
+                    ->set('name', $notification['column_to_value'])
+                    ->update();
+        }
+        if ($notification['column_to_be_updated'] === 'unit') {
+            $db->table('inventory')
+                    ->where('id', $inventory['id'])
+                    ->set('unit', $notification['column_to_value'])
+                    ->update();
+        }
+
+        if ($notification['column_to_be_updated'] === 'description') {
+            $db->table('inventory')
+                    ->where('id', $inventory['id'])
+                    ->set('description', $notification['column_to_value'])
+                    ->update();
         }
 
         // 4. Mark notification as accepted

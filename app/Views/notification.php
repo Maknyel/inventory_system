@@ -99,10 +99,10 @@
     function showModal(notification) {
         document.getElementById('modalUser').textContent = notification.created_by_name;
         document.getElementById('modalDate').textContent = new Date(notification.created_at).toLocaleString();
-        document.getElementById('modalInventoryName').textContent = notification.inventory_name ?? '—';
-        document.getElementById('modalDescription').textContent = notification.inventory_description ?? '—';
+        document.getElementById('modalInventoryName').textContent = (notification.column_to_be_updated=='quantity')?(notification.inventory_name ?? '—'):(notification.name ?? '—');
+        document.getElementById('modalDescription').textContent = (notification.column_to_be_updated=='quantity')?(notification.inventory_description ?? '—'):(notification.description ?? '—');
         document.getElementById('modalUnit').textContent = notification.inventory_unit ?? '—';
-        document.getElementById('modalQuantity').textContent = notification.inventory_quantity ?? '—';
+        document.getElementById('modalQuantity').textContent = (notification.column_to_be_updated=='quantity')?(notification.inventory_quantity ?? '—'):(notification.current_quantity ?? '—');
         document.getElementById('modalAdjustment').textContent = notification.text ?? '—';
 
         document.getElementById('notificationModal').classList.remove('hidden');
@@ -164,6 +164,8 @@
         // Redirect to inventory detail page
         if(currentNotification.column_to_be_updated == 'quantity'){
             window.open(`${base_url}inventory_history?id=${currentNotification.inventory_history_id}`);
+        }else{
+            window.open(`${base_url}inventory/${currentNotification.inventory_type_v1}/${currentNotification.sub_inventory_type_v1}?id=${currentNotification.inventory_id}`);
         }
         
     });
