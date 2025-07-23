@@ -121,6 +121,12 @@
     <div id="pagination" class="flex justify-center gap-2 mt-4"></div>
 </div>
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('id')) {
+      document.getElementById('filterForm').style.display = 'none';
+    }
+  });
     document.addEventListener('DOMContentLoaded', () => {
         populateFormFromURL();
         loadTable(1);
@@ -158,11 +164,18 @@
         const number_per_page = formData.get('number_per_page') || 10;
         const order_by = formData.get('order_by') || 'created_at';
         const order_dir = formData.get('order_dir') || 'desc';
-
+        const urlParams = new URLSearchParams(window.location.search);
         const url = new URL(base_url + 'api/inventory-history');
+        if(urlParams.has('id')){
+            url.searchParams.set('id', urlParams.get('id'));
+            url.searchParams.set('in_out', '');
+        }else{
+            url.searchParams.set('id', '');
+            url.searchParams.set('in_out', in_out);
+        }
         url.searchParams.set('search', search);
         url.searchParams.set('search_dr', search_dr);
-        url.searchParams.set('in_out', in_out);
+        
         url.searchParams.set('number_per_page', number_per_page);
         url.searchParams.set('page', page);
         url.searchParams.set('order_by', order_by);

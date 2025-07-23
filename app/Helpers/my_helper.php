@@ -89,7 +89,7 @@ if (!function_exists('get_notification_count')) {
     function get_notification_count()
     {
         $db = \Config\Database::connect();
-        return $db->table('notifications')->where('is_accepted', 0)->countAll();
+        return $db->table('notifications')->where('is_accepted', 0)->countAllResults();
     }
 }
 

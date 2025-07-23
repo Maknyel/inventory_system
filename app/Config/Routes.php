@@ -69,6 +69,8 @@ $routes->put('notifications/(:num)', 'NotificationController::update/$1'); // PU
 $routes->patch('notifications/(:num)', 'NotificationController::update/$1'); // PATCH update notification
 $routes->delete('notifications/(:num)', 'NotificationController::delete/$1'); // DELETE notification by ID
 $routes->post('api/notifications/view/(:num)', 'NotificationController::markAsViewed/$1');
+$routes->post('api/notifications/accept/(:num)', 'NotificationController::accept/$1');
+$routes->post('api/notifications/cancel/(:num)', 'NotificationController::cancel/$1');
 
 
 $routes->get('/notification_page', 'NotificationController::index_page');

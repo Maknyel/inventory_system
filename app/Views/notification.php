@@ -26,7 +26,7 @@
                             </div>
                             <div>
                                 <button 
-                                    onclick="markAsViewed(<?= $note['id'] ?>)"
+                                    onclick='markAsViewed(<?= json_encode($note) ?>)'
                                     class="text-sm text-blue-600 hover:underline"
                                 >View</button>
                             </div>
@@ -40,25 +40,133 @@
     </div>
 </div>
 
+<!-- Modal -->
+<div id="notificationModal" class="fixed inset-0 z-50 hidden bg-black bg-opacity-50 flex items-center justify-center">
+    <div class="bg-white rounded-lg shadow-lg w-full max-w-md p-6 relative">
+        <button onclick="closeModal()" class="absolute top-2 right-3 text-gray-500 hover:text-gray-700 text-2xl">&times;</button>
+        <h2 class="text-xl font-bold mb-4 text-gray-800">Notification Details</h2>
+
+        <div class="text-sm text-gray-700 space-y-2">
+            <p><strong>From:</strong> <span id="modalUser"></span></p>
+            <p><strong>Date:</strong> <span id="modalDate"></span></p>
+            <p><strong>Inventory Name:</strong> <span id="modalInventoryName"></span></p>
+            <p><strong>Description:</strong> <span id="modalDescription"></span></p>
+            <p><strong>Unit:</strong> <span id="modalUnit"></span></p>
+            <p><strong>Quantity:</strong> <span id="modalQuantity"></span></p>
+            <p><strong>Adjustment:</strong> <span id="modalAdjustment"></span></p>
+        </div>
+
+        <div class="mt-6 flex justify-end gap-4">
+            <button 
+                id="acceptBtn"
+                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded text-sm"
+            >Accept Request</button>
+
+            <button 
+                id="cancelBtn"
+                class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded text-sm"
+            >Cancel Request</button>
+
+            <button 
+                id="showDataBtn"
+                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded text-sm"
+            >Show Data</button>
+        </div>
+    </div>
+</div>
+
+
 <script>
-    function markAsViewed(notificationId) {
-        fetch(base_url+'api/notifications/view/' + notificationId, {
+    let currentNotification = null;
+    function markAsViewed(notification) {
+        fetch(`${base_url}api/notifications/view/${notification.id}`, {
             method: 'POST',
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ id: notificationId })
-        })
-        .then(response => {
+            body: JSON.stringify({ id: notification.id })
+        }).then(response => {
             if (response.ok) {
-                // Redirect to a view page or simply reload the page
-                window.location.reload(); // or redirect to detail page
+                currentNotification = notification;
+                showModal(notification);
             } else {
                 alert('Failed to mark as viewed.');
             }
         });
     }
+
+    function showModal(notification) {
+        document.getElementById('modalUser').textContent = notification.created_by_name;
+        document.getElementById('modalDate').textContent = new Date(notification.created_at).toLocaleString();
+        document.getElementById('modalInventoryName').textContent = notification.inventory_name ?? '—';
+        document.getElementById('modalDescription').textContent = notification.inventory_description ?? '—';
+        document.getElementById('modalUnit').textContent = notification.inventory_unit ?? '—';
+        document.getElementById('modalQuantity').textContent = notification.inventory_quantity ?? '—';
+        document.getElementById('modalAdjustment').textContent = notification.text ?? '—';
+
+        document.getElementById('notificationModal').classList.remove('hidden');
+    }
+
+    function closeModal() {
+        document.getElementById('notificationModal').classList.add('hidden');
+    }
+
+    // Cancel button click
+    document.getElementById('cancelBtn').addEventListener('click', function() {
+        if (!currentNotification) return;
+
+        fetch(`${base_url}api/notifications/cancel/${currentNotification.id}`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                alert('Request cancelled.');
+                closeModal();
+                location.reload();
+            } else {
+                alert('Failed to accept request.');
+            }
+        });
+    });
+
+    // Accept button click
+    document.getElementById('acceptBtn').addEventListener('click', function() {
+        if (!currentNotification) return;
+
+        fetch(`${base_url}api/notifications/accept/${currentNotification.id}`, {
+            method: 'POST',
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'Content-Type': 'application/json'
+            }
+        }).then(response => {
+            if (response.ok) {
+                alert('Request accepted.');
+                closeModal();
+                location.reload();
+            } else {
+                alert('Failed to accept request.');
+            }
+        });
+    });
+
+    // Show Data button click
+    document.getElementById('showDataBtn').addEventListener('click', function() {
+        if (!currentNotification || !currentNotification.inventory_id) {
+            alert('No inventory linked.');
+            return;
+        }
+
+        // Redirect to inventory detail page
+        if(currentNotification.column_to_be_updated == 'quantity'){
+            window.open(`${base_url}inventory_history?id=${currentNotification.inventory_history_id}`);
+        }
+        
+    });
 </script>
 
 <?= $this->endSection() ?>
