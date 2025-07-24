@@ -1,6 +1,35 @@
 <?= $this->extend('layout') ?>
 
 <?= $this->section('content') ?>
+<!-- Modal -->
+<div id="updateModal" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden z-50">
+    <div class="bg-white rounded-lg shadow-lg p-6 w-full max-w-md relative">
+        <h2 class="text-lg font-bold mb-4">Update Quantity</h2>
+        <form id="updateQuantityForm" class="flex flex-col gap-4">
+            <input type="hidden" id="recordId">
+            <input type="hidden" id="inventoryId">
+            <input type="hidden" id="currentQuantity">
+
+            <label class="text-sm font-medium">
+                Type:
+                <select id="updateType" required class="border rounded px-2 py-1 w-full">
+                    <option value="add">Add</option>
+                    <option value="minus">Minus</option>
+                </select>
+            </label>
+
+            <label class="text-sm font-medium">
+                Quantity:
+                <input type="number" id="updateQty" required min="1" class="border rounded px-2 py-1 w-full">
+            </label>
+
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="closeModal()" class="bg-gray-300 text-gray-700 px-4 py-2 rounded hover:bg-gray-400">Cancel</button>
+                <button type="submit" class="bg-yellow-600 text-white px-4 py-2 rounded hover:bg-yellow-700">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
 
 <nav class="text-sm text-gray-600" aria-label="Breadcrumb">
     <ol class="flex items-center space-x-2">
@@ -51,7 +80,10 @@
 <div class="flex flex-col h-full overflow-auto">
     <table id="myTable" class="min-w-full table-auto border-collapse border border-gray-300">
         <thead>
+            
             <tr>
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">Update Quantity</th>
+
                 <!-- <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">#</th> -->
                  <th class="sticky top-0 bg-white px-4 py-2 border-b text-left">
                     <a href="?in_out=<?= esc($in_out) ?>&number_per_page=<?= esc($number_per_page) ?>&search=<?= esc($search) ?>&inventory_type=<?=$inventory_type_parse['id']?>&sub_inventory_type=<?=$sub_inventory_type_parse['id']?>&orderby=inventory_history.in_out&orderdir=<?= $orderby == 'inventory_history.in_out' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
@@ -151,6 +183,18 @@
         <tbody>
             <?php foreach ($inventory_history as $record): ?>
                 <tr>
+                    <td class="px-4 py-2 border-b">
+                        <?php if ($record['in_out'] === 'in'): ?>
+                            <button 
+                                onclick="openModal(<?= $record['id'] ?>, <?= $record['inventory_id'] ?>, <?= $record['quantity'] ?>)" 
+                                class="bg-yellow-600 text-white px-2 py-1 rounded text-sm hover:bg-yellow-700"
+                            >
+                                Update Qty
+                            </button>
+                        <?php else: ?>
+                            <span class="text-gray-400 text-sm italic">No update</span>
+                        <?php endif; ?>
+                    </td>
                     <!-- <td class="px-4 py-2 border-b"><?= $record['id'] ?></td> -->
                     <td class="px-4 py-2 border-b"><?= esc($record['in_out']) ?></td>
                     <td class="px-4 py-2 border-b"><?= esc($record['name']) ?></td>
@@ -225,6 +269,124 @@
     </div>
 </div>
 <script>
+    function openModal(recordId, inventoryId, currentQty) {
+        document.getElementById("updateModal").classList.remove("hidden");
+        document.getElementById("recordId").value = recordId;
+        document.getElementById("inventoryId").value = inventoryId;
+        document.getElementById("currentQuantity").value = currentQty;
+    }
+
+    function closeModal() {
+        document.getElementById("updateModal").classList.add("hidden");
+        document.getElementById("updateQuantityForm").reset();
+    }
+
+    document.getElementById("updateQuantityForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const recordId = document.getElementById("recordId").value;
+        const inventoryId = document.getElementById("inventoryId").value;
+        const currentQuantity = parseInt(document.getElementById("currentQuantity").value);
+        const type = document.getElementById("updateType").value;
+        const quantity = parseInt(document.getElementById("updateQty").value);
+
+        if (!quantity || quantity <= 0) {
+            alert('Please enter a valid quantity.');
+            return;
+        }
+
+        let newQuantity = 0;
+        if (type === 'add') {
+            newQuantity += quantity;
+        } else if (type === 'minus') {
+            newQuantity -= quantity;
+            
+        }
+
+        const notificationText = `Quantity ${type === 'add' ? 'added' : 'subtracted'} by ${quantity}.`;
+
+        try {
+            const response = await fetch(base_url + 'notifications', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    inventory_history_id: recordId,
+                    inventory_id: inventoryId,
+                    text: notificationText,
+                    column_to_be_updated: 'quantity',
+                    column_from_value: currentQuantity.toString(),
+                    column_to_value: newQuantity.toString(),
+                    created_by: user_id, // make sure user_id is set globally
+                    is_read: '0',
+                    is_accepted: '0',
+                    is_viewed: '0',
+                }),
+            });
+
+            if (!response.ok) throw new Error('Failed to create notification');
+
+            alert('Notification created successfully.');
+            closeModal();
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+    });
+    async function handleUpdateQuantity(event, recordId, inventoryId, currentQuantity) {
+        event.preventDefault();
+
+        const form = event.target;
+        const type = form.type.value;
+        const quantity = parseInt(form.quantity.value, 10);
+
+        if (!quantity || quantity <= 0) {
+            alert('Please enter a valid quantity.');
+            return false;
+        }
+
+        // Calculate new quantity for notification
+        let newQuantity = 0;
+        if (type === 'add') {
+            newQuantity += quantity;
+        } else if (type === 'minus') {
+            newQuantity -= quantity;
+            
+        }
+
+        const notificationText = `Quantity ${type === 'add' ? 'added' : 'subtracted'} by ${quantity}.`;
+
+        try {
+            const response = await fetch(base_url+'notifications', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    inventory_history_id: recordId,
+                    inventory_id: inventoryId,
+                    text: notificationText,
+                    column_to_be_updated: 'quantity',
+                    column_from_value: currentQuantity.toString(),
+                    column_to_value: newQuantity.toString(),
+                    created_by: user_id, // change if you want actual user ID
+                    is_read: '0',
+                    is_accepted: '0',
+                    is_viewed: '0',
+                }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to create notification');
+            }
+
+            alert('Notification created successfully.');
+            form.reset();
+
+        } catch (error) {
+            alert('Error: ' + error.message);
+        }
+
+        return false;
+    }
     function downloadCSV() {
         const table = document.getElementById("myTable");
         let csv = [];

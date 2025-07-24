@@ -10,6 +10,7 @@
 </head>
 <script>
     var base_url = `<?=base_url()?>`;
+    var user_id = `<?=session()->get('user_id')?>`;
 </script>
 <body class="flex flex-col h-screen overflow-hidden bg-gray-100 text-gray-900">
 
@@ -26,10 +27,13 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
                     </svg>
                 </button>
+                
                 <h1 class="text-xl font-bold"><?= global_name() ?></h1>
 
                 <div class="">
+                    
                     <div class="relative inline-block text-left">
+                        
                         <!-- Trigger -->
                         <button id="userMenuButton" class="flex items-center space-x-2 focus:outline-none">
                             <?php $user = current_user(); ?>
@@ -74,6 +78,18 @@
             <nav>
                 <ul class="space-y-2">
                     <li><a href="<?= base_url('') ?>" class="block hover:underline">Home</a></li>
+                    <?php if (current_user()['role_id'] == 4) { ?>
+                        <?php if (current_user()['role_id'] == 4) { ?>
+                            <li class="relative">
+                                <a href="<?= base_url('notification_page') ?>" class="block hover:underline relative">
+                                    Notifications
+                                    <span class="absolute -top-2 -left-3 bg-red-600 text-white text-xs font-bold rounded-full px-1.5 py-0.5">
+                                        <?= get_notification_count() ?>
+                                    </span>
+                                </a>
+                            </li>
+                        <?php } ?>
+                    <?php } ?>
                     <?php if (current_user()['role_id'] == 1 || current_user()['role_id'] == 2 || current_user()['role_id'] == 4) { ?>
                         <li><a href="<?= base_url('inventory') ?>" class="block hover:underline">Inventory</a></li>
                     <?php } ?>
@@ -84,6 +100,7 @@
                         <!-- <li><a href="<?= base_url('inventory_out') ?>" class="block hover:underline">Inventory Out</a></li> -->
                     <?php } ?>
                     <li><a href="<?= base_url('inventory_history') ?>" class="block hover:underline">Inventory History</a></li>
+                    
                     <?php if (current_user()['role_id'] == 1 || current_user()['role_id'] == 4) { ?>
                         <li><a href="<?= base_url('supplier') ?>" class="block hover:underline">Supplier</a></li>
                         <li><a href="<?= base_url('distributor') ?>" class="block hover:underline">Distribution</a></li>

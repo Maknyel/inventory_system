@@ -39,7 +39,11 @@ $routes->get('/inventory_out_pos', 'InventoryController::inventoryOutPos');
 
 $routes->get('api/inventory-history', 'InventoryHistoryController::getInventoryHistoryApi');
 $routes->get('/inventory_history', 'InventoryHistoryController::index');
+
+
 $routes->get('/inventory_history_filter', 'InventoryHistoryController::filter');
+
+$routes->get('/inventory_excess', 'InventoryController::inventory_excess');
 
 $routes->get('/supplier', 'SupplierController::index');
 $routes->get('/supplier/list', 'SupplierController::getSupplierList');
@@ -50,6 +54,26 @@ $routes->delete('/inventorysupplier/api/delete/(:num)', 'SupplierController::api
 $routes->get('inventorysupplier/export', 'SupplierController::export');
 
 
+$routes->group('inventory/excess/api', function($routes) {
+    $routes->get('(:num)', 'ExcessStockApi::show/$1');
+    $routes->post('store', 'ExcessStockApi::create');
+    $routes->post('update/(:num)', 'ExcessStockApi::update/$1');
+    $routes->delete('delete/(:num)', 'ExcessStockApi::delete/$1');
+});
+
+
+$routes->get('notifications', 'NotificationController::index');         // GET all notifications
+$routes->get('notifications/(:num)', 'NotificationController::show/$1'); // GET one notification by ID
+$routes->post('notifications', 'NotificationController::create');        // POST create notification
+$routes->put('notifications/(:num)', 'NotificationController::update/$1'); // PUT update notification by ID
+$routes->patch('notifications/(:num)', 'NotificationController::update/$1'); // PATCH update notification
+$routes->delete('notifications/(:num)', 'NotificationController::delete/$1'); // DELETE notification by ID
+$routes->post('api/notifications/view/(:num)', 'NotificationController::markAsViewed/$1');
+$routes->post('api/notifications/accept/(:num)', 'NotificationController::accept/$1');
+$routes->post('api/notifications/cancel/(:num)', 'NotificationController::cancel/$1');
+
+
+$routes->get('/notification_page', 'NotificationController::index_page');
 
 
 

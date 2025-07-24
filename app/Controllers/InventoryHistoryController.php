@@ -33,9 +33,12 @@ class InventoryHistoryController extends Controller
         $start_date = $this->request->getGet('start_date');
         $end_date = $this->request->getGet('end_date');
         $purpose = $this->request->getGet('purpose');
+        $id = $this->request->getGet('id');
         
 
         $query = $group->select('*');
+
+
         if ($search_dr) {
             if (!empty($search_dr)) {
             $query->groupStart()
@@ -75,6 +78,9 @@ class InventoryHistoryController extends Controller
                 ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id', 'left')
                 ->where('inventory_history_group.inventory_history_id IS NULL');
                 
+                if($id){
+                    $builder->where('inventory_history.id', $id);
+                }
                 
                 if ($start_date && $end_date) {
                     $builder->where('inventory_history.created_at >=', $start_date.' 00:00:00')
@@ -135,6 +141,9 @@ class InventoryHistoryController extends Controller
                 ->join('inventory_history_group', 'inventory_history.id = inventory_history_group.inventory_history_id')
                 ->where('inventory_history_group.dr_number', $groupItem['dr_number']);
                 
+                if($id){
+                    $builder->where('inventory_history.id', $id);
+                }
                 
                 if ($start_date && $end_date) {
                     $builder->where('inventory_history.created_at >=', $start_date.' 00:00:00')

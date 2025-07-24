@@ -12,51 +12,53 @@
     
 
 
-<form id="filterForm" class="mb-4 flex items-center gap-2">
-    <input type="text" name="search" placeholder="Search Name..." class="px-3 py-2 border rounded w-64" />
-    <input type="text" name="search_dr" placeholder="Search DR..." class="px-3 py-2 border rounded w-64" />
+<form id="filterForm" class="mb-4 flex flex-row items-center gap-2 flex-1 w-full h-10">
+    <div class="flex flex-row items-center gap-2 flex-1 w-full overflow-auto h-16 px-4">
+        <input type="text" name="search" placeholder="Search Name..." class="px-3 py-2 border rounded w-64" />
+        <input type="text" name="search_dr" placeholder="Search DR..." class="px-3 py-2 border rounded w-64" />
 
-    <select name="purpose" placeholder="Purpose" class="px-3 py-2 border rounded">
-        <option></option>
-        <option>For Own Consumption</option>
+        <select name="purpose" placeholder="Purpose" class="px-3 py-2 border rounded">
+            <option></option>
+            <option>For Own Consumption</option>
 
-        <?php foreach (getAllDistributors() as $key => $value) { ?>
+            <?php foreach (getAllDistributors() as $key => $value) { ?>
 
-            <option value="<?=$value['id']?>"><?=$value['type']?> | <?=$value['name']?></option>
-        <?php } ?>
-    </select>
-    
+                <option value="<?=$value['id']?>"><?=$value['type']?> | <?=$value['name']?></option>
+            <?php } ?>
+        </select>
+        
 
-     <!-- ✅ Add these date inputs -->
-    <input type="date" name="start_date" class="px-3 py-2 border rounded" />
-    <input type="date" name="end_date" class="px-3 py-2 border rounded" />
+        <!-- ✅ Add these date inputs -->
+        <input type="date" name="start_date" class="px-3 py-2 border rounded" />
+        <input type="date" name="end_date" class="px-3 py-2 border rounded" />
 
-    <select name="in_out" class="px-3 py-2 border rounded">
-        <option value="all">All</option>
-        <option value="in">IN</option>
-        <option value="out" selected>OUT</option>
-    </select>
-    
-    <select name="number_per_page" class="px-3 py-2 border rounded">
-        <option value="10" selected>10 per page</option>
-        <option value="25">25 per page</option>
-        <option value="50">50 per page</option>
-        <option value="100">100 per page</option>
-        <option value="100">500 per page</option>
-        <option value="100">1000 per page</option>
-    </select>
-    <select name="order_by" class="px-3 py-2 border rounded">
-        <option value="created_at" selected>Sort by Created At</option>
-        <option value="name">Sort by Name</option>
-        <option value="price">Sort by Price</option>
-        <option value="quantity">Sort by Quantity</option>
-        <!-- add more as you want -->
-    </select>
+        <select name="in_out" class="px-3 py-2 border rounded">
+            <option value="all">All</option>
+            <option value="in">IN</option>
+            <option value="out" selected>OUT</option>
+        </select>
+        
+        <select name="number_per_page" class="px-3 py-2 border rounded">
+            <option value="10" selected>10 per page</option>
+            <option value="25">25 per page</option>
+            <option value="50">50 per page</option>
+            <option value="100">100 per page</option>
+            <option value="100">500 per page</option>
+            <option value="100">1000 per page</option>
+        </select>
+        <select name="order_by" class="px-3 py-2 border rounded">
+            <option value="created_at" selected>Sort by Created At</option>
+            <option value="name">Sort by Name</option>
+            <option value="price">Sort by Price</option>
+            <option value="quantity">Sort by Quantity</option>
+            <!-- add more as you want -->
+        </select>
 
-    <select name="order_dir" class="px-3 py-2 border rounded">
-        <option value="asc">Ascending</option>
-        <option value="desc" selected>Descending</option>
-    </select>
+        <select name="order_dir" class="px-3 py-2 border rounded">
+            <option value="asc">Ascending</option>
+            <option value="desc" selected>Descending</option>
+        </select>
+    </div>
     <button type="submit" class="px-4 py-2 bg-yellow-600 text-white rounded">Filter</button>
 </form>
 
@@ -121,6 +123,12 @@
     <div id="pagination" class="flex justify-center gap-2 mt-4"></div>
 </div>
 <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('id')) {
+      document.getElementById('filterForm').style.display = 'none';
+    }
+  });
     document.addEventListener('DOMContentLoaded', () => {
         populateFormFromURL();
         loadTable(1);
@@ -158,11 +166,18 @@
         const number_per_page = formData.get('number_per_page') || 10;
         const order_by = formData.get('order_by') || 'created_at';
         const order_dir = formData.get('order_dir') || 'desc';
-
+        const urlParams = new URLSearchParams(window.location.search);
         const url = new URL(base_url + 'api/inventory-history');
+        if(urlParams.has('id')){
+            url.searchParams.set('id', urlParams.get('id'));
+            url.searchParams.set('in_out', '');
+        }else{
+            url.searchParams.set('id', '');
+            url.searchParams.set('in_out', in_out);
+        }
         url.searchParams.set('search', search);
         url.searchParams.set('search_dr', search_dr);
-        url.searchParams.set('in_out', in_out);
+        
         url.searchParams.set('number_per_page', number_per_page);
         url.searchParams.set('page', page);
         url.searchParams.set('order_by', order_by);

@@ -46,6 +46,11 @@
             class="px-3 py-1 bg-gray-500 text-white rounded hover:bg-gray-600 transition">
             History
         </a>
+
+        <a href="<?= base_url('inventory_excess?inventory_type=' . $inventory_type_parse['id'] . '&sub_inventory_type=' . $sub_inventory_type_parse['id']) ?>"
+            class="px-3 py-1 bg-red-500 text-white rounded hover:bg-red-600 transition">
+            Excess Stock
+        </a>
     </div>
     <div class="flex gap-2">
         <!-- <button onclick="exportInventory()" class="px-4 py-2 bg-yellow-600 text-white rounded hover:bg-yellow-600">
@@ -69,7 +74,7 @@
     <table class="min-w-full table-auto border-collapse border border-gray-300">
         <thead>
             <tr>
-                <?php if (current_user()['role_id'] == 1 || current_user()['role_id'] == 4) { ?>
+                <?php if (current_user()['role_id'] == 1 || current_user()['role_id'] == 4 || current_user()['role_id'] == 2) { ?>
                     <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">Option</th>
                 <?php } ?>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">Icon</th>
@@ -154,6 +159,12 @@
                                 </td>
                             <?php endif; ?>
 
+                            <?php if (current_user()['role_id'] == 2): ?>
+                                <td class="px-4 py-2 border-b text-left">
+                                    <button onclick="openFieldUpdateModal(`<?= $sub['id'] ?>`, `<?=($sub['name'])?>`, `<?=($sub['unit'])?>`, `<?=($sub['description'])?>`)" class="text-blue-600 hover:underline">Request Update</button>
+                                </td>
+                            <?php endif; ?>
+
                             <td class="px-4 py-2 border-b text-left">
                                 <?php if ($sub['icon'] != null): ?>
                                     <img src="<?= base_url('uploads/icons/' . $sub['icon']) ?>" alt="Icon" class="w-6 h-6">
@@ -228,6 +239,36 @@
     </div>
 </div>
 
+<!-- Modal for Field Update Notification -->
+<div id="field-update-modal" class="flex fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
+    <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
+        <h2 class="text-xl font-bold mb-4">Request Field Update</h2>
+        <form id="fieldUpdateForm">
+            <input type="hidden" id="fieldUpdateInventoryId">
+            <input type="hidden" id="fieldUpdateRecordId">
+            
+            <div class="mb-4">
+                <label for="fieldSelect" class="block font-medium">Select Field</label>
+                <select id="fieldSelect" required class="w-full px-3 py-2 border rounded">
+                    <option value="">-- Choose Field --</option>
+                    <option value="name">Name</option>
+                    <option value="unit">Unit</option>
+                    <option value="description">Description</option>
+                </select>
+            </div>
+            <div class="mb-4">
+                <label for="newFieldValue" class="block font-medium">New Value</label>
+                <input type="text" id="newFieldValue" required class="w-full px-3 py-2 border rounded">
+            </div>
+            <div class="flex justify-end gap-2">
+                <button type="button" onclick="closeFieldUpdateModal()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
+                <button type="submit" class="px-4 py-2 bg-yellow-600 text-white rounded">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
 <!-- Modal for Add/Edit Inventory -->
 <div id="inventory-modal" class="flex fixed inset-0 z-50 hidden items-center justify-center bg-black bg-opacity-50">
     <div class="bg-white p-6 rounded shadow-lg w-full max-w-md">
@@ -270,6 +311,7 @@
 </div>
 
 <script>
+    let currentInventory = null;
     document.getElementById('file').addEventListener('change', function() {
         const fileInput = this;
         const formData = new FormData();
@@ -376,21 +418,84 @@
     }
 
     function toggleSubinventory(id, btn) {
-    // Toggle visibility of rows with matching id prefix
-    document.querySelectorAll(`tr[id^="${id}"]`).forEach(row => {
-        row.classList.toggle('hidden');
+        // Toggle visibility of rows with matching id prefix
+        document.querySelectorAll(`tr[id^="${id}"]`).forEach(row => {
+            row.classList.toggle('hidden');
+        });
+
+        // Get the arrow span inside the button
+        const arrowSpan = btn.querySelector('.arrow');
+
+        // Check if any of the rows are now visible
+        const anyVisible = Array.from(document.querySelectorAll(`tr[id^="${id}"]`))
+            .some(row => !row.classList.contains('hidden'));
+
+        // Update arrow symbol
+        arrowSpan.innerHTML = anyVisible ? '&darr;' : '&rarr;';
+    }
+
+    function openFieldUpdateModal(inventoryId, name, unit, description) {
+        currentInventory = {
+            name: name,
+            unit: unit,
+            description: description
+        };
+        document.getElementById("fieldUpdateInventoryId").value = inventoryId;
+        document.getElementById("fieldUpdateRecordId").value = null; // assuming record ID = inventory ID
+        document.getElementById("fieldSelect").value = '';
+        document.getElementById("newFieldValue").value = '';
+        document.getElementById("field-update-modal").classList.remove("hidden");
+    }
+
+    function closeFieldUpdateModal() {
+        document.getElementById("field-update-modal").classList.add("hidden");
+    }
+
+    document.getElementById("fieldUpdateForm").addEventListener("submit", async function (event) {
+        event.preventDefault();
+
+        const recordId = document.getElementById("fieldUpdateRecordId").value;
+        const inventoryId = document.getElementById("fieldUpdateInventoryId").value;
+        const field = document.getElementById("fieldSelect").value;
+        const newValue = document.getElementById("newFieldValue").value;
+
+        if (!field || !newValue) {
+            alert("Please select a field and provide a new value.");
+            return;
+        }
+
+        const currentValue = currentInventory[field];
+
+        const notificationText = `Request to update ${field} from "${currentValue}" to "${newValue}"`;
+
+        try {
+            const response = await fetch(base_url + 'notifications', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    inventory_history_id: recordId,
+                    inventory_id: inventoryId,
+                    text: notificationText,
+                    column_to_be_updated: field,
+                    column_from_value: currentValue,
+                    column_to_value: newValue,
+                    created_by: user_id,
+                    is_read: '0',
+                    is_accepted: '0',
+                    is_viewed: '0',
+                }),
+            });
+
+            if (!response.ok) throw new Error("Failed to create notification.");
+
+            alert("Update request sent successfully.");
+            closeFieldUpdateModal();
+        } catch (error) {
+            alert("Error: " + error.message);
+        }
     });
 
-    // Get the arrow span inside the button
-    const arrowSpan = btn.querySelector('.arrow');
 
-    // Check if any of the rows are now visible
-    const anyVisible = Array.from(document.querySelectorAll(`tr[id^="${id}"]`))
-        .some(row => !row.classList.contains('hidden'));
-
-    // Update arrow symbol
-    arrowSpan.innerHTML = anyVisible ? '&darr;' : '&rarr;';
-}
 </script>
 
 

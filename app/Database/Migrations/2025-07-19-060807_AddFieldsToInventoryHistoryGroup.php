@@ -8,33 +8,49 @@ class AddFieldsToInventoryHistoryGroup extends Migration
 {
     public function up()
     {
-        $this->forge->addColumn('inventory_history_group', [
-            'total_amount' => [
-                'type'       => 'LONGTEXT',
-                'null'       => true,
-            ],
-            'discount' => [
-                'type'       => 'LONGTEXT',
-                'null'       => true,
-            ],
-            'discount_amount' => [
-                'type'       => 'LONGTEXT',
-                'null'       => true,
-            ],
-            'grand_total_amount' => [
-                'type'       => 'LONGTEXT',
-                'null'       => true,
-            ],
-        ]);
+        $db = \Config\Database::connect();
+        $fieldsToAdd = [];
+
+        if (! $db->fieldExists('total_amount', 'inventory_history_group')) {
+            $fieldsToAdd['total_amount'] = [
+                'type' => 'LONGTEXT',
+                'null' => true,
+            ];
+        }
+        if (! $db->fieldExists('discount', 'inventory_history_group')) {
+            $fieldsToAdd['discount'] = [
+                'type' => 'LONGTEXT',
+                'null' => true,
+            ];
+        }
+        if (! $db->fieldExists('discount_amount', 'inventory_history_group')) {
+            $fieldsToAdd['discount_amount'] = [
+                'type' => 'LONGTEXT',
+                'null' => true,
+            ];
+        }
+        if (! $db->fieldExists('grand_total_amount', 'inventory_history_group')) {
+            $fieldsToAdd['grand_total_amount'] = [
+                'type' => 'LONGTEXT',
+                'null' => true,
+            ];
+        }
+
+        if (! empty($fieldsToAdd)) {
+            $this->forge->addColumn('inventory_history_group', $fieldsToAdd);
+        }
     }
 
     public function down()
     {
-        $this->forge->dropColumn('inventory_history_group', [
-            'total_amount',
-            'discount',
-            'discount_amount',
-            'grand_total_amount',
-        ]);
+        $db = \Config\Database::connect();
+
+        $fields = ['total_amount', 'discount', 'discount_amount', 'grand_total_amount'];
+
+        foreach ($fields as $field) {
+            if ($db->fieldExists($field, 'inventory_history_group')) {
+                $this->forge->dropColumn('inventory_history_group', $field);
+            }
+        }
     }
 }
