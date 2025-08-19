@@ -67,6 +67,10 @@
 
 <form method="get" class="mb-4 flex items-center gap-2">
     <input type="text" name="search" value="<?= esc($search) ?>" placeholder="Search inventory..." class="px-3 py-2 border rounded w-64">
+    <select name="is_for_sale" class="w-full px-3 py-2 border rounded max-w-64">
+        <option <?=($is_for_sale == '')?'selected':''?> value="">For Sale</option>
+        <option <?=($is_for_sale == 'Not for Sale')?'selected':''?> value="Not for Sale">Not for Sale</option>
+    </select>
     <button type="submit" class="px-4 py-2 bg-yellow-600 text-white rounded">Search</button>
 </form>
 <div class="flex flex-col h-full overflow-auto">
@@ -80,39 +84,39 @@
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">Icon</th>
                 <!-- <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">Icon</th> New Column -->
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
-                    <a href="?search=<?= esc($search) ?>&orderby=inventory.name&orderdir=<?= $orderby == 'inventory.name' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
+                    <a href="?search=<?= esc($search) ?>&is_for_sale=<?= esc($is_for_sale) ?>&orderby=inventory.name&orderdir=<?= $orderby == 'inventory.name' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Inventory Name
                         <i class="ion-<?= ($orderby == 'inventory.name' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.name' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
-                    <a href="?search=<?= esc($search) ?>&orderby=inventory.unit&orderdir=<?= $orderby == 'inventory.unit' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
+                    <a href="?search=<?= esc($search) ?>&is_for_sale=<?= esc($is_for_sale) ?>&orderby=inventory.unit&orderdir=<?= $orderby == 'inventory.unit' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Unit
                         <i class="ion-<?= ($orderby == 'inventory.unit' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.unit' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
-                    <a href="?search=<?= esc($search) ?>&orderby=inventory.description&orderdir=<?= $orderby == 'inventory.description' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
+                    <a href="?search=<?= esc($search) ?>&is_for_sale=<?= esc($is_for_sale) ?>&orderby=inventory.description&orderdir=<?= $orderby == 'inventory.description' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Description
                         <i class="ion-<?= ($orderby == 'inventory.description' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.description' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
-                    <a href="?search=<?= esc($search) ?>&orderby=inventory.reordering_level&orderdir=<?= $orderby == 'inventory.reordering_level' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
+                    <a href="?search=<?= esc($search) ?>&is_for_sale=<?= esc($is_for_sale) ?>&orderby=inventory.reordering_level&orderdir=<?= $orderby == 'inventory.reordering_level' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Reordering Level
                         <i class="ion-<?= ($orderby == 'inventory.reordering_level' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.reordering_level' ? 'text-black' : 'text-gray-400' ?>"></i>
 
                     </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
-                    <a href="?search=<?= esc($search) ?>&orderby=inventory.current_quantity&orderdir=<?= $orderby == 'inventory.current_quantity' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
+                    <a href="?search=<?= esc($search) ?>&is_for_sale=<?= esc($is_for_sale) ?>&orderby=inventory.current_quantity&orderdir=<?= $orderby == 'inventory.current_quantity' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Current Quantity
                         <i class="ion-<?= ($orderby == 'inventory.current_quantity' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.current_quantity' ? 'text-black' : 'text-gray-400' ?>"></i>
 
                     </a>
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
-                    <a href="?search=<?= esc($search) ?>&orderby=inventory.current_price&orderdir=<?= $orderby == 'inventory.current_price' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
+                    <a href="?search=<?= esc($search) ?>&is_for_sale=<?= esc($is_for_sale) ?>&orderby=inventory.current_price&orderdir=<?= $orderby == 'inventory.current_price' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Current Price
                         <i class="ion-<?= ($orderby == 'inventory.current_price' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.current_price' ? 'text-black' : 'text-gray-400' ?>"></i>
 
@@ -120,7 +124,7 @@
 
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
-                    <a href="?search=<?= esc($search) ?>&orderby=inventory.created_at&orderdir=<?= $orderby == 'inventory.created_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
+                    <a href="?search=<?= esc($search) ?>&is_for_sale=<?= esc($is_for_sale) ?>&orderby=inventory.created_at&orderdir=<?= $orderby == 'inventory.created_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Created At
                         <i class="ion-<?= ($orderby == 'inventory.created_at' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.created_at' ? 'text-black' : 'text-gray-400' ?>"></i>
 
@@ -128,11 +132,20 @@
 
                 </th>
                 <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
-                    <a href="?search=<?= esc($search) ?>&orderby=inventory.updated_at&orderdir=<?= $orderby == 'inventory.updated_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
+                    <a href="?search=<?= esc($search) ?>&is_for_sale=<?= esc($is_for_sale) ?>&orderby=inventory.updated_at&orderdir=<?= $orderby == 'inventory.updated_at' && $orderdir == 'asc' ? 'desc' : 'asc' ?>">
                         Updated At
                         <i class="ion-<?= ($orderby == 'inventory.updated_at' && $orderdir == 'asc') ? 'arrow-up-b' : 'arrow-down-b' ?> <?= $orderby == 'inventory.updated_at' ? 'text-black' : 'text-gray-400' ?>"></i>
                     </a>
 
+                </th>
+
+
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
+                    Flag
+                </th>
+
+                <th class="sticky top-0 bg-white px-4 py-2 border-b text-left cursor-pointer">
+                    Status
                 </th>
             </tr>
         </thead>
@@ -141,7 +154,7 @@
                 <!-- Main Row -->
                 <tr>
                     
-                    <td class="main-group-data bg-[#FFFFFF80] cursor-pointer px-4 py-2 border-b font-bold" colspan="10">
+                    <td class="main-group-data bg-[#FFFFFF80] cursor-pointer px-4 py-2 border-b font-bold" colspan="12">
                         <button onclick="toggleSubinventory('sub<?= $index ?>', this)" class="mr-2 text-yellow-600 hover:underline">
                             <span class="arrow">&rarr;</span> <?= esc($item['name']) ?>
                         </button>
@@ -191,6 +204,9 @@
                             <td class="px-4 py-2 border-b text-left">
                                 <?= $sub['updated_at'] !== '0000-00-00 00:00:00' ? date('F j, Y h:i a', strtotime($sub['updated_at'])) : '' ?>
                             </td>
+
+                            <td class="px-4 py-2 border-b text-left"><?= ($sub['is_for_sale'] != 'Not for Sale')?'for Sale':'Not for Sale' ?></td>
+                            <td class="px-4 py-2 border-b text-left"><?= esc($sub['note']) ?></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php endif; ?>
@@ -302,6 +318,24 @@
                 <label for="inventory-reordering-level" class="block font-medium">Reordering Level</label>
                 <input type="number" id="inventory-reordering-level" class="w-full px-3 py-2 border rounded">
             </div>
+
+            <div class="mb-4">
+                <label for="inventory-reordering-flag" class="block font-medium">Flag</label>
+                <select id="inventory-reordering-flag" class="w-full px-3 py-2 border rounded">
+                    <option value="">For Sale</option>
+                    <option value="Not for Sale">Not for Sale</option>
+                </select>
+            </div>
+
+            <div class="mb-4">
+                <label for="inventory-reordering-status" class="block font-medium">Status</label>
+                <select id="inventory-reordering-status" class="w-full px-3 py-2 border rounded">
+                    <option value=""></option>
+                    <option value="For Repair">For Repair</option>
+                    <option value="For Disposal">For Disposal</option>
+                </select>
+            </div>
+
             <div class="flex justify-end gap-2">
                 <button type="button" onclick="closeModal()" class="px-4 py-2 bg-gray-300 rounded">Cancel</button>
                 <button type="submit" class="px-4 py-2 bg-yellow-600 text-white rounded">Save</button>
@@ -346,6 +380,8 @@
 
         document.getElementById('inventory-description').value = '';
         document.getElementById('inventory-reordering-level').value = '';
+        document.getElementById('inventory-reordering-flag').value = '';
+        document.getElementById('inventory-reordering-status').value = '';
         document.getElementById('inventory-icon').value = ''; // Reset icon input
         document.getElementById('modal-title').textContent = 'Add Inventory';
         document.getElementById('inventory-modal').classList.remove('hidden');
@@ -361,6 +397,9 @@
                 document.getElementById('inventory-icon').value = data.icon;
                 document.getElementById('inventory-description').value = data.description;
                 document.getElementById('inventory-reordering-level').value = data.reordering_level;
+                document.getElementById('inventory-reordering-flag').value = data.is_for_sale;
+                document.getElementById('inventory-reordering-status').value = data.note;
+
                 document.getElementById('modal-title').textContent = 'Edit Inventory';
                 document.getElementById('inventory-modal').classList.remove('hidden');
             });
@@ -383,6 +422,9 @@
         const sub_inventory_type = `<?= $sub_inventory_type_parse['id'] ?>`;
         const reordering_level = document.getElementById('inventory-reordering-level').value;
 
+        const reordering_flag = document.getElementById('inventory-reordering-flag').value;
+        const reordering_status = document.getElementById('inventory-reordering-status').value;
+
         const formData = new FormData();
         formData.append('name', name);
         formData.append('unit', unit);
@@ -391,6 +433,12 @@
         formData.append('inventory_type', inventory_type);
         formData.append('sub_inventory_type', sub_inventory_type);
         formData.append('reordering_level', reordering_level);
+
+
+        formData.append('is_for_sale', reordering_flag);
+        formData.append('note', reordering_status);
+        
+        
 
         const url = id ? base_url + `inventory/api/update/${id}` : base_url + 'inventory/api/store';
         const method = id ? 'POST' : 'POST';

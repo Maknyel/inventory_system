@@ -137,6 +137,7 @@ class InventoryController extends Controller
         // Get the current page number from the URL, default to 1
         $currentPage = $this->request->getVar('page_inventory') ?: 1;
         $search = $this->request->getGet('search');
+        $is_for_sale = $this->request->getGet('is_for_sale');
         $id = $this->request->getGet('id');
         $orderBy = $this->request->getGet('orderby') ?? 'inventory.name';
         $orderDir = $this->request->getGet('orderdir') ?? 'asc';
@@ -152,6 +153,25 @@ class InventoryController extends Controller
                 ->like('inventory.name', $search)
                 ->orLike('inventory.description', $search)
                 ->orLike('inventory_type.name', $search)
+                ->groupEnd();
+        }
+
+        if (isset($is_for_sale)) {
+            if($is_for_sale == ''){
+                $inventoryModel->groupStart()
+                    ->where('inventory.is_for_sale', '')
+                    ->orWhere('inventory.is_for_sale', NULL)
+                ->groupEnd();
+            }else{
+                $inventoryModel->groupStart()
+                ->where('inventory.is_for_sale', $is_for_sale)
+                ->groupEnd();
+            }
+            
+        }else{
+            $inventoryModel->groupStart()
+                ->where('inventory.is_for_sale', '')
+                ->orWhere('inventory.is_for_sale', NULL)
                 ->groupEnd();
         }
 
@@ -199,6 +219,25 @@ class InventoryController extends Controller
                     ->groupEnd();
             }
 
+            if (isset($is_for_sale)) {
+                if($is_for_sale == ''){
+                    $inventoryModel1->groupStart()
+                        ->where('inventory.is_for_sale', '')
+                        ->orWhere('inventory.is_for_sale', NULL)
+                    ->groupEnd();
+                }else{
+                    $inventoryModel1->groupStart()
+                    ->where('inventory.is_for_sale', $is_for_sale)
+                    ->groupEnd();
+                }
+                
+            }else{
+                $inventoryModel1->groupStart()
+                    ->where('inventory.is_for_sale', '')
+                    ->orWhere('inventory.is_for_sale', NULL)
+                ->groupEnd();
+            }
+
             if (!empty($id)) {
                 $inventoryModel1->groupStart()
                     ->where('inventory.id', $id)
@@ -228,6 +267,7 @@ class InventoryController extends Controller
         $data['inventory_type_data'] = $inventoryTypeModel->findAll();
 
         $data['search'] = $search;
+        $data['is_for_sale'] = $is_for_sale;
         // $data['inventory_type'] = $inventory_type;
         $data['orderby'] = $orderBy;
         $data['orderdir'] = $orderDir;
@@ -675,9 +715,13 @@ class InventoryController extends Controller
         $subInventoryType = $this->request->getGet('sub_inventory_type');
 
         // Build query
-        $query = $model->select('inventory.id, inventory.name, inventory.current_quantity, inventory.current_price, inventory.unit, inventory.description')
+        $query = $model->select('inventory.is_for_sale, inventory.id, inventory.name, inventory.current_quantity, inventory.current_price, inventory.unit, inventory.description')
             ->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'left');
 
+        $query->groupStart()
+        ->where('inventory.is_for_sale', '')
+        ->orWhere('inventory.is_for_sale', NULL)
+        ->groupEnd();
         // if ($inventoryType) {
         //     $query->where('inventory.inventory_type', $inventoryType);
         // }
@@ -729,6 +773,8 @@ class InventoryController extends Controller
             'sub_inventory_type' => $this->request->getPost('sub_inventory_type'),
             'reordering_level' => $this->request->getPost('reordering_level'),
             'icon' => $this->request->getPost('icon'),
+            'note' => $this->request->getPost('note'),
+            'is_for_sale' => $this->request->getPost('is_for_sale'),
         ];
 
 
@@ -753,6 +799,8 @@ class InventoryController extends Controller
             'sub_inventory_type' => $this->request->getPost('sub_inventory_type'),
             'reordering_level' => $this->request->getPost('reordering_level'),
             'icon' => $this->request->getPost('icon'),
+            'note' => $this->request->getPost('note'),
+            'is_for_sale' => $this->request->getPost('is_for_sale'),
         ];
 
         $inventoryModel->update($id, $data);
