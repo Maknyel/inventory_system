@@ -38,7 +38,19 @@ $routes->get('/inventory_return_history', 'InventoryController::inventoryReturnH
 $routes->get('/inventory_out_pos', 'InventoryController::inventoryOutPos');
 
 $routes->get('api/inventory-history', 'InventoryHistoryController::getInventoryHistoryApi');
+$routes->get('api/inventory-history-dr', 'InventoryHistoryController::getInventoryDRHistoryApi');
+
 $routes->get('/inventory_history', 'InventoryHistoryController::index');
+$routes->get('/inventory_history/dr_history', 'InventoryHistoryController::dr_history');
+
+
+
+
+$routes->get('/print/purchase-order/(:num)', 'PrintController::purchase_order/$1');
+$routes->get('/print/form-customer/(:num)', 'PrintController::form_customer/$1');
+$routes->get('/print/form-distributor/(:num)', 'PrintController::form_distributor/$1');
+
+
 
 
 $routes->get('/inventory_history_filter', 'InventoryHistoryController::filter');

@@ -33,13 +33,18 @@
             src="<?= base_url('public/images/imgHeader.png') ?>"
             class="w-full h-auto"
         >
+        <div class="flex justify-end">
+            <div>
+                <p class="text-xl text-bold text-[rgb(77,102,117)]"><strong>DR #:</strong> {{ dr_number }}</p>
+            </div>
+        </div>
         <div class="flex justify-between mb-4">
             <div>
                 <p><strong>DELIVERED TO:</strong> {{ supplier }}</p>
                 <p><strong>Address:</strong> {{ attention }}</p>
             </div>
             <div>
-                <p><strong>REF. P.O. #:</strong> {{ dr_number }}</p>
+                <p><strong>REF. P.O. #:</strong></p>
                 <p><strong>DATE:</strong> {{ orderDate }}</p>
             </div>
         </div>
@@ -113,13 +118,18 @@
             src="<?= base_url('public/images/imgHeader.png') ?>"
             class="w-full h-auto"
         >
+        <div class="flex justify-end">
+            <div>
+                <p class="text-xl text-bold text-[rgb(77,102,117)]"><strong>DR #:</strong> {{ dr_number }}</p>
+            </div>
+        </div>
         <div class="flex justify-between mb-4">
             <div>
                 <p><strong>DELIVERED TO:</strong> {{ supplier }}</p>
                 <p><strong>Address:</strong> {{ attention }}</p>
             </div>
             <div>
-                <p><strong>REF. P.O. #:</strong> {{ dr_number }}</p>
+                <p><strong>REF. P.O. #:</strong> </p>
                 <p><strong>DATE:</strong> {{ orderDate }}</p>
             </div>
         </div>
@@ -266,18 +276,34 @@
 
     <!-- Item Selection -->
     <div  v-show="!dr_number" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        <div>
+            <label class="block font-medium mb-1">Delivered To</label>
+            <input v-model="name" type="text" class="w-full border rounded px-3 py-2">
+        </div>
+
+        <div>
+            <label class="block font-medium mb-1">Address</label>
+            <textarea v-model="address" type="text" class="w-full border rounded px-3 py-2"></textarea>
+        </div>
+
+        <div>
+            <label class="block font-medium mb-1">REF. P.O. #</label>
+            <input v-model="ref_po_number" type="text" class="w-full border rounded px-3 py-2">
+        </div>
+
+
         <div style="position: relative;">
-        <label class="block font-medium mb-1">Inventory Item</label>
-        <input
-            type="text"
-            v-model="inventorySearch"
-            @input="filterInventory"
-            @focus="showInventorySuggestions = true"
-            @blur="hideInventorySuggestions"
-            autocomplete="off"
-            class="w-full border rounded px-3 py-2"
-            placeholder="Search inventory..."
-        />
+            <label class="block font-medium mb-1">Inventory Item</label>
+            <input
+                type="text"
+                v-model="inventorySearch"
+                @input="filterInventory"
+                @focus="showInventorySuggestions = true"
+                @blur="hideInventorySuggestions"
+                autocomplete="off"
+                class="w-full border rounded px-3 py-2"
+                placeholder="Search inventory..."
+            />
         <ul v-if="showInventorySuggestions && filteredInventory.length" 
             class="absolute z-10 w-full bg-white border rounded max-h-40 overflow-auto shadow mt-1">
             <li v-for="item in filteredInventory" :key="item.id"
@@ -428,6 +454,9 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
+            name: "",
+            address: "",
+            ref_po_number: "",
             discount: "",
             dr_number: "",
             selectedForms: [],
@@ -705,13 +734,17 @@ createApp({
                     total_amount: this.totalAmount,
                     discount: this.discount,
                     discount_amount: this.discountComputation,
-                    grand_total_amount: this.grandTotalAmount
+                    grand_total_amount: this.grandTotalAmount,
+                    name: this.name,
+                    address: this.address,
+                    ref_po_number: this.ref_po_number,
                 })
             })
             .then(res => res.json())
             .then(response => {
                 this.dr_number = response.dr_number;
                 alert('POS transaction completed!');
+                window.location.href = "<?= base_url('inventory_history/dr_history') ?>";
                 // this.cart = [];
                 // this.type = '';
                 // this.distributor_id = '';

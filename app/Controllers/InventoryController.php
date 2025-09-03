@@ -376,6 +376,12 @@ class InventoryController extends Controller
             $discount = $json['discount'] ?? null;
             $discount_amount = $json['discount_amount'] ?? null;
             $grand_total_amount = $json['grand_total_amount'] ?? null;
+
+            $name = $json['name'] ?? null;
+            $address = $json['address'] ?? null;
+            $ref_po_number = $json['ref_po_number'] ?? null;
+
+
             if (empty($items)) {
                 return $this->response->setStatusCode(400)->setJSON(['error' => 'Cart is empty.']);
             }
@@ -438,8 +444,11 @@ class InventoryController extends Controller
                     'discount'                          => $discount,
                     'discount_amount'                   => $discount_amount,
                     'grand_total_amount'                => $grand_total_amount,
-                    'created_at'                        => ('Y-m-d H:i:s'),
-                    'updated_at'                        => ('Y-m-d H:i:s'),
+                    'name'                              => $name,
+                    'address'                           => $address,
+                    'ref_po_number'                     => $ref_po_number,
+                    // 'created_at'                        => ('Y-m-d H:i:s'),
+                    // 'updated_at'                        => ('Y-m-d H:i:s'),
                 ]);
             }
 

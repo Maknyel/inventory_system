@@ -124,7 +124,8 @@ function get_low_stock_items(): array
     $db = \Config\Database::connect();
     $builder = $db->table('inventory');
     $builder->select('inventory.icon, inventory.name, inventory.description, inventory.current_quantity, inventory.current_price, inventory.reordering_level, inventory_type.name as inventory_type_name');
-    $builder->join('inventory_type', 'inventory.inventory_type = inventory_type.id', 'left');
+    $builder->join('inventory_type', 'inventory.inventory_type = inventory_type.id', 'inner');
+    $builder->join('sub_inventory_type', 'inventory.sub_inventory_type = sub_inventory_type.id', 'inner');
     
     $builder->groupStart()
         ->where('reordering_level > current_quantity')

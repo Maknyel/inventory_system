@@ -18,6 +18,9 @@ class InventoryHistoryGroupModel extends Model
         'discount',
         'discount_amount',
         'grand_total_amount',
+        'name',
+        'address',
+        'ref_po_number'
     ];
 
     // Enable automatic timestamps if you want CI to handle created_at/updated_at automatically

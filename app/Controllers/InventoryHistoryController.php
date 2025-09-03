@@ -19,6 +19,106 @@ class InventoryHistoryController extends Controller
 
     }
 
+
+
+
+
+    public function dr_history()
+    {
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        $data = [];
+        return view('inventory_history/dr_history', $data);
+
+    }
+
+    public function getInventoryDRHistoryApi()
+    {
+        $group = new \App\Models\InventoryHistoryGroupModel();
+        $model = new \App\Models\InventoryHistoryModel();
+
+        // Apply filters from GET parameters
+        $search_dr = $this->request->getGet('search_dr');
+        $number_per_page = $this->request->getGet('number_per_page') ?? 10;
+        $page = $this->request->getGet('page') ?? 1;
+        $start_date = $this->request->getGet('start_date');
+        $end_date = $this->request->getGet('end_date');
+        $search_dt = $this->request->getGet('search_dt');
+        $search_address = $this->request->getGet('search_address');
+        $search_ref = $this->request->getGet('search_ref');
+        
+
+        $query = $group->select('*');
+
+        if ($start_date && $end_date) {
+            $query->where('created_at >=', $start_date.' 00:00:00')
+                    ->where('created_at <=', $end_date.' 23:59:59');
+        }
+
+
+        if ($search_dr) {
+            if (!empty($search_dr)) {
+            $query->groupStart()
+                    ->like('dr_number', $search_dr)
+                    ->groupEnd();
+            }
+        }
+
+
+
+        if ($search_dt) {
+            if (!empty($search_dt)) {
+            $query->groupStart()
+                    ->like('name', $search_dt)
+                    ->groupEnd();
+            }
+        }
+        if ($search_address) {
+            if (!empty($search_address)) {
+            $query->groupStart()
+                    ->like('address', $search_address)
+                    ->groupEnd();
+            }
+        }
+        if ($search_ref) {
+            if (!empty($search_ref)) {
+            $query->groupStart()
+                    ->like('ref_po_number', $search_ref)
+                    ->groupEnd();
+            }
+        }
+
+        
+        
+        
+
+
+        $query->groupBy('dr_number');
+        $query->orderBy('dr_number', 'desc');
+
+
+        // Pagination
+        $data = $query->paginate($number_per_page, 'inventory_history', $page);
+        $pager = \Config\Services::pager();
+
+
+
+
+        
+
+
+        return $this->response->setJSON([
+            'data' => $data,
+            'pagination' => [
+                'total' => $pager->getTotal('inventory_history'),
+                'current_page' => $pager->getCurrentPage('inventory_history'),
+                'per_page' => $pager->getPerPage('inventory_history'),
+                'total_pages' => $pager->getPageCount('inventory_history'),
+            ]
+        ]);
+    }
+
     public function getInventoryHistoryApi()
     {
         $group = new \App\Models\InventoryHistoryGroupModel();
