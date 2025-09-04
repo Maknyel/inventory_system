@@ -126,7 +126,7 @@ createApp({
             return date.toLocaleString();
         },
         async getInventoryHistory(){
-            fetch(`${base_url}inventory/in/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`)
+            fetch(`${base_url}inventory/out/list?inventory_type=${inventoryType}&sub_inventory_type=${subInventoryType}`)
             .then(res => res.json())
             .then(data => {
                 this.inventoryHistoryList = data;
