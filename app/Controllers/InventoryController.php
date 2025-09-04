@@ -672,6 +672,46 @@ class InventoryController extends Controller
         return $this->response->setJSON(['message' => 'POS stock-in successful']);
     }
 
+    public function getInventoryOutList()
+    {
+        $model = new \App\Models\InventoryHistoryModel();
+
+
+        // Get query parameters
+        $inventoryType = $this->request->getGet('inventory_type');
+        $subInventoryType = $this->request->getGet('sub_inventory_type');
+
+        // Build query
+        $query = $model->select('
+            inventory_history.id,
+            inventory_history.name,
+            inventory_history.description,
+            inventory_history.price,
+            inventory_history.quantity,
+            inventory_history.return_quantity,
+            inventory_history.in_out,
+            inventory_history.inventory_id,
+            inventory_history.created_at,
+            inventory_history.updated_at,
+            inventory.inventory_type,
+            inventory.sub_inventory_type
+        ');
+        $query->where('inventory_history.in_out', 'out');
+        $query->where('(inventory_history.price - IFNULL(inventory_history.return_quantity, 0)) >', 0);
+        $query->join('inventory', 'inventory_history.inventory_id = inventory.id');
+
+        if ($inventoryType) {
+            $query->where('inventory.inventory_type', $inventoryType);
+        }
+
+        if ($subInventoryType) {
+            $query->where('inventory.sub_inventory_type', $subInventoryType);
+        }
+
+        $data = $query->findAll();
+
+        return $this->response->setJSON($data);
+    }
 
     public function getInventoryInList()
     {

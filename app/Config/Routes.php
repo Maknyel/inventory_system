@@ -23,6 +23,7 @@ $routes->delete('inventory/api/delete/(:segment)', 'InventoryController::delete/
 $routes->get('inventory/export', 'InventoryController::export');
 $routes->get('/inventory/list', 'InventoryController::getInventoryList');
 $routes->get('/inventory/in/list', 'InventoryController::getInventoryInList');
+$routes->get('/inventory/out/list', 'InventoryController::getInventoryOutList');
 $routes->post('/inventory/save-stock', 'InventoryController::saveStock');
 $routes->post('/inventory/save-pos-stock', 'InventoryController::savePosStock');
 

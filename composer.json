@@ -13,6 +13,7 @@
         "php": "^7.4 || ^8.0",
         "codeigniter4/framework": "^4.0",
         "dompdf/dompdf": "^3.1",
+        "masterminds/html5": "^2.10",
         "mpdf/mpdf": "^6.1"
     },
     "require-dev": {
