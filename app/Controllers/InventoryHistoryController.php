@@ -33,6 +33,16 @@ class InventoryHistoryController extends Controller
 
     }
 
+    public function dr_historyv2()
+    {
+        if (!session()->has('user_id')) {
+            return redirect()->to(base_url('login'));
+        }
+        $data = [];
+        return view('inventory_history/dr_historyv2', $data);
+
+    }
+
     public function getInventoryDRHistoryApi()
     {
         $group = new \App\Models\InventoryHistoryGroupModel();

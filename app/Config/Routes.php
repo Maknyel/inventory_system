@@ -43,6 +43,11 @@ $routes->get('api/inventory-history-dr', 'InventoryHistoryController::getInvento
 
 $routes->get('/inventory_history', 'InventoryHistoryController::index');
 $routes->get('/inventory_history/dr_history', 'InventoryHistoryController::dr_history');
+$routes->get('/inventory_history/dr_historyv2', 'InventoryHistoryController::dr_historyv2');
+
+
+
+$routes->post('/inventory_history_group/updateGroup/(:num)', 'InventoryHistoryGroupController::updateGroup/$1');
 
 
 
